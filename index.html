@@ -80,10 +80,13 @@
 
   .hero-bg-lines {
     position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(91,143,168,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(91,143,168,0.07) 1px, transparent 1px);
-    background-size: 80px 80px;
+    overflow: hidden;
+  }
+
+  #hero-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0.55;
   }
 
   .hero-orb {
@@ -546,63 +549,66 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#sectors">Sectors</a></li>
-    <li><a href="#investors">Investors</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#contact" style="color:var(--accent);">Get in Touch</a></li>
+    <li><a href="#about" data-en="About" data-es="Nosotros">About</a></li>
+    <li><a href="#sectors" data-en="Sectors" data-es="Sectores">Sectors</a></li>
+    <li><a href="#investors" data-en="Investors" data-es="Inversores">Investors</a></li>
+    <li><a href="#team" data-en="Team" data-es="Equipo">Team</a></li>
+
   </ul>
-  <a href="#contact" class="nav-cta">Get in Touch</a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button id="lang-toggle" aria-label="Toggle language" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;background:transparent;border:1px solid var(--border);color:var(--text-mid);padding:6px 14px;cursor:pointer;transition:all 0.2s;white-space:nowrap;">ES</button>
+    <a href="#contact" class="nav-cta" data-en="Get in Touch" data-es="Contáctanos">Get in Touch</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-bg-lines"></div>
+  <div class="hero-bg-lines"><canvas id="hero-canvas"></canvas></div>
   <div class="hero-orb"></div>
   <div class="hero-content fade-in">
-    <div class="hero-eyebrow">Search Fund — Latin America</div>
-    <h1>Acquiring <em>exceptional</em> businesses in Colombia</h1>
-    <p>Arista Capital Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve.</p>
+    <div class="hero-eyebrow" data-en="Search Fund — Latin America" data-es="Search Fund — América Latina">Search Fund — Latin America</div>
+    <h1 data-en="Acquiring <em>exceptional</em> businesses in Colombia" data-es="Adquiriendo empresas <em>excepcionales</em> en Colombia">Acquiring <em>exceptional</em> businesses in Colombia</h1>
+    <p data-en="Arista Capital Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve." data-es="Arista Capital Partners es un search fund enfocado en identificar, adquirir y operar las mejores pymes de América Latina — generando valor duradero para inversores, operadores y las comunidades que servimos.">Arista Capital Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve.</p>
     <div class="hero-actions">
-      <a href="#investors" class="btn-primary">Investor Information</a>
-      <a href="#about" class="btn-outline">Our Thesis</a>
+      <a href="#investors" class="btn-primary" data-en="Investor Information" data-es="Información para Inversores">Investor Information</a>
+      <a href="#about" class="btn-outline" data-en="Our Thesis" data-es="Nuestra Tesis">Our Thesis</a>
     </div>
   </div>
 </section>
 <section id="about">
   <div class="about-text fade-in">
-    <div class="section-eyebrow">Our Thesis</div>
-    <h2 class="section-title">A disciplined approach to acquiring Colombia's finest operators</h2>
-    <p>Latin America represents one of the most compelling untapped markets for the search fund model. Colombia's growing middle class, improving institutional environment, and fragmented SME landscape create a unique window of opportunity for experienced operators.</p>
-    <p>We focus on profitable, established businesses with defensible competitive positions — where skilled ownership can unlock meaningful value creation over a 5–7 year horizon.</p>
+    <div class="section-eyebrow" data-en="Our Thesis" data-es="Nuestra Tesis">Our Thesis</div>
+    <h2 class="section-title" data-en="A disciplined approach to acquiring Colombia's finest operators" data-es="Un enfoque disciplinado para adquirir los mejores operadores de Colombia">A disciplined approach to acquiring Colombia's finest operators</h2>
+    <p data-en="Latin America represents one of the most compelling untapped markets for the search fund model. Colombia's growing middle class, improving institutional environment, and fragmented SME landscape create a unique window of opportunity for experienced operators." data-es="América Latina representa uno de los mercados más atractivos y sin explotar para el modelo de search fund. La creciente clase media de Colombia, la mejora del entorno institucional y el fragmentado ecosistema de pymes crean una ventana única de oportunidad para operadores experimentados.">Latin America represents one of the most compelling untapped markets for the search fund model. Colombia's growing middle class, improving institutional environment, and fragmented SME landscape create a unique window of opportunity for experienced operators.</p>
+    <p data-en="We focus on profitable, established businesses with defensible competitive positions — where skilled ownership can unlock meaningful value creation over a 5–7 year horizon." data-es="Nos enfocamos en empresas rentables y consolidadas con posiciones competitivas defendibles — donde una gestión experta puede desbloquear una creación de valor significativa en un horizonte de 5 a 7 años.">We focus on profitable, established businesses with defensible competitive positions — where skilled ownership can unlock meaningful value creation over a 5–7 year horizon.</p>
   </div>
   <div class="about-pillars fade-in">
     <div class="pillar">
       <span class="pillar-num">01</span>
       <div>
-        <div class="pillar-title">Focused Sector Expertise</div>
-        <div class="pillar-desc">Deep sector knowledge across clinical laboratories, engineering services, industrial linen and laundry, heavy equipment rentals, specialty medical practices, and specialty chemicals and pharmaceutical manufacturing — resilient industries with strong recurring revenue characteristics.</div>
+        <div class="pillar-title" data-en="Focused Sector Expertise" data-es="Especialización Sectorial">Focused Sector Expertise</div>
+        <div class="pillar-desc" data-en="Deep sector knowledge across clinical laboratories, engineering services, industrial linen and laundry, heavy equipment rentals, specialty medical practices, and specialty chemicals and pharmaceutical manufacturing — resilient industries with strong recurring revenue characteristics." data-es="Conocimiento profundo en laboratorios clínicos, servicios de ingeniería, lavandería industrial, alquiler de maquinaria pesada, consultorios médicos especializados y fabricación de químicos y farmacéuticos — industrias resilientes con ingresos recurrentes sólidos.">Deep sector knowledge across clinical laboratories, engineering services, industrial linen and laundry, heavy equipment rentals, specialty medical practices, and specialty chemicals and pharmaceutical manufacturing — resilient industries with strong recurring revenue characteristics.</div>
       </div>
     </div>
     <div class="pillar">
       <span class="pillar-num">02</span>
       <div>
-        <div class="pillar-title">Operational Value Creation</div>
-        <div class="pillar-desc">Our edge is operational improvement — bringing rigorous management practices, data-driven decision making, and M&A playbooks to businesses built on strong foundations.</div>
+        <div class="pillar-title" data-en="Operational Value Creation" data-es="Creación de Valor Operacional">Operational Value Creation</div>
+        <div class="pillar-desc" data-en="Our edge is operational improvement — bringing rigorous management practices, data-driven decision making, and M&A playbooks to businesses built on strong foundations." data-es="Nuestra ventaja es la mejora operacional — aplicando prácticas de gestión rigurosas, toma de decisiones basada en datos y metodologías de M&A a empresas con bases sólidas.">Our edge is operational improvement — bringing rigorous management practices, data-driven decision making, and M&A playbooks to businesses built on strong foundations.</div>
       </div>
     </div>
     <div class="pillar">
       <span class="pillar-num">03</span>
       <div>
-        <div class="pillar-title">Aligned Incentives</div>
-        <div class="pillar-desc">As operators who invest alongside our investors, our incentives are fully aligned. We take pride in building businesses that create lasting value for all stakeholders.</div>
+        <div class="pillar-title" data-en="Aligned Incentives" data-es="Incentivos Alineados">Aligned Incentives</div>
+        <div class="pillar-desc" data-en="As operators who invest alongside our investors, our incentives are fully aligned. We take pride in building businesses that create lasting value for all stakeholders." data-es="Como operadores que invertimos junto a nuestros inversores, nuestros incentivos están completamente alineados. Nos enorgullece construir empresas que generen valor duradero para todos los grupos de interés.">As operators who invest alongside our investors, our incentives are fully aligned. We take pride in building businesses that create lasting value for all stakeholders.</div>
       </div>
     </div>
     <div class="pillar">
       <span class="pillar-num">04</span>
       <div>
-        <div class="pillar-title">Local Advantage</div>
-        <div class="pillar-desc">On-the-ground presence in Colombia, deep local networks, and fluency in the regulatory and cultural landscape provide meaningful information and execution advantages.</div>
+        <div class="pillar-title" data-en="Local Advantage" data-es="Ventaja Local">Local Advantage</div>
+        <div class="pillar-desc" data-en="On-the-ground presence in Colombia, deep local networks, and fluency in the regulatory and cultural landscape provide meaningful information and execution advantages." data-es="Presencia directa en Colombia, redes locales profundas y dominio del entorno regulatorio y cultural nos proporcionan ventajas informativas y de ejecución significativas.">On-the-ground presence in Colombia, deep local networks, and fluency in the regulatory and cultural landscape provide meaningful information and execution advantages.</div>
       </div>
     </div>
   </div>
@@ -612,47 +618,47 @@
 <section id="sectors">
   <div class="sectors-header fade-in">
     <div>
-      <div class="section-eyebrow">Target Sectors</div>
-      <h2 class="section-title">Where we focus our search</h2>
+      <div class="section-eyebrow" data-en="Target Sectors" data-es="Sectores Objetivo">Target Sectors</div>
+      <h2 class="section-title" data-en="Where we focus our search" data-es="Dónde enfocamos nuestra búsqueda">Where we focus our search</h2>
     </div>
-    <p class="section-sub" style="max-width: 300px;">Fragmented markets with strong unit economics and a clear path to consolidation.</p>
+    <p class="section-sub" style="max-width: 300px;" data-en="Fragmented markets with strong unit economics and a clear path to consolidation." data-es="Mercados fragmentados con sólida economía unitaria y una clara ruta hacia la consolidación.">Fragmented markets with strong unit economics and a clear path to consolidation.</p>
   </div>
   <div class="sector-cards fade-in">
     <div class="sector-card">
       <div class="sector-icon">✦</div>
-      <div class="sector-name">Clinical<br>Laboratories</div>
-      <div class="sector-desc">Diagnostic and testing labs serving healthcare providers and direct patients. Recurring demand, essential services, and strong cash flow dynamics with clear consolidation opportunities.</div>
-      <span class="sector-tag">Target Sector</span>
+      <div class="sector-name" data-en="Clinical<br>Laboratories" data-es="Laboratorios<br>Clínicos">Clinical<br>Laboratories</div>
+      <div class="sector-desc" data-en="Diagnostic and testing labs serving healthcare providers and direct patients. Recurring demand, essential services, and strong cash flow dynamics with clear consolidation opportunities." data-es="Laboratorios de diagnóstico al servicio de proveedores de salud y pacientes directos. Demanda recurrente, servicios esenciales y sólida dinámica de flujo de caja con claras oportunidades de consolidación.">Diagnostic and testing labs serving healthcare providers and direct patients. Recurring demand, essential services, and strong cash flow dynamics with clear consolidation opportunities.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
       <div class="sector-icon">✦</div>
-      <div class="sector-name">Engineering<br>Services</div>
-      <div class="sector-desc">Specialized engineering firms providing technical consulting, project management, and design services across infrastructure and industrial sectors with stable recurring client relationships.</div>
-      <span class="sector-tag">Target Sector</span>
+      <div class="sector-name" data-en="Engineering<br>Services" data-es="Servicios de<br>Ingeniería">Engineering<br>Services</div>
+      <div class="sector-desc" data-en="Specialized engineering firms providing technical consulting, project management, and design services across infrastructure and industrial sectors with stable recurring client relationships." data-es="Firmas de ingeniería especializadas que ofrecen consultoría técnica, gestión de proyectos y diseño en sectores de infraestructura e industria, con relaciones comerciales recurrentes y estables.">Specialized engineering firms providing technical consulting, project management, and design services across infrastructure and industrial sectors with stable recurring client relationships.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
       <div class="sector-icon">✦</div>
-      <div class="sector-name">Industrial Linen<br>& Laundry</div>
-      <div class="sector-desc">Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation.</div>
-      <span class="sector-tag">Target Sector</span>
+      <div class="sector-name" data-en="Industrial Linen<br>&amp; Laundry" data-es="Lavandería<br>Industrial">Industrial Linen<br>&amp; Laundry</div>
+      <div class="sector-desc" data-en="Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation." data-es="Empresas de lavandería y suministro de lencería para clientes de hotelería, salud e industria. Ingresos predecibles, altos costos de cambio y notable fragmentación del mercado local.">Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
       <div class="sector-icon">✦</div>
-      <div class="sector-name">Heavy Equipment<br>Rentals</div>
-      <div class="sector-desc">Equipment rental companies serving construction, mining, and infrastructure industries. Asset-backed businesses with strong recurring revenue and meaningful barriers to entry.</div>
-      <span class="sector-tag">Target Sector</span>
+      <div class="sector-name" data-en="Heavy Equipment<br>Rentals" data-es="Alquiler de<br>Maquinaria Pesada">Heavy Equipment<br>Rentals</div>
+      <div class="sector-desc" data-en="Equipment rental companies serving construction, mining, and infrastructure industries. Asset-backed businesses with strong recurring revenue and meaningful barriers to entry." data-es="Empresas de alquiler de equipos para construcción, minería e infraestructura. Negocios respaldados por activos con ingresos recurrentes sólidos y barreras de entrada significativas.">Equipment rental companies serving construction, mining, and infrastructure industries. Asset-backed businesses with strong recurring revenue and meaningful barriers to entry.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
       <div class="sector-icon">✦</div>
-      <div class="sector-name">Specialty Medical<br>Practices</div>
-      <div class="sector-desc">Focused specialty medical clinics with defensible patient bases, recurring revenue, and professional management upside. Essential healthcare services with strong local market positions.</div>
-      <span class="sector-tag">Target Sector</span>
+      <div class="sector-name" data-en="Specialty Medical<br>Practices" data-es="Consultorios Médicos<br>Especializados">Specialty Medical<br>Practices</div>
+      <div class="sector-desc" data-en="Focused specialty medical clinics with defensible patient bases, recurring revenue, and professional management upside. Essential healthcare services with strong local market positions." data-es="Clínicas médicas especializadas con bases de pacientes defendibles, ingresos recurrentes y potencial de mejora en gestión profesional. Servicios de salud esenciales con posiciones sólidas en el mercado local.">Focused specialty medical clinics with defensible patient bases, recurring revenue, and professional management upside. Essential healthcare services with strong local market positions.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
       <div class="sector-icon">✦</div>
-      <div class="sector-name">Specialty Chemicals &<br>Pharma Manufacturing</div>
-      <div class="sector-desc">Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets.</div>
-      <span class="sector-tag">Target Sector</span>
+      <div class="sector-name" data-en="Specialty Chemicals &amp;<br>Pharma Manufacturing" data-es="Química Especializada<br>y Farmacéutica">Specialty Chemicals &amp;<br>Pharma Manufacturing</div>
+      <div class="sector-desc" data-en="Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets." data-es="Fabricantes de nicho en química y farmacéutica con formulaciones propias, barreras regulatorias y relaciones consolidadas con clientes en mercados industriales y sanitarios.">Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
   </div>
 </section>
@@ -662,37 +668,37 @@
   <div class="fade-in">
     <div class="section-eyebrow" style="color: var(--accent-light);">
       <span style="background: var(--accent); display:block; width:24px; height:1px;"></span>
-      For Investors
+      <span data-en="For Investors" data-es="Para Inversores">For Investors</span>
     </div>
-    <h2 class="section-title">A differentiated return profile in an emerging market</h2>
-    <p class="section-sub">The search fund model has generated compelling returns for investors over three decades. Arista Capital Partners applies this proven structure to the Latin American opportunity.</p>
+    <h2 class="section-title" data-en="A differentiated return profile in an emerging market" data-es="Un perfil de retorno diferenciado en un mercado emergente">A differentiated return profile in an emerging market</h2>
+    <p class="section-sub" data-en="The search fund model has generated compelling returns for investors over three decades. Arista Capital Partners applies this proven structure to the Latin American opportunity." data-es="El modelo de search fund ha generado retornos atractivos para inversores durante tres décadas. Arista Capital Partners aplica esta estructura probada a la oportunidad latinoamericana.">The search fund model has generated compelling returns for investors over three decades. Arista Capital Partners applies this proven structure to the Latin American opportunity.</p>
     <div class="invest-points">
       <div class="invest-point">
         <div class="invest-check">✓</div>
         <div class="invest-point-text">
-          <strong>Asymmetric upside</strong>
-          Step-up economics on acquisition provide early investors preferential returns prior to equity participation by the operators.
+          <strong data-en="Asymmetric upside" data-es="Potencial asimétrico">Asymmetric upside</strong>
+          <span data-en="Step-up economics on acquisition provide early investors preferential returns prior to equity participation by the operators." data-es="La estructura escalonada en la adquisición otorga a los inversores tempranos retornos preferenciales antes de la participación accionaria de los operadores.">Step-up economics on acquisition provide early investors preferential returns prior to equity participation by the operators.</span>
         </div>
       </div>
       <div class="invest-point">
         <div class="invest-check">✓</div>
         <div class="invest-point-text">
-          <strong>Operator-led model</strong>
-          Principals invest meaningfully alongside investors — full alignment of incentives throughout the search and ownership phases.
+          <strong data-en="Operator-led model" data-es="Modelo liderado por operadores">Operator-led model</strong>
+          <span data-en="Principals invest meaningfully alongside investors — full alignment of incentives throughout the search and ownership phases." data-es="Los socios invierten de forma significativa junto a los inversores — alineación total de incentivos durante las fases de búsqueda y propiedad.">Principals invest meaningfully alongside investors — full alignment of incentives throughout the search and ownership phases.</span>
         </div>
       </div>
       <div class="invest-point">
         <div class="invest-check">✓</div>
         <div class="invest-point-text">
-          <strong>Experienced principals</strong>
-          Operators bring world-class management consulting and M&A backgrounds — rigorous frameworks applied to SME acquisition.
+          <strong data-en="Experienced principals" data-es="Socios con experiencia">Experienced principals</strong>
+          <span data-en="Operators bring world-class management consulting and M&A backgrounds — rigorous frameworks applied to SME acquisition." data-es="Los operadores aportan trayectorias de consultoría de gestión y M&A de primer nivel — marcos rigurosos aplicados a la adquisición de pymes.">Operators bring world-class management consulting and M&A backgrounds — rigorous frameworks applied to SME acquisition.</span>
         </div>
       </div>
       <div class="invest-point">
         <div class="invest-check">✓</div>
         <div class="invest-point-text">
-          <strong>Underpenetrated market</strong>
-          Latin American search funds remain nascent, creating deal pricing and structural advantages not available in more competitive markets.
+          <strong data-en="Underpenetrated market" data-es="Mercado sin explotar">Underpenetrated market</strong>
+          <span data-en="Latin American search funds remain nascent, creating deal pricing and structural advantages not available in more competitive markets." data-es="Los search funds en América Latina siguen siendo incipientes, lo que genera ventajas de precio y estructurales no disponibles en mercados más competitivos.">Latin American search funds remain nascent, creating deal pricing and structural advantages not available in more competitive markets.</span>
         </div>
       </div>
     </div>
@@ -702,22 +708,22 @@
 <!-- TEAM -->
 <section id="team">
   <div class="team-header fade-in">
-    <div class="section-eyebrow" style="justify-content: center;">The Team</div>
-    <h2 class="section-title">Operators first</h2>
-    <p class="section-sub" style="margin: 0 auto;">Two principals combining global consulting credentials with deep on-the-ground expertise in Latin America.</p>
+    <div class="section-eyebrow" style="justify-content: center;" data-en="The Team" data-es="El Equipo">The Team</div>
+    <h2 class="section-title" data-en="Operators first" data-es="Operadores ante todo">Operators first</h2>
+    <p class="section-sub" style="margin: 0 auto;" data-en="Two principals combining global consulting credentials with deep on-the-ground expertise in Latin America." data-es="Dos socios que combinan credenciales de consultoría global con un profundo conocimiento sobre el terreno en América Latina.">Two principals combining global consulting credentials with deep on-the-ground expertise in Latin America.</p>
   </div>
   <div class="team-grid fade-in">
     <div class="team-card">
       <div class="team-avatar">L</div>
       <div class="team-name">Louis Abrassard</div>
-      <div class="team-role">Co-Founder & Principal</div>
-      <div class="team-bio">Consultant at Bain & Company with M&A and strategy experience across multiple sectors. A Yale graduate who has completed 50+ due diligences, Louis brings deep diligence experience across both the buy side and sell side. Brings rigorous analytical frameworks and transaction structuring expertise to the search. Based in Boston, with deep ties to Latin American markets.</div>
+      <div class="team-role" data-en="Co-Founder &amp; Principal" data-es="Co-Fundador y Director">Co-Founder &amp; Principal</div>
+      <div class="team-bio" data-en="Consultant at Bain &amp; Company with M&amp;A and strategy experience across multiple sectors. A Yale graduate who has completed 50+ due diligences, Louis brings deep diligence experience across both the buy side and sell side. Brings rigorous analytical frameworks and transaction structuring expertise to the search. Based in Boston, with deep ties to Latin American markets." data-es="Consultor en Bain &amp; Company con experiencia en M&amp;A y estrategia en múltiples sectores. Graduado de Yale y con más de 50 due diligences completados, Louis aporta una profunda experiencia en procesos de análisis tanto en el lado comprador como vendedor, junto con marcos analíticos rigurosos y conocimiento en estructuración de transacciones.">Consultant at Bain &amp; Company with M&amp;A and strategy experience across multiple sectors. A Yale graduate who has completed 50+ due diligences, Louis brings deep diligence experience across both the buy side and sell side. Brings rigorous analytical frameworks and transaction structuring expertise to the search. Based in Boston, with deep ties to Latin American markets.</div>
     </div>
     <div class="team-card">
       <div class="team-avatar">M</div>
       <div class="team-name">Mateo Morales</div>
-      <div class="team-role">Co-Founder & Principal</div>
-      <div class="team-bio">A native Colombian, Mateo brings an extensive network of bankers, advisors, and intermediaries in the region. Provides critical on-the-ground deal sourcing networks, regulatory fluency, and management expertise across the target sectors, with deep operational experience in the Colombian market.</div>
+      <div class="team-role" data-en="Co-Founder &amp; Principal" data-es="Co-Fundador y Director">Co-Founder &amp; Principal</div>
+      <div class="team-bio" data-en="A native Colombian, Mateo brings an extensive network of bankers, advisors, and intermediaries in the region. Provides critical on-the-ground deal sourcing networks, regulatory fluency, and management expertise across the target sectors, with deep operational experience in the Colombian market." data-es="Colombiano de nacimiento, Mateo aporta una extensa red de banqueros, asesores e intermediarios en la región. Ofrece redes críticas de originación de operaciones sobre el terreno, dominio regulatorio y experiencia en gestión en los sectores objetivo, con una profunda trayectoria operacional en el mercado colombiano.">A native Colombian, Mateo brings an extensive network of bankers, advisors, and intermediaries in the region. Provides critical on-the-ground deal sourcing networks, regulatory fluency, and management expertise across the target sectors, with deep operational experience in the Colombian market.</div>
     </div>
   </div>
 </section>
@@ -725,30 +731,30 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-info fade-in">
-    <div class="section-eyebrow">Contact</div>
-    <h2 class="section-title">Let's start a conversation</h2>
-    <p class="section-sub">Whether you're a potential investor, a business owner considering your next chapter, or an advisor — we'd like to hear from you.</p>
+    <div class="section-eyebrow" data-en="Contact" data-es="Contacto">Contact</div>
+    <h2 class="section-title" data-en="Let's start a conversation" data-es="Iniciemos una conversación">Let's start a conversation</h2>
+    <p class="section-sub" data-en="Whether you're a potential investor, a business owner considering your next chapter, or an advisor — we'd like to hear from you." data-es="Ya sea que sea un potencial inversor, un empresario considerando su próximo capítulo o un asesor — nos gustaría escucharle.">Whether you're a potential investor, a business owner considering your next chapter, or an advisor — we'd like to hear from you.</p>
     <div class="contact-detail">
-      <div class="contact-detail-label">Headquarters</div>
-      <div class="contact-detail-value">Boston, MA & Bogotá, Colombia</div>
+      <div class="contact-detail-label" data-en="Headquarters" data-es="Sede">Headquarters</div>
+      <div class="contact-detail-value">Boston, MA &amp; Bogotá, Colombia</div>
     </div>
     <div class="contact-detail">
-      <div class="contact-detail-label">For Investors</div>
-      <div class="contact-detail-value">investors@aristacapital.co</div>
+      <div class="contact-detail-label" data-en="For Investors" data-es="Para Inversores">For Investors</div>
+      <div class="contact-detail-value">investors@aristacapitalpartners.com</div>
     </div>
     <div class="contact-detail">
-      <div class="contact-detail-label">For Business Owners</div>
-      <div class="contact-detail-value">acquisitions@aristacapital.co</div>
+      <div class="contact-detail-label" data-en="For Business Owners" data-es="Para Empresarios">For Business Owners</div>
+      <div class="contact-detail-value">acquisitions@aristacapitalpartners.com</div>
     </div>
   </div>
   <div class="contact-form fade-in">
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label">First Name</label>
+        <label class="form-label" data-en="First Name" data-es="Nombre">First Name</label>
         <input type="text" class="form-input" placeholder="Ana">
       </div>
       <div class="form-group">
-        <label class="form-label">Last Name</label>
+        <label class="form-label" data-en="Last Name" data-es="Apellido">Last Name</label>
         <input type="text" class="form-input" placeholder="García">
       </div>
     </div>
@@ -757,27 +763,27 @@
       <input type="email" class="form-input" placeholder="ana@example.com">
     </div>
     <div class="form-group">
-      <label class="form-label">I am a</label>
+      <label class="form-label" data-en="I am a" data-es="Soy">I am a</label>
       <select class="form-select">
-        <option value="">Select one...</option>
-        <option>Prospective Investor</option>
-        <option>Business Owner / Seller</option>
-        <option>M&A Advisor / Intermediary</option>
-        <option>Other</option>
+        <option value="" data-en="Select one..." data-es="Seleccione...">Select one...</option>
+        <option data-en="Prospective Investor" data-es="Inversor Potencial">Prospective Investor</option>
+        <option data-en="Business Owner / Seller" data-es="Empresario / Vendedor">Business Owner / Seller</option>
+        <option data-en="M&amp;A Advisor / Intermediary" data-es="Asesor M&amp;A / Intermediario">M&amp;A Advisor / Intermediary</option>
+        <option data-en="Other" data-es="Otro">Other</option>
       </select>
     </div>
     <div class="form-group">
-      <label class="form-label">Message</label>
-      <textarea class="form-textarea" placeholder="Tell us about your interest in Arista Capital Partners..."></textarea>
+      <label class="form-label" data-en="Message" data-es="Mensaje">Message</label>
+      <textarea class="form-textarea" data-placeholder-en="Tell us about your interest in Arista Capital Partners..." data-placeholder-es="Cuéntenos sobre su interés en Arista Capital Partners..." placeholder="Tell us about your interest in Arista Capital Partners..."></textarea>
     </div>
-    <button class="form-submit">Send Message</button>
+    <button class="form-submit" data-en="Send Message" data-es="Enviar Mensaje">Send Message</button>
   </div>
 </section>
 
 <footer>
   <div class="footer-logo">Arista <span>Capital Partners</span></div>
-  <div class="footer-text">© 2025 Arista Capital Partners · Boston, MA & Bogotá, Colombia</div>
-  <div class="footer-text">Confidential — Not an offer to sell securities</div>
+  <div class="footer-text">© <span id="footer-year"></span> Arista Capital Partners · Boston, MA &amp; Bogotá, Colombia</div>
+  <div class="footer-text" data-en="Confidential — Not an offer to sell securities" data-es="Confidencial — No constituye una oferta de venta de valores">Confidential — Not an offer to sell securities</div>
 </footer>
 
 <script>
@@ -817,14 +823,186 @@
     });
   });
 
-  document.querySelector('.form-submit').addEventListener('click', () => {
+  // Animated mountain range canvas
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    const ACCENT = 'rgba(91,143,168,';
+    const LINES = 10;
+    const COLS  = 28; // number of peaks/valleys per line
+
+    // Simple pseudo-noise: layered sines with different frequencies
+    function noise(x, seed) {
+      return Math.sin(x * 2.1 + seed) * 0.5
+           + Math.sin(x * 5.3 + seed * 1.7) * 0.28
+           + Math.sin(x * 11.7 + seed * 0.9) * 0.14
+           + Math.sin(x * 23.1 + seed * 2.3) * 0.08;
+    }
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+
+    // Give each line its own seed so they look different from each other
+    const seeds = Array.from({ length: LINES }, () => Math.random() * 100);
+    // Drift speed per line - very slow
+    const speeds = Array.from({ length: LINES }, () => (Math.random() * 0.00008 + 0.00004));
+
+    function drawMountainLine(lineIndex, t, alpha) {
+      const seed  = seeds[lineIndex];
+      const speed = speeds[lineIndex];
+      const baseY = H * (lineIndex + 1) / (LINES + 1);
+      // Lower lines have smaller amplitude (like closer ridges)
+      const amp   = H * (0.10 + (LINES - lineIndex) / LINES * 0.10);
+
+      ctx.beginPath();
+
+      for (let col = 0; col <= COLS; col++) {
+        const xFrac = col / COLS;
+        const x = xFrac * W;
+
+        // noise() returns roughly -1..1; absolute value creates V-shapes (peaks)
+        const raw    = noise(xFrac * 3 + t * speed, seed);
+        // Mix between abs (sharp peaks) and raw (valleys) for asymmetric ridgeline
+        const shaped = Math.abs(raw) * 0.7 - raw * 0.18;
+        const y      = baseY - shaped * amp;
+
+        col === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+
+      ctx.strokeStyle = ACCENT + alpha + ')';
+      ctx.lineWidth   = 0.85;
+      ctx.lineJoin    = 'miter';
+      ctx.miterLimit  = 6;
+      ctx.stroke();
+    }
+
+    function draw(ts) {
+      ctx.clearRect(0, 0, W, H);
+
+      for (let i = 0; i < LINES; i++) {
+        // Lines further back (lower index) are slightly fainter
+        const alpha = (0.09 + (i / LINES) * 0.14).toFixed(3);
+        drawMountainLine(i, ts, alpha);
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+  })();
+
+  // Language system
+  const LATAM_COUNTRIES = new Set([
+    'AR','BO','BR','CL','CO','CR','CU','DO','EC','GT','HN','MX',
+    'NI','PA','PE','PR','PY','SV','UY','VE','GY','SR','BZ'
+  ]);
+
+  let currentLang = 'en';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang === 'es' ? 'es' : 'en';
+
+    // Update all data-en / data-es elements
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (!val) return;
+      // Preserve inner HTML for elements that contain tags like <em>
+      if (val.includes('<')) {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
+      }
+    });
+
+    // Handle select options separately
+    document.querySelectorAll('select option[data-en]').forEach(opt => {
+      opt.textContent = opt.getAttribute('data-' + lang) || opt.getAttribute('data-en');
+    });
+
+    // Textarea placeholder
+    const ta = document.querySelector('.form-textarea[data-placeholder-en]');
+    if (ta) ta.placeholder = ta.getAttribute('data-placeholder-' + lang) || ta.getAttribute('data-placeholder-en');
+
+    // Toggle button label
+    const btn = document.getElementById('lang-toggle');
+    btn.textContent = lang === 'es' ? 'EN' : 'ES';
+    btn.title = lang === 'es' ? 'Switch to English' : 'Cambiar a Español';
+
+    localStorage.setItem('acp-lang', lang);
+  }
+
+  async function detectAndSetLang() {
+    // Check manual override first
+    const saved = localStorage.getItem('acp-lang');
+    if (saved) { applyLang(saved); return; }
+
+    try {
+      const res  = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      const code = (data.country_code || '').toUpperCase();
+      applyLang(LATAM_COUNTRIES.has(code) ? 'es' : 'en');
+    } catch {
+      applyLang('en'); // fallback
+    }
+  }
+
+  document.getElementById('lang-toggle').addEventListener('click', () => {
+    applyLang(currentLang === 'en' ? 'es' : 'en');
+  });
+
+  detectAndSetLang();
+
+  // Dynamic copyright year
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // Formspree contact form
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkoenogq';
+
+  document.querySelector('.form-submit').addEventListener('click', async () => {
     const btn = document.querySelector('.form-submit');
-    btn.textContent = 'Message Sent ✓';
-    btn.style.background = '#3D7A6B';
-    setTimeout(() => {
-      btn.textContent = 'Send Message';
-      btn.style.background = '';
-    }, 3000);
+
+    const firstName = document.querySelector('input[placeholder="Ana"]').value.trim();
+    const lastName  = document.querySelector('input[placeholder="García"]').value.trim();
+    const email     = document.querySelector('input[type="email"]').value.trim();
+    const role      = document.querySelector('.form-select').value;
+    const message   = document.querySelector('.form-textarea').value.trim();
+
+    if (!firstName || !email || !message) {
+      btn.textContent = 'Please fill in required fields';
+      btn.style.background = '#8B4A4A';
+      setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; }, 2500);
+      return;
+    }
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ firstName, lastName, email, role, message })
+      });
+
+      if (res.ok) {
+        btn.textContent = 'Message Sent ✓';
+        btn.style.background = '#3D7A6B';
+        document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => el.value = '');
+        setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; btn.disabled = false; }, 3000);
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      btn.textContent = 'Something went wrong - try again';
+      btn.style.background = '#8B4A4A';
+      setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; btn.disabled = false; }, 3000);
+    }
   });
 </script>
 
