@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arista Capital Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --slate:       #2B3A4A;
+    --slate-dark:  #1C2A38;
+    --slate-mid:   #3D5068;
+    --slate-deep:  #111E2B;
+    --accent:      #5B8FA8;
+    --accent-light:#7AAEC4;
+    --accent-pale: #D6E8F0;
+    --bg:          #F4F6F8;
+    --bg-dark:     #EAEDF1;
+    --white:       #FFFFFF;
+    --text-dark:   #1C2A38;
+    --text-mid:    #3D5068;
+    --text-muted:  #6B7E90;
+    --border:      rgba(43, 58, 74, 0.13);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 72px;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 600;
+    color: var(--slate-deep); letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 400; color: var(--text-mid);
+    text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    font-size: 13px; font-weight: 500; color: var(--slate);
+    text-decoration: none; border: 1px solid var(--slate);
+    padding: 8px 22px; letter-spacing: 0.04em; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--slate); color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--slate-deep);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 120px 48px 80px;
+  }
+
+  .hero-bg-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(91,143,168,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,143,168,0.07) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .hero-orb {
+    position: absolute; right: -120px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(91,143,168,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content { max-width: 680px; position: relative; z-index: 2; }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-light); margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 32px; height: 1px; background: var(--accent-light);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5vw, 62px);
+    font-weight: 500; line-height: 1.15;
+    color: var(--white); margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent-light); }
+
+  .hero p {
+    font-size: 17px; font-weight: 300;
+    color: rgba(255,255,255,0.58);
+    max-width: 520px; line-height: 1.75; margin-bottom: 44px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--accent); color: var(--white);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 14px 32px; text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent-light); }
+
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.75);
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 14px 32px; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.22);
+    cursor: pointer; transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.55); color: white; }
+
+  .hero-stats {
+    position: absolute; right: 48px; bottom: 80px;
+    display: flex; gap: 48px; z-index: 2;
+  }
+
+  .stat {
+    text-align: right;
+    border-right: 1px solid rgba(91,143,168,0.35);
+    padding-right: 24px;
+  }
+  .stat:last-child { border-right: none; padding-right: 0; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 500;
+    color: var(--white); display: block;
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.38); display: block; margin-top: 4px;
+  }
+
+  /* SHARED */
+  section { padding: 96px 48px; }
+
+  .section-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-eyebrow::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 500; color: var(--slate-deep);
+    line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 20px;
+  }
+
+  .section-sub {
+    font-size: 16px; color: var(--text-muted);
+    max-width: 500px; line-height: 1.7;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--bg);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+
+  .about-text p {
+    font-size: 16px; color: var(--text-mid);
+    line-height: 1.8; margin-bottom: 20px;
+  }
+
+  .about-pillars { display: flex; flex-direction: column; }
+
+  .pillar {
+    padding: 28px 0; border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 24px;
+  }
+  .pillar:first-child { border-top: 1px solid var(--border); }
+
+  .pillar-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; color: var(--accent);
+    min-width: 28px; padding-top: 2px;
+  }
+
+  .pillar-title { font-size: 15px; font-weight: 500; color: var(--slate-deep); margin-bottom: 6px; }
+  .pillar-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+  /* SECTORS */
+  #sectors { background: var(--white); }
+
+  .sectors-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 60px;
+  }
+
+  .sector-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .sector-card {
+    background: var(--white); padding: 40px 36px;
+    transition: background 0.2s;
+  }
+  .sector-card:hover { background: var(--accent-pale); }
+
+  .sector-icon {
+    width: 40px; height: 40px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px; font-size: 18px; color: var(--accent);
+  }
+
+  .sector-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 500;
+    color: var(--slate-deep); margin-bottom: 12px;
+  }
+
+  .sector-desc {
+    font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;
+  }
+
+  .sector-tag {
+    display: inline-block; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid rgba(91,143,168,0.35);
+    padding: 4px 12px;
+  }
+
+  /* INVESTORS */
+  #investors {
+    background: var(--slate-deep); color: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 96px; align-items: start;
+  }
+
+  #investors .section-title { color: var(--white); }
+  #investors .section-sub { color: rgba(255,255,255,0.48); }
+
+  .invest-points { display: flex; flex-direction: column; margin-top: 48px; }
+
+  .invest-point {
+    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .invest-point:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+
+  .invest-check {
+    width: 20px; height: 20px;
+    border: 1px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+    font-size: 11px; color: var(--accent);
+  }
+
+  .invest-point-text { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+  .invest-point-text strong {
+    display: block; font-size: 15px; font-weight: 500;
+    color: var(--white); margin-bottom: 4px;
+  }
+
+  .deal-terms {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 40px;
+  }
+
+  .deal-terms-title {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.38); margin-bottom: 28px;
+  }
+
+  .term-row {
+    display: flex; justify-content: space-between;
+    align-items: center; padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .term-row:last-child { border-bottom: none; }
+
+  .term-label { font-size: 13px; color: rgba(255,255,255,0.42); letter-spacing: 0.03em; }
+  .term-value { font-size: 14px; font-weight: 500; color: var(--white); }
+  .term-value.accent { color: var(--accent-light); }
+
+  /* TEAM */
+  #team { background: var(--bg); text-align: center; }
+
+  .team-header { max-width: 520px; margin: 0 auto 64px; }
+
+  .team-grid {
+    display: grid; grid-template-columns: repeat(2, 380px);
+    gap: 24px; justify-content: center;
+  }
+
+  .team-card {
+    background: var(--white); border: 1px solid var(--border);
+    padding: 40px; text-align: left;
+    transition: box-shadow 0.2s;
+  }
+  .team-card:hover { box-shadow: 0 8px 32px rgba(43,58,74,0.1); }
+
+  .team-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--slate);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--accent-light); font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .team-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 500;
+    color: var(--slate-deep); margin-bottom: 4px;
+  }
+
+  .team-role {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+  }
+
+  .team-bio { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+  /* CONTACT */
+  #contact {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .form-label {
+    font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted);
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: var(--bg); border: 1px solid var(--border);
+    padding: 12px 16px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--slate-deep); outline: none;
+    transition: border-color 0.2s; width: 100%; appearance: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    background: var(--slate); color: var(--white); border: none;
+    padding: 14px 32px; font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s;
+    align-self: flex-start; margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--slate-mid); }
+
+  .contact-info { padding-top: 8px; }
+
+  .contact-detail { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .contact-detail:first-of-type { border-top: 1px solid var(--border); margin-top: 40px; }
+
+  .contact-detail-label {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 4px;
+  }
+  .contact-detail-value { font-size: 15px; color: var(--slate-deep); }
+
+  /* FOOTER */
+  footer {
+    background: var(--slate-deep); padding: 40px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(91,143,168,0.2);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 600; color: var(--white);
+  }
+  .footer-logo span { color: var(--accent-light); }
+
+  .footer-text { font-size: 12px; color: rgba(255,255,255,0.28); letter-spacing: 0.04em; }
+
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* HAMBURGER BUTTON */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--slate-deep);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    /* NAV */
+    nav { padding: 0 20px; height: 60px; }
+    .nav-hamburger { display: flex; }
+    .nav-cta { display: none; }
+    .nav-links {
+      display: none; position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; gap: 0; padding: 0; z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block; padding: 16px 24px;
+      font-size: 14px; border-bottom: 1px solid var(--border);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 80px 24px 60px;
+      flex-direction: column;
+      justify-content: flex-start; align-items: flex-start;
+    }
+    .hero-content { max-width: 100%; }
+    .hero h1 { font-size: clamp(32px, 8vw, 48px); }
+    .hero-orb { width: 240px; height: 240px; right: -60px; opacity: 0.5; }
+    .hero-stats {
+      position: static;
+      flex-direction: row; flex-wrap: wrap;
+      gap: 20px; margin-top: 48px;
+    }
+    .stat {
+      text-align: left;
+      border-right: none; padding-right: 0;
+      border-bottom: 1px solid rgba(91,143,168,0.35);
+      padding-bottom: 12px; min-width: 100px;
+    }
+    .stat:last-child { border-bottom: none; }
+    .stat-number { font-size: 22px; }
+
+    /* SECTIONS */
+    section { padding: 56px 24px; }
+
+    /* ABOUT */
+    #about { grid-template-columns: 1fr; gap: 40px; }
+
+    /* SECTORS */
+    .sectors-header {
+      flex-direction: column; align-items: flex-start;
+      gap: 16px; margin-bottom: 40px;
+    }
+    .sectors-header p { max-width: 100% !important; }
+    .sector-cards { grid-template-columns: 1fr; }
+    .sector-card { padding: 28px 24px; }
+
+    /* INVESTORS */
+    #investors { grid-template-columns: 1fr; gap: 40px; }
+    .deal-terms { padding: 24px 20px; }
+    .term-label { font-size: 12px; }
+    .term-value { font-size: 13px; }
+
+    /* TEAM */
+    #team { text-align: left; }
+    .team-header { text-align: left; margin-bottom: 40px; }
+    .team-header .section-eyebrow { justify-content: flex-start; }
+    .team-header .section-sub { margin: 0; }
+    .team-grid { grid-template-columns: 1fr; max-width: 100%; }
+    .team-card { padding: 28px 20px; }
+
+    /* CONTACT */
+    #contact { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-detail:first-of-type { margin-top: 24px; }
+
+    /* FOOTER */
+    footer {
+      flex-direction: column; gap: 10px;
+      padding: 32px 24px; text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 72px 20px 48px; }
+    section { padding: 48px 20px; }
+    nav { padding: 0 16px; }
+    footer { padding: 28px 20px; }
+    .sector-card { padding: 24px 20px; }
+    .team-card { padding: 24px 20px; }
+    .deal-terms { padding: 20px 16px; }
+    .hero-stats { gap: 16px; }
+    .stat-number { font-size: 20px; }
+    .pillar { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Arista <span>Capital Partners</span></a>
+  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#investors">Investors</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact" style="color:var(--accent);">Get in Touch</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-content fade-in">
+    <div class="hero-eyebrow">Search Fund — Latin America</div>
+    <h1>Acquiring <em>exceptional</em> businesses in Colombia</h1>
+    <p>Arista Capital Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve.</p>
+    <div class="hero-actions">
+      <a href="#investors" class="btn-primary">Investor Information</a>
+      <a href="#about" class="btn-outline">Our Thesis</a>
+    </div>
+  </div>
+</section>
+<section id="about">
+  <div class="about-text fade-in">
+    <div class="section-eyebrow">Our Thesis</div>
+    <h2 class="section-title">A disciplined approach to acquiring Colombia's finest operators</h2>
+    <p>Latin America represents one of the most compelling untapped markets for the search fund model. Colombia's growing middle class, improving institutional environment, and fragmented SME landscape create a unique window of opportunity for experienced operators.</p>
+    <p>We focus on profitable, established businesses with defensible competitive positions — where skilled ownership can unlock meaningful value creation over a 5–7 year horizon.</p>
+  </div>
+  <div class="about-pillars fade-in">
+    <div class="pillar">
+      <span class="pillar-num">01</span>
+      <div>
+        <div class="pillar-title">Focused Sector Expertise</div>
+        <div class="pillar-desc">Deep sector knowledge across clinical laboratories, engineering services, industrial linen and laundry, heavy equipment rentals, specialty medical practices, and specialty chemicals and pharmaceutical manufacturing — resilient industries with strong recurring revenue characteristics.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">02</span>
+      <div>
+        <div class="pillar-title">Operational Value Creation</div>
+        <div class="pillar-desc">Our edge is operational improvement — bringing rigorous management practices, data-driven decision making, and M&A playbooks to businesses built on strong foundations.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">03</span>
+      <div>
+        <div class="pillar-title">Aligned Incentives</div>
+        <div class="pillar-desc">As operators who invest alongside our investors, our incentives are fully aligned. We take pride in building businesses that create lasting value for all stakeholders.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">04</span>
+      <div>
+        <div class="pillar-title">Local Advantage</div>
+        <div class="pillar-desc">On-the-ground presence in Colombia, deep local networks, and fluency in the regulatory and cultural landscape provide meaningful information and execution advantages.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="sectors-header fade-in">
+    <div>
+      <div class="section-eyebrow">Target Sectors</div>
+      <h2 class="section-title">Where we focus our search</h2>
+    </div>
+    <p class="section-sub" style="max-width: 300px;">Fragmented markets with strong unit economics and a clear path to consolidation.</p>
+  </div>
+  <div class="sector-cards fade-in">
+    <div class="sector-card">
+      <div class="sector-icon">✦</div>
+      <div class="sector-name">Clinical<br>Laboratories</div>
+      <div class="sector-desc">Diagnostic and testing labs serving healthcare providers and direct patients. Recurring demand, essential services, and strong cash flow dynamics with clear consolidation opportunities.</div>
+      <span class="sector-tag">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">✦</div>
+      <div class="sector-name">Engineering<br>Services</div>
+      <div class="sector-desc">Specialized engineering firms providing technical consulting, project management, and design services across infrastructure and industrial sectors with stable recurring client relationships.</div>
+      <span class="sector-tag">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">✦</div>
+      <div class="sector-name">Industrial Linen<br>& Laundry</div>
+      <div class="sector-desc">Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation.</div>
+      <span class="sector-tag">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">✦</div>
+      <div class="sector-name">Heavy Equipment<br>Rentals</div>
+      <div class="sector-desc">Equipment rental companies serving construction, mining, and infrastructure industries. Asset-backed businesses with strong recurring revenue and meaningful barriers to entry.</div>
+      <span class="sector-tag">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">✦</div>
+      <div class="sector-name">Specialty Medical<br>Practices</div>
+      <div class="sector-desc">Focused specialty medical clinics with defensible patient bases, recurring revenue, and professional management upside. Essential healthcare services with strong local market positions.</div>
+      <span class="sector-tag">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">✦</div>
+      <div class="sector-name">Specialty Chemicals &<br>Pharma Manufacturing</div>
+      <div class="sector-desc">Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets.</div>
+      <span class="sector-tag">Target Sector</span>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTORS -->
+<section id="investors">
+  <div class="fade-in">
+    <div class="section-eyebrow" style="color: var(--accent-light);">
+      <span style="background: var(--accent); display:block; width:24px; height:1px;"></span>
+      For Investors
+    </div>
+    <h2 class="section-title">A differentiated return profile in an emerging market</h2>
+    <p class="section-sub">The search fund model has generated compelling returns for investors over three decades. Arista Capital Partners applies this proven structure to the Latin American opportunity.</p>
+    <div class="invest-points">
+      <div class="invest-point">
+        <div class="invest-check">✓</div>
+        <div class="invest-point-text">
+          <strong>Asymmetric upside</strong>
+          Step-up economics on acquisition provide early investors preferential returns prior to equity participation by the operators.
+        </div>
+      </div>
+      <div class="invest-point">
+        <div class="invest-check">✓</div>
+        <div class="invest-point-text">
+          <strong>Operator-led model</strong>
+          Principals invest meaningfully alongside investors — full alignment of incentives throughout the search and ownership phases.
+        </div>
+      </div>
+      <div class="invest-point">
+        <div class="invest-check">✓</div>
+        <div class="invest-point-text">
+          <strong>Experienced principals</strong>
+          Operators bring world-class management consulting and M&A backgrounds — rigorous frameworks applied to SME acquisition.
+        </div>
+      </div>
+      <div class="invest-point">
+        <div class="invest-check">✓</div>
+        <div class="invest-point-text">
+          <strong>Underpenetrated market</strong>
+          Latin American search funds remain nascent, creating deal pricing and structural advantages not available in more competitive markets.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="team-header fade-in">
+    <div class="section-eyebrow" style="justify-content: center;">The Team</div>
+    <h2 class="section-title">Operators first</h2>
+    <p class="section-sub" style="margin: 0 auto;">Two principals combining global consulting credentials with deep on-the-ground expertise in Latin America.</p>
+  </div>
+  <div class="team-grid fade-in">
+    <div class="team-card">
+      <div class="team-avatar">L</div>
+      <div class="team-name">Louis Abrassard</div>
+      <div class="team-role">Co-Founder & Principal</div>
+      <div class="team-bio">Consultant at Bain & Company with M&A and strategy experience across multiple sectors. A Yale graduate who has completed 50+ due diligences, Louis brings deep diligence experience across both the buy side and sell side. Brings rigorous analytical frameworks and transaction structuring expertise to the search. Based in Boston, with deep ties to Latin American markets.</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">M</div>
+      <div class="team-name">Mateo Morales</div>
+      <div class="team-role">Co-Founder & Principal</div>
+      <div class="team-bio">A native Colombian, Mateo brings an extensive network of bankers, advisors, and intermediaries in the region. Provides critical on-the-ground deal sourcing networks, regulatory fluency, and management expertise across the target sectors, with deep operational experience in the Colombian market.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info fade-in">
+    <div class="section-eyebrow">Contact</div>
+    <h2 class="section-title">Let's start a conversation</h2>
+    <p class="section-sub">Whether you're a potential investor, a business owner considering your next chapter, or an advisor — we'd like to hear from you.</p>
+    <div class="contact-detail">
+      <div class="contact-detail-label">Headquarters</div>
+      <div class="contact-detail-value">Boston, MA & Bogotá, Colombia</div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-detail-label">For Investors</div>
+      <div class="contact-detail-value">investors@aristacapital.co</div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-detail-label">For Business Owners</div>
+      <div class="contact-detail-value">acquisitions@aristacapital.co</div>
+    </div>
+  </div>
+  <div class="contact-form fade-in">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-input" placeholder="Ana">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-input" placeholder="García">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" placeholder="ana@example.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">I am a</label>
+      <select class="form-select">
+        <option value="">Select one...</option>
+        <option>Prospective Investor</option>
+        <option>Business Owner / Seller</option>
+        <option>M&A Advisor / Intermediary</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Message</label>
+      <textarea class="form-textarea" placeholder="Tell us about your interest in Arista Capital Partners..."></textarea>
+    </div>
+    <button class="form-submit">Send Message</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Arista <span>Capital Partners</span></div>
+  <div class="footer-text">© 2025 Arista Capital Partners · Boston, MA & Bogotá, Colombia</div>
+  <div class="footer-text">Confidential — Not an offer to sell securities</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        const siblings = e.target.parentElement?.querySelectorAll('.fade-in');
+        if (siblings) {
+          let delay = 0;
+          siblings.forEach((s) => {
+            if (!s.classList.contains('visible')) {
+              s.style.transitionDelay = (delay * 0.12) + 's';
+              delay++;
+            }
+          });
+        }
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Hamburger menu
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.querySelector('.form-submit').addEventListener('click', () => {
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#3D7A6B';
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+    }, 3000);
+  });
+</script>
+
+</body>
+</html>
