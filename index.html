@@ -823,77 +823,145 @@
     });
   });
 
-  // Animated mountain range canvas
+  // Topographic contour masses — two clusters, uneven spacing, smooth motion
   (function() {
     const canvas = document.getElementById('hero-canvas');
-    const ctx = canvas.getContext('2d');
+    const ctx    = canvas.getContext('2d');
     let W, H;
-    const ACCENT = 'rgba(91,143,168,';
-    const LINES = 10;
-    const COLS  = 28; // number of peaks/valleys per line
+    const R = 91, G = 143, B = 168;
 
-    // Simple pseudo-noise: layered sines with different frequencies
-    function noise(x, seed) {
-      return Math.sin(x * 2.1 + seed) * 0.5
-           + Math.sin(x * 5.3 + seed * 1.7) * 0.28
-           + Math.sin(x * 11.7 + seed * 0.9) * 0.14
-           + Math.sin(x * 23.1 + seed * 2.3) * 0.08;
+    // ── Cubic hermite spline interpolation ───────────────────────────────────
+    function hermite(a, b, c, d, t) {
+      const t2 = t*t, t3 = t2*t;
+      return a*(-0.5*t3+t2-0.5*t) + b*(1.5*t3-2.5*t2+1) +
+             c*(-1.5*t3+2*t2+0.5*t) + d*(0.5*t3-0.5*t2);
     }
+
+    // ── Two contour masses ────────────────────────────────────────────────────
+    // Each mass has: centre, radii, number of lines, control point count
+    // lineGaps: array of RELATIVE spacings (will be normalised) — uneven gaps
+    function makeGaps(n) {
+      // Alternate tight/loose clusters for topographic feel
+      const g = [];
+      for (let i = 0; i < n - 1; i++) {
+        // Cluster tightly around 1/4 and 3/4 of the mass
+        const pos = i / (n - 1);
+        const tightness = 0.3 + 0.7 * (
+          Math.abs(Math.sin(pos * Math.PI * 2.3 + 0.8)) *
+          Math.abs(Math.sin(pos * Math.PI * 1.1 + 0.3))
+        );
+        g.push(tightness);
+      }
+      return g;
+    }
+
+    const MASSES = [
+      { cx:0.70, cy:0.36, rx:0.28, ry:0.21, lines:30, pts:8,
+        driftSpeedX:0.000011, driftSpeedY:0.000008, driftPhaseX:0.0, driftPhaseY:1.4 },
+      { cx:0.28, cy:0.65, rx:0.26, ry:0.19, lines:26, pts:7,
+        driftSpeedX:0.000009, driftSpeedY:0.000012, driftPhaseX:2.1, driftPhaseY:0.6 },
+    ];
+
+    MASSES.forEach(m => {
+      // Per control-point seeds and drift phases
+      const np = m.pts + 3;
+      m.cpSeeds  = Array.from({length:np}, () => Math.random() * 6.28);
+      m.cpSpeeds = Array.from({length:np}, () => Math.random() * 0.00018 + 0.00008);
+
+      // Pre-compute uneven vertical spacings (normalised to sum to 1)
+      const gaps = makeGaps(m.lines);
+      const total = gaps.reduce((s, v) => s + v, 0);
+      // Convert to cumulative 0..1 positions
+      m.levels = [0];
+      let acc = 0;
+      for (let i = 0; i < gaps.length; i++) {
+        acc += gaps[i] / total;
+        m.levels.push(acc);
+      }
+      // Remap levels from 0..1 → -1..+1
+      m.levels = m.levels.map(v => v * 2 - 1);
+    });
 
     function resize() {
-      W = canvas.width  = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
+      // Fix the blue-square bug: set pixel dims to match CSS layout size
+      const rect = canvas.parentElement.getBoundingClientRect();
+      W = canvas.width  = Math.round(rect.width  || canvas.offsetWidth  || window.innerWidth);
+      H = canvas.height = Math.round(rect.height || canvas.offsetHeight || window.innerHeight);
     }
 
-    // Give each line its own seed so they look different from each other
-    const seeds = Array.from({ length: LINES }, () => Math.random() * 100);
-    // Drift speed per line - very slow
-    const speeds = Array.from({ length: LINES }, () => (Math.random() * 0.00008 + 0.00004));
+    // Spine offset for a line at xFrac within the mass, driven by time
+    function spineY(m, xFrac, ts) {
+      const seg = xFrac * (m.pts - 1);
+      const i   = Math.floor(seg);
+      const t   = seg - i;
+      const cp  = k => {
+        const idx = Math.max(0, Math.min(m.pts - 1, k));
+        return Math.sin(ts * m.cpSpeeds[idx] + m.cpSeeds[idx]) * 0.5;
+      };
+      return hermite(cp(i-1), cp(i), cp(i+1), cp(i+2), t);
+    }
 
-    function drawMountainLine(lineIndex, t, alpha) {
-      const seed  = seeds[lineIndex];
-      const speed = speeds[lineIndex];
-      const baseY = H * (lineIndex + 1) / (LINES + 1);
-      // Lower lines have smaller amplitude (like closer ridges)
-      const amp   = H * (0.10 + (LINES - lineIndex) / LINES * 0.10);
+    function drawMass(m, ts) {
+      // Whole-mass slow drift
+      const cx = m.cx + Math.sin(ts * m.driftSpeedX + m.driftPhaseX) * 0.025;
+      const cy = m.cy + Math.cos(ts * m.driftSpeedY + m.driftPhaseY) * 0.018;
 
-      ctx.beginPath();
+      for (let i = 0; i < m.lines; i++) {
+        const level = m.levels[i];  // -1..+1, unevenly distributed
 
-      for (let col = 0; col <= COLS; col++) {
-        const xFrac = col / COLS;
-        const x = xFrac * W;
+        // Elliptical silhouette: lines at the edge are shorter
+        const widthFrac = Math.sqrt(Math.max(0, 1 - level * level));
+        if (widthFrac < 0.08) continue;
 
-        // noise() returns roughly -1..1; absolute value creates V-shapes (peaks)
-        const raw    = noise(xFrac * 3 + t * speed, seed);
-        // Mix between abs (sharp peaks) and raw (valleys) for asymmetric ridgeline
-        const shaped = Math.abs(raw) * 0.7 - raw * 0.18;
-        const y      = baseY - shaped * amp;
+        const xLeft  = (cx - m.rx * widthFrac) * W;
+        const xRight = (cx + m.rx * widthFrac) * W;
+        if (xRight - xLeft < 6) continue;
 
-        col === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        const lineSpan = xRight - xLeft;
+
+        ctx.beginPath();
+        const steps = 90;
+        for (let s = 0; s <= steps; s++) {
+          const xf  = s / steps;
+          const x   = xLeft + xf * lineSpan;
+
+          // Organic waviness — amplitude tapers at line ends
+          const taper  = Math.sin(xf * Math.PI);
+          const offset = spineY(m, xf, ts) * m.ry * 0.20 * taper;
+
+          const y = (cy + level * m.ry + offset) * H;
+          s === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+
+        // Opacity gradient: bright centre, fade edges
+        const alpha = Math.max(0.05, 0.34 - Math.abs(level) * 0.28);
+        ctx.strokeStyle = `rgba(${R},${G},${B},${alpha.toFixed(3)})`;
+        ctx.lineWidth   = 0.85;
+        ctx.lineJoin    = 'round';
+        ctx.stroke();
       }
-
-      ctx.strokeStyle = ACCENT + alpha + ')';
-      ctx.lineWidth   = 0.85;
-      ctx.lineJoin    = 'miter';
-      ctx.miterLimit  = 6;
-      ctx.stroke();
     }
 
     function draw(ts) {
       ctx.clearRect(0, 0, W, H);
-
-      for (let i = 0; i < LINES; i++) {
-        // Lines further back (lower index) are slightly fainter
-        const alpha = (0.09 + (i / LINES) * 0.14).toFixed(3);
-        drawMountainLine(i, ts, alpha);
-      }
-
+      MASSES.forEach(m => drawMass(m, ts));
       requestAnimationFrame(draw);
     }
 
-    window.addEventListener('resize', resize);
-    resize();
-    requestAnimationFrame(draw);
+    // Re-size whenever the window changes, with a small debounce
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 60);
+    });
+
+    // Wait for full layout before first size read
+    if (document.readyState === 'complete') {
+      resize();
+      requestAnimationFrame(draw);
+    } else {
+      window.addEventListener('load', () => { resize(); requestAnimationFrame(draw); });
+    }
   })();
 
   // Language system
