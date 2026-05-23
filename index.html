@@ -446,6 +446,575 @@
     var W = 0, H = 0;
     var R = 91, G = 143, B = 168;
     var NUM_LINES = 22;
+    var STEPS     = 18;
+
+    var phases  = [], speeds  = [], phases2 = [], speeds2 = [];
+    var freqA   = [], freqB   = [], ampA    = [], ampB    = [];
+    for (var qi = 0; qi < NUM_LINES; qi++) {
+      phases.push(Math.random() * Math.PI * 2);
+      speeds.push(0.00090 + Math.random() * 0.00060);
+      phases2.push(Math.random() * Math.PI * 2);
+      speeds2.push(0.00055 + Math.random() * 0.00040);
+      freqA.push(1.2 + Math.random() * 0.8);
+      freqB.push(2.8 + Math.random() * 1.6);
+      ampA.push(0.55 + Math.random() * 0.25);
+      ampB.push(0.30 + Math.random() * 0.20);
+    }
+
+    var basePositions = null;
+    var lastH = 0;
+
+    function buildSpacing(n, h) {
+      var margin = h * 0.04;
+      var usable = h - margin * 2;
+      var step   = usable / (n - 1);
+      var pos = [];
+      for (var k = 0; k < n; k++) {
+        pos.push(margin + k * step + (Math.random() - 0.5) * step * 0.28);
+      }
+      pos.sort(function(a, b) { return a - b; });
+      return pos;
+    }
+
+    function resize() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      if (w !== W || h !== H) {
+        W = canvas.width  = w;
+        H = canvas.height = h;
+      }
+    }
+
+    function noise(idx, xf, ts) {
+      var t1 = ts * speeds[idx]  + phases[idx];
+      var t2 = ts * speeds2[idx] + phases2[idx];
+      return ampA[idx] * Math.sin(xf * freqA[idx] * Math.PI * 2 + t1)
+           + ampB[idx] * Math.sin(xf * freqB[idx] * Math.PI * 2 - t2);
+    }
+
+    function draw(ts) {
+      if (W === 0 || H === 0) { resize(); requestAnimationFrame(draw); return; }
+      if (H !== lastH) { basePositions = buildSpacing(NUM_LINES, H); lastH = H; }
+
+      var minGap = H / (NUM_LINES + 1) * 0.55;
+      var AMP    = minGap * 1.1;
+      var li, ls, prev, by, t_, alpha, x, y;
+      var stride = STEPS + 1;
+
+      ctx.clearRect(0, 0, W, H);
+
+      var grid = new Float32Array(NUM_LINES * stride);
+      for (li = 0; li < NUM_LINES; li++) {
+        by = basePositions[li];
+        for (ls = 0; ls <= STEPS; ls++) {
+          grid[li * stride + ls] = by + noise(li, ls / STEPS, ts) * AMP;
+        }
+      }
+      for (li = 1; li < NUM_LINES; li++) {
+        for (ls = 0; ls <= STEPS; ls++) {
+          prev = grid[(li - 1) * stride + ls];
+          if (grid[li * stride + ls] < prev + minGap * 0.35) {
+            grid[li * stride + ls] = prev + minGap * 0.35;
+          }
+        }
+      }
+      for (li = 0; li < NUM_LINES; li++) {
+        t_    = li / (NUM_LINES - 1);
+        alpha = 0.12 + 0.16 * Math.pow(Math.sin(t_ * Math.PI), 1.4);
+        ctx.beginPath();
+        for (ls = 0; ls <= STEPS; ls++) {
+          x = (ls / STEPS) * W;
+          y = grid[li * stride + ls];
+          if (ls === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
+        }
+        ctx.strokeStyle = 'rgba(' + R + ',' + G + ',' + B + ',' + alpha.toFixed(3) + ')';
+        ctx.lineWidth   = 0.9;
+        ctx.lineJoin    = 'miter';
+        ctx.miterLimit  = 10;
+        ctx.stroke();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    function start() {
+      resize();
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', function() { resize(); basePositions = null; });
+    // Defer slightly so layout is settled before first size read
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(start, 0); });
+    } else {
+      setTimeout(start, 0);
+    }
+  })();
+
+    var LATAM_COUNTRIES = new Set(['AR','BO','BR','CL','CO','CR','CU','DO','EC','GT','HN','MX','NI','PA','PE','PR','PY','SV','UY','VE','GY','SR','BZ']);
+  var currentLang = 'en';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang === 'es' ? 'es' : 'en';
+    document.querySelectorAll('[data-en]').forEach(function(el) {
+      var val = el.getAttribute('data-' + lang);
+      if (!val) return;
+      if (val.indexOf('<') !== -1) { el.innerHTML = val; } else { el.textContent = val; }
+    });
+    document.querySelectorAll('select option[data-en]').forEach(function(opt) {
+      opt.textContent = opt.getAttribute('data-' + lang) || opt.getAttribute('data-en');
+    });
+    var ta = document.querySelector('.form-textarea[data-placeholder-en]');
+    if (ta) ta.placeholder = ta.getAttribute('data-placeholder-' + lang) || ta.getAttribute('data-placeholder-en');
+    var btn = document.getElementById('lang-toggle');
+    btn.textContent = lang === 'es' ? 'EN' : 'ES';
+    btn.title = lang === 'es' ? 'Switch to English' : 'Cambiar a Español';
+    localStorage.setItem('acp-lang', lang);
+  }
+
+  function detectAndSetLang() {
+    var saved = localStorage.getItem('acp-lang');
+    if (saved) { applyLang(saved); return; }
+    fetch('https://ipapi.co/json/')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var code = (data.country_code || '').toUpperCase();
+        applyLang(LATAM_COUNTRIES.has(code) ? 'es' : 'en');
+      })
+      .catch(function() { applyLang('en'); });
+  }
+
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    applyLang(currentLang === 'en' ? 'es' : 'en');
+  });
+
+  detectAndSetLang();
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkoenogq';
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    var btn       = document.querySelector('.form-submit');
+    var firstName = document.querySelector('input[placeholder="Ana"]').value.trim();
+    var lastName  = document.querySelector('input[placeholder="García"]').value.trim();
+    var email     = document.querySelector('input[type="email"]').value.trim();
+    var role      = document.querySelector('.form-select').value;
+    var message   = document.querySelector('.form-textarea').value.trim();
+
+    if (!firstName || !email || !message) {
+      btn.textContent = 'Please fill in required fields';
+      btn.style.background = '#8B4A4A';
+      setTimeout(function() { btn.textContent = 'Send Message'; btn.style.background = ''; }, 2500);
+      return;
+    }
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ firstName: firstName, lastName: lastName, email: email, role: role, message: message })
+    }).then(function(res) {
+      if (res.ok) {
+        btn.textContent = 'Message Sent';
+        btn.style.background = '#3D7A6B';
+        document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(function(el) { el.value = ''; });
+        setTimeout(function() { btn.textContent = 'Send Message'; btn.style.background = ''; btn.disabled = false; }, 3000);
+      } else { throw new Error('Server error'); }
+    }).catch(function() {
+      btn.textContent = 'Something went wrong - try again';
+      btn.style.background = '#8B4A4A';
+      setTimeout(function() { btn.textContent = 'Send Message'; btn.style.background = ''; btn.disabled = false; }, 3000);
+    });
+  });
+</script>
+
+</body>
+</html>  .pillar { padding: 28px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 24px; }
+  .pillar:first-child { border-top: 1px solid var(--border); }
+  .pillar-num { font-family: 'Playfair Display', serif; font-size: 13px; color: var(--accent); min-width: 28px; padding-top: 2px; }
+  .pillar-title { font-size: 15px; font-weight: 500; color: var(--slate-deep); margin-bottom: 6px; }
+  .pillar-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+  #sectors { background: var(--white); }
+  .sectors-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .sector-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .sector-card { background: var(--white); padding: 40px 36px; transition: background 0.2s; }
+  .sector-card:hover { background: var(--accent-pale); }
+  .sector-icon { width: 40px; height: 40px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 18px; color: var(--accent); }
+  .sector-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: var(--slate-deep); margin-bottom: 12px; }
+  .sector-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+  .sector-tag { display: inline-block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(91,143,168,0.35); padding: 4px 12px; }
+  #investors { background: var(--slate-deep); color: var(--white); padding: 96px 48px; }
+  #investors .section-title { color: var(--white); }
+  #investors .section-sub { color: rgba(255,255,255,0.48); }
+  .invest-points { display: flex; flex-direction: column; margin-top: 48px; }
+  .invest-point { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; gap: 20px; align-items: flex-start; }
+  .invest-point:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+  .invest-check { width: 20px; height: 20px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 11px; color: var(--accent); }
+  .invest-point-text { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+  .invest-point-text strong { display: block; font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+  .term-row:last-child { border-bottom: none; }
+  .term-value.accent { color: var(--accent-light); }
+  #team { background: var(--bg); text-align: center; }
+  .team-header { max-width: 520px; margin: 0 auto 64px; }
+  .team-grid { display: grid; grid-template-columns: repeat(2, 380px); gap: 24px; justify-content: center; }
+  .team-card { background: var(--white); border: 1px solid var(--border); padding: 40px; text-align: left; transition: box-shadow 0.2s; }
+  .team-card:hover { box-shadow: 0 8px 32px rgba(43,58,74,0.1); }
+  .team-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--slate); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 18px; color: var(--accent-light); font-weight: 500; margin-bottom: 20px; }
+  .team-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: var(--slate-deep); margin-bottom: 4px; }
+  .team-role { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .team-bio { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  #contact { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .form-input, .form-select, .form-textarea { background: var(--bg); border: 1px solid var(--border); padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--slate-deep); outline: none; transition: border-color 0.2s; width: 100%; appearance: none; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-submit { background: var(--slate); color: var(--white); border: none; padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; align-self: flex-start; margin-top: 8px; }
+  .form-submit:hover { background: var(--slate-mid); }
+  .contact-info { padding-top: 8px; }
+  .contact-detail { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .contact-detail:first-of-type { border-top: 1px solid var(--border); margin-top: 40px; }
+  .contact-detail-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .contact-detail-value { font-size: 15px; color: var(--slate-deep); }
+  footer { background: var(--slate-deep); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(91,143,168,0.2); }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--white); }
+  .footer-logo span { color: var(--accent-light); }
+  .footer-text { font-size: 12px; color: rgba(255,255,255,0.28); letter-spacing: 0.04em; }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--slate-deep); transition: transform 0.3s, opacity 0.3s; }
+  .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; height: 60px; }
+    .nav-hamburger { display: flex; }
+    .nav-cta { display: none; }
+    .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(255,255,255,0.98); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); flex-direction: column; gap: 0; padding: 0; z-index: 99; }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 16px 24px; font-size: 14px; border-bottom: 1px solid var(--border); }
+    .hero { padding: 80px 24px 60px; flex-direction: column; justify-content: flex-start; align-items: flex-start; }
+    .hero-content { max-width: 100%; }
+    .hero h1 { font-size: clamp(32px, 8vw, 48px); }
+    .hero-stats { position: static; flex-direction: row; flex-wrap: wrap; gap: 20px; margin-top: 48px; }
+    .stat { text-align: left; border-right: none; padding-right: 0; border-bottom: 1px solid rgba(91,143,168,0.35); padding-bottom: 12px; min-width: 100px; }
+    .stat:last-child { border-bottom: none; }
+    .stat-number { font-size: 22px; }
+    section { padding: 56px 24px; }
+    #about { grid-template-columns: 1fr; gap: 40px; }
+    .sectors-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
+    .sectors-header p { max-width: 100% !important; }
+    .sector-cards { grid-template-columns: 1fr; }
+    .sector-card { padding: 28px 24px; }
+    
+    #team { text-align: left; }
+    .team-header { text-align: left; margin-bottom: 40px; }
+    .team-header .section-eyebrow { justify-content: flex-start; }
+    .team-header .section-sub { margin: 0; }
+    .team-grid { grid-template-columns: 1fr; max-width: 100%; }
+    .team-card { padding: 28px 20px; }
+    #contact { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-detail:first-of-type { margin-top: 24px; }
+    footer { flex-direction: column; gap: 10px; padding: 32px 24px; text-align: center; }
+  }
+  @media (max-width: 480px) {
+    .hero { padding: 72px 20px 48px; }
+    section { padding: 48px 20px; }
+    nav { padding: 0 16px; }
+    footer { padding: 28px 20px; }
+    .sector-card { padding: 24px 20px; }
+    .team-card { padding: 24px 20px; }
+    .hero-stats { gap: 16px; }
+    .stat-number { font-size: 20px; }
+    .pillar { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Arista <span>Capital Partners</span></a>
+  <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#about" data-en="About" data-es="Nosotros">About</a></li>
+    <li><a href="#sectors" data-en="Sectors" data-es="Sectores">Sectors</a></li>
+    <li><a href="#investors" data-en="Investors" data-es="Inversores">Investors</a></li>
+    <li><a href="#team" data-en="Team" data-es="Equipo">Team</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button id="lang-toggle" aria-label="Toggle language" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;background:transparent;border:1px solid var(--border);color:var(--text-mid);padding:6px 14px;cursor:pointer;transition:all 0.2s;white-space:nowrap;">ES</button>
+    <a href="#contact" class="nav-cta" data-en="Get in Touch" data-es="Contáctanos">Get in Touch</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-bg-lines"><canvas id="hero-canvas"></canvas></div>
+  <div class="hero-content fade-in">
+    <div class="hero-eyebrow" data-en="Search Fund — Latin America" data-es="Search Fund — América Latina">Search Fund — Latin America</div>
+    <h1 data-en="Acquiring <em>exceptional</em> businesses in Colombia" data-es="Adquiriendo empresas <em>excepcionales</em> en Colombia">Acquiring <em>exceptional</em> businesses in Colombia</h1>
+    <p data-en="Arista Capital Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve." data-es="Arista Capital Partners es un search fund enfocado en identificar, adquirir y operar las mejores pymes de América Latina — generando valor duradero para inversores, operadores y las comunidades que servimos.">Arista Capital Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve.</p>
+    <div class="hero-actions">
+      <a href="#investors" class="btn-primary" data-en="Investor Information" data-es="Información para Inversores">Investor Information</a>
+      <a href="#about" class="btn-outline" data-en="Our Thesis" data-es="Nuestra Tesis">Our Thesis</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-text fade-in">
+    <div class="section-eyebrow" data-en="Our Thesis" data-es="Nuestra Tesis">Our Thesis</div>
+    <h2 class="section-title" data-en="A disciplined approach to acquiring Colombia's finest operators" data-es="Un enfoque disciplinado para adquirir los mejores operadores de Colombia">A disciplined approach to acquiring Colombia's finest operators</h2>
+    <p data-en="Latin America represents one of the most compelling untapped markets for the search fund model. Colombia's growing middle class, improving institutional environment, and fragmented SME landscape create a unique window of opportunity for experienced operators." data-es="América Latina representa uno de los mercados más atractivos y sin explotar para el modelo de search fund. La creciente clase media de Colombia, la mejora del entorno institucional y el fragmentado ecosistema de pymes crean una ventana única de oportunidad para operadores experimentados.">Latin America represents one of the most compelling untapped markets for the search fund model. Colombia's growing middle class, improving institutional environment, and fragmented SME landscape create a unique window of opportunity for experienced operators.</p>
+    <p data-en="We focus on profitable, established businesses with defensible competitive positions — where skilled ownership can unlock meaningful value creation over a 5–7 year horizon." data-es="Nos enfocamos en empresas rentables y consolidadas con posiciones competitivas defendibles — donde una gestión experta puede desbloquear una creación de valor significativa en un horizonte de 5 a 7 años.">We focus on profitable, established businesses with defensible competitive positions — where skilled ownership can unlock meaningful value creation over a 5–7 year horizon.</p>
+  </div>
+  <div class="about-pillars fade-in">
+    <div class="pillar">
+      <span class="pillar-num">01</span>
+      <div>
+        <div class="pillar-title" data-en="Focused Sector Expertise" data-es="Especialización Sectorial">Focused Sector Expertise</div>
+        <div class="pillar-desc" data-en="Deep sector knowledge across clinical laboratories, engineering services, industrial linen and laundry, heavy equipment rentals, specialty medical practices, and specialty chemicals and pharmaceutical manufacturing — resilient industries with strong recurring revenue characteristics." data-es="Conocimiento profundo en laboratorios clínicos, servicios de ingeniería, lavandería industrial, alquiler de maquinaria pesada, consultorios médicos especializados y fabricación de químicos y farmacéuticos — industrias resilientes con ingresos recurrentes sólidos.">Deep sector knowledge across clinical laboratories, engineering services, industrial linen and laundry, heavy equipment rentals, specialty medical practices, and specialty chemicals and pharmaceutical manufacturing — resilient industries with strong recurring revenue characteristics.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">02</span>
+      <div>
+        <div class="pillar-title" data-en="Operational Value Creation" data-es="Creación de Valor Operacional">Operational Value Creation</div>
+        <div class="pillar-desc" data-en="Our edge is operational improvement — bringing rigorous management practices, data-driven decision making, and M&A playbooks to businesses built on strong foundations." data-es="Nuestra ventaja es la mejora operacional — aplicando prácticas de gestión rigurosas, toma de decisiones basada en datos y metodologías de M&A a empresas con bases sólidas.">Our edge is operational improvement — bringing rigorous management practices, data-driven decision making, and M&A playbooks to businesses built on strong foundations.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">03</span>
+      <div>
+        <div class="pillar-title" data-en="Aligned Incentives" data-es="Incentivos Alineados">Aligned Incentives</div>
+        <div class="pillar-desc" data-en="As operators who invest alongside our investors, our incentives are fully aligned. We take pride in building businesses that create lasting value for all stakeholders." data-es="Como operadores que invertimos junto a nuestros inversores, nuestros incentivos están completamente alineados. Nos enorgullece construir empresas que generen valor duradero para todos los grupos de interés.">As operators who invest alongside our investors, our incentives are fully aligned. We take pride in building businesses that create lasting value for all stakeholders.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">04</span>
+      <div>
+        <div class="pillar-title" data-en="Local Advantage" data-es="Ventaja Local">Local Advantage</div>
+        <div class="pillar-desc" data-en="On-the-ground presence in Colombia, deep local networks, and fluency in the regulatory and cultural landscape provide meaningful information and execution advantages." data-es="Presencia directa en Colombia, redes locales profundas y dominio del entorno regulatorio y cultural nos proporcionan ventajas informativas y de ejecución significativas.">On-the-ground presence in Colombia, deep local networks, and fluency in the regulatory and cultural landscape provide meaningful information and execution advantages.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sectors">
+  <div class="sectors-header fade-in">
+    <div>
+      <div class="section-eyebrow" data-en="Target Sectors" data-es="Sectores Objetivo">Target Sectors</div>
+      <h2 class="section-title" data-en="Where we focus our search" data-es="Dónde enfocamos nuestra búsqueda">Where we focus our search</h2>
+    </div>
+    <p class="section-sub" style="max-width: 300px;" data-en="Fragmented markets with strong unit economics and a clear path to consolidation." data-es="Mercados fragmentados con sólida economía unitaria y una clara ruta hacia la consolidación.">Fragmented markets with strong unit economics and a clear path to consolidation.</p>
+  </div>
+  <div class="sector-cards fade-in">
+    <div class="sector-card">
+      <div class="sector-icon">&#10022;</div>
+      <div class="sector-name" data-en="Clinical<br>Laboratories" data-es="Laboratorios<br>Clínicos">Clinical<br>Laboratories</div>
+      <div class="sector-desc" data-en="Diagnostic and testing labs serving healthcare providers and direct patients. Recurring demand, essential services, and strong cash flow dynamics with clear consolidation opportunities." data-es="Laboratorios de diagnóstico al servicio de proveedores de salud y pacientes directos. Demanda recurrente, servicios esenciales y sólida dinámica de flujo de caja con claras oportunidades de consolidación.">Diagnostic and testing labs serving healthcare providers and direct patients. Recurring demand, essential services, and strong cash flow dynamics with clear consolidation opportunities.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">&#10022;</div>
+      <div class="sector-name" data-en="Engineering<br>Services" data-es="Servicios de<br>Ingeniería">Engineering<br>Services</div>
+      <div class="sector-desc" data-en="Specialized engineering firms providing technical consulting, project management, and design services across infrastructure and industrial sectors with stable recurring client relationships." data-es="Firmas de ingeniería especializadas que ofrecen consultoría técnica, gestión de proyectos y diseño en sectores de infraestructura e industria, con relaciones comerciales recurrentes y estables.">Specialized engineering firms providing technical consulting, project management, and design services across infrastructure and industrial sectors with stable recurring client relationships.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">&#10022;</div>
+      <div class="sector-name" data-en="Industrial Linen &amp; Laundry" data-es="Lavandería Industrial">Industrial Linen &amp; Laundry</div>
+      <div class="sector-desc" data-en="Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation." data-es="Empresas de lavandería y suministro de lencería para clientes de hotelería, salud e industria. Ingresos predecibles, altos costos de cambio y notable fragmentación del mercado local.">Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">&#10022;</div>
+      <div class="sector-name" data-en="Heavy Equipment<br>Rentals" data-es="Alquiler de<br>Maquinaria Pesada">Heavy Equipment<br>Rentals</div>
+      <div class="sector-desc" data-en="Equipment rental companies serving construction, mining, and infrastructure industries. Asset-backed businesses with strong recurring revenue and meaningful barriers to entry." data-es="Empresas de alquiler de equipos para construcción, minería e infraestructura. Negocios respaldados por activos con ingresos recurrentes sólidos y barreras de entrada significativas.">Equipment rental companies serving construction, mining, and infrastructure industries. Asset-backed businesses with strong recurring revenue and meaningful barriers to entry.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">&#10022;</div>
+      <div class="sector-name" data-en="Specialty Medical<br>Practices" data-es="Consultorios Médicos<br>Especializados">Specialty Medical<br>Practices</div>
+      <div class="sector-desc" data-en="Focused specialty medical clinics with defensible patient bases, recurring revenue, and professional management upside. Essential healthcare services with strong local market positions." data-es="Clínicas médicas especializadas con bases de pacientes defendibles, ingresos recurrentes y potencial de mejora en gestión profesional. Servicios de salud esenciales con posiciones sólidas en el mercado local.">Focused specialty medical clinics with defensible patient bases, recurring revenue, and professional management upside. Essential healthcare services with strong local market positions.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">&#10022;</div>
+      <div class="sector-name" data-en="Specialty Chemicals &amp; Pharma Manufacturing" data-es="Química Especializada y Farmacéutica">Specialty Chemicals &amp; Pharma Manufacturing</div>
+      <div class="sector-desc" data-en="Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets." data-es="Fabricantes de nicho en química y farmacéutica con formulaciones propias, barreras regulatorias y relaciones consolidadas con clientes en mercados industriales y sanitarios.">Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets.</div>
+      <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
+    </div>
+  </div>
+</section>
+
+<section id="investors">
+  <div class="fade-in">
+    <div class="section-eyebrow" style="color: var(--accent-light);">
+      <span style="background: var(--accent); display:block; width:24px; height:1px;"></span>
+      <span data-en="For Investors" data-es="Para Inversores">For Investors</span>
+    </div>
+    <h2 class="section-title" data-en="A differentiated return profile in an emerging market" data-es="Un perfil de retorno diferenciado en un mercado emergente">A differentiated return profile in an emerging market</h2>
+    <p class="section-sub" data-en="The search fund model has generated compelling returns for investors over three decades. Arista Capital Partners applies this proven structure to the Latin American opportunity." data-es="El modelo de search fund ha generado retornos atractivos para inversores durante tres décadas. Arista Capital Partners aplica esta estructura probada a la oportunidad latinoamericana.">The search fund model has generated compelling returns for investors over three decades. Arista Capital Partners applies this proven structure to the Latin American opportunity.</p>
+    <div class="invest-points">
+      <div class="invest-point">
+        <div class="invest-check">&#10003;</div>
+        <div class="invest-point-text">
+          <strong data-en="Asymmetric upside" data-es="Potencial asimétrico">Asymmetric upside</strong>
+          <span data-en="Step-up economics on acquisition provide early investors preferential returns prior to equity participation by the operators." data-es="La estructura escalonada en la adquisición otorga a los inversores tempranos retornos preferenciales antes de la participación accionaria de los operadores.">Step-up economics on acquisition provide early investors preferential returns prior to equity participation by the operators.</span>
+        </div>
+      </div>
+      <div class="invest-point">
+        <div class="invest-check">&#10003;</div>
+        <div class="invest-point-text">
+          <strong data-en="Operator-led model" data-es="Modelo liderado por operadores">Operator-led model</strong>
+          <span data-en="Principals invest meaningfully alongside investors — full alignment of incentives throughout the search and ownership phases." data-es="Los socios invierten de forma significativa junto a los inversores — alineación total de incentivos durante las fases de búsqueda y propiedad.">Principals invest meaningfully alongside investors — full alignment of incentives throughout the search and ownership phases.</span>
+        </div>
+      </div>
+      <div class="invest-point">
+        <div class="invest-check">&#10003;</div>
+        <div class="invest-point-text">
+          <strong data-en="Experienced principals" data-es="Socios con experiencia">Experienced principals</strong>
+          <span data-en="Operators bring world-class management consulting and M&A backgrounds — rigorous frameworks applied to SME acquisition." data-es="Los operadores aportan trayectorias de consultoría de gestión y M&A de primer nivel — marcos rigurosos aplicados a la adquisición de pymes.">Operators bring world-class management consulting and M&amp;A backgrounds — rigorous frameworks applied to SME acquisition.</span>
+        </div>
+      </div>
+      <div class="invest-point">
+        <div class="invest-check">&#10003;</div>
+        <div class="invest-point-text">
+          <strong data-en="Underpenetrated market" data-es="Mercado sin explotar">Underpenetrated market</strong>
+          <span data-en="Latin American search funds remain nascent, creating deal pricing and structural advantages not available in more competitive markets." data-es="Los search funds en América Latina siguen siendo incipientes, lo que genera ventajas de precio y estructurales no disponibles en mercados más competitivos.">Latin American search funds remain nascent, creating deal pricing and structural advantages not available in more competitive markets.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="team-header fade-in">
+    <div class="section-eyebrow" style="justify-content: center;" data-en="The Team" data-es="El Equipo">The Team</div>
+    <h2 class="section-title" data-en="Operators first" data-es="Operadores ante todo">Operators first</h2>
+    <p class="section-sub" style="margin: 0 auto;" data-en="Two principals combining global consulting credentials with deep on-the-ground expertise in Latin America." data-es="Dos socios que combinan credenciales de consultoría global con un profundo conocimiento sobre el terreno en América Latina.">Two principals combining global consulting credentials with deep on-the-ground expertise in Latin America.</p>
+  </div>
+  <div class="team-grid fade-in">
+    <div class="team-card">
+      <div class="team-avatar">L</div>
+      <div class="team-name">Louis Abrassard</div>
+      <div class="team-role" data-en="Co-Founder &amp; Principal" data-es="Co-Fundador y Director">Co-Founder &amp; Principal</div>
+      <div class="team-bio" data-en="Consultant at Bain &amp; Company with M&amp;A and strategy experience across multiple sectors. A Yale graduate who has completed 50+ due diligences, Louis brings deep diligence experience across both the buy side and sell side. Brings rigorous analytical frameworks and transaction structuring expertise to the search. Based in Boston, with deep ties to Latin American markets." data-es="Consultor en Bain &amp; Company con experiencia en M&amp;A y estrategia en múltiples sectores. Graduado de Yale y con más de 50 due diligences completados, Louis aporta una profunda experiencia en procesos de análisis tanto en el lado comprador como vendedor, junto con marcos analíticos rigurosos y conocimiento en estructuración de transacciones.">Consultant at Bain &amp; Company with M&amp;A and strategy experience across multiple sectors. A Yale graduate who has completed 50+ due diligences, Louis brings deep diligence experience across both the buy side and sell side. Brings rigorous analytical frameworks and transaction structuring expertise to the search. Based in Boston, with deep ties to Latin American markets.</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">M</div>
+      <div class="team-name">Mateo Morales</div>
+      <div class="team-role" data-en="Co-Founder &amp; Principal" data-es="Co-Fundador y Director">Co-Founder &amp; Principal</div>
+      <div class="team-bio" data-en="A native Colombian, Mateo brings an extensive network of bankers, advisors, and intermediaries in the region. Provides critical on-the-ground deal sourcing networks, regulatory fluency, and management expertise across the target sectors, with deep operational experience in the Colombian market." data-es="Colombiano de nacimiento, Mateo aporta una extensa red de banqueros, asesores e intermediarios en la región. Ofrece redes críticas de originación de operaciones sobre el terreno, dominio regulatorio y experiencia en gestión en los sectores objetivo, con una profunda trayectoria operacional en el mercado colombiano.">A native Colombian, Mateo brings an extensive network of bankers, advisors, and intermediaries in the region. Provides critical on-the-ground deal sourcing networks, regulatory fluency, and management expertise across the target sectors, with deep operational experience in the Colombian market.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-info fade-in">
+    <div class="section-eyebrow" data-en="Contact" data-es="Contacto">Contact</div>
+    <h2 class="section-title" data-en="Let's start a conversation" data-es="Iniciemos una conversación">Let's start a conversation</h2>
+    <p class="section-sub" data-en="Whether you're a potential investor, a business owner considering your next chapter, or an advisor — we'd like to hear from you." data-es="Ya sea que sea un potencial inversor, un empresario considerando su próximo capítulo o un asesor — nos gustaría escucharle.">Whether you're a potential investor, a business owner considering your next chapter, or an advisor — we'd like to hear from you.</p>
+    <div class="contact-detail">
+      <div class="contact-detail-label" data-en="Headquarters" data-es="Sede">Headquarters</div>
+      <div class="contact-detail-value">Boston, MA &amp; Bogotá, Colombia</div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-detail-label" data-en="For Investors" data-es="Para Inversores">For Investors</div>
+      <div class="contact-detail-value">investors@aristacapitalpartners.com</div>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-detail-label" data-en="For Business Owners" data-es="Para Empresarios">For Business Owners</div>
+      <div class="contact-detail-value">acquisitions@aristacapitalpartners.com</div>
+    </div>
+  </div>
+  <div class="contact-form fade-in">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" data-en="First Name" data-es="Nombre">First Name</label>
+        <input type="text" class="form-input" placeholder="Ana">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Last Name" data-es="Apellido">Last Name</label>
+        <input type="text" class="form-input" placeholder="García">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" placeholder="ana@example.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-en="I am a" data-es="Soy">I am a</label>
+      <select class="form-select">
+        <option value="" data-en="Select one..." data-es="Seleccione...">Select one...</option>
+        <option data-en="Prospective Investor" data-es="Inversor Potencial">Prospective Investor</option>
+        <option data-en="Business Owner / Seller" data-es="Empresario / Vendedor">Business Owner / Seller</option>
+        <option data-en="M&amp;A Advisor / Intermediary" data-es="Asesor M&amp;A / Intermediario">M&amp;A Advisor / Intermediary</option>
+        <option data-en="Other" data-es="Otro">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-en="Message" data-es="Mensaje">Message</label>
+      <textarea class="form-textarea" data-placeholder-en="Tell us about your interest in Arista Capital Partners..." data-placeholder-es="Cuéntenos sobre su interés en Arista Capital Partners..." placeholder="Tell us about your interest in Arista Capital Partners..."></textarea>
+    </div>
+    <button class="form-submit" data-en="Send Message" data-es="Enviar Mensaje">Send Message</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Arista <span>Capital Partners</span></div>
+  <div class="footer-text">© <span id="footer-year"></span> Arista Capital Partners · Boston, MA &amp; Bogotá, Colombia</div>
+  <div class="footer-text" data-en="Confidential — Not an offer to sell securities" data-es="Confidencial — No constituye una oferta de venta de valores">Confidential — Not an offer to sell securities</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        const siblings = e.target.parentElement && e.target.parentElement.querySelectorAll('.fade-in');
+        if (siblings) {
+          let delay = 0;
+          siblings.forEach((s) => {
+            if (!s.classList.contains('visible')) {
+              s.style.transitionDelay = (delay * 0.12) + 's';
+              delay++;
+            }
+          });
+        }
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+
+  var hamburger = document.querySelector('.nav-hamburger');
+  var navLinks  = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', function() {
+    var isOpen = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  (function() {
+    var canvas = document.getElementById('hero-canvas');
+    var ctx    = canvas.getContext('2d');
+    var W = 0, H = 0;
+    var R = 91, G = 143, B = 168;
+    var NUM_LINES = 22;
     var STEPS     = 120;
 
     var phases  = [], speeds  = [], phases2 = [], speeds2 = [];
