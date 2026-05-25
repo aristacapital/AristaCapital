@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arista Capital Partners</title>
+<title>Arista Partners</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,13 +12,15 @@
     --slate-dark:   #1C2A38;
     --slate-mid:    #3D5068;
     --slate-deep:   #111E2B;
-    --accent:       #5B8FA8;
-    --accent-light: #7AAEC4;
-    --accent-pale:  #D6E8F0;
-    --colombia:     #CE1126;
-    --colombia-yellow: #FCD116;
-    --bg:           #F4F6F8;
-    --bg-dark:      #EAEDF1;
+    --accent:       #4A7A6E;
+    --accent-light: #7FA89A;
+    --accent-pale:  #E8EDEA;
+    --niebla:       #7FA89A;
+    --niebla-light: #E8EDEA;
+    --niebla-mid:   #C0CFCA;
+    --niebla-dark:  #4A7A6E;
+    --bg:           #E8EDEA;
+    --bg-dark:      #C0CFCA;
     --white:        #FFFFFF;
     --text-dark:    #1C2A38;
     --text-mid:     #3D5068;
@@ -51,9 +53,7 @@
     font-size: 20px; font-weight: 600;
     color: var(--slate-deep); letter-spacing: 0.02em; text-decoration: none;
   }
-  .nav-logo-text { display: flex; flex-direction: column; gap: 0; line-height: 1; }
-  .nav-logo-text .name { font-size: 20px; font-weight: 600; color: #111E2B; }
-  .nav-logo-text .sub  { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); font-family: 'DM Sans', sans-serif; }
+  .nav-logo-text { font-size: 20px; font-weight: 600; color: #111E2B; font-family: 'Playfair Display', serif; letter-spacing: 0.02em; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
     font-size: 13px; font-weight: 400; color: var(--text-mid);
@@ -167,7 +167,7 @@
   .pillar:first-child { border-top: 1px solid var(--border); }
   .pillar-num {
     font-family: 'Playfair Display', serif;
-    font-size: 28px; color: var(--colombia);
+    font-size: 28px; color: var(--niebla-dark);
     min-width: 38px; font-weight: 600; line-height: 1;
     padding-top: 2px;
   }
@@ -184,12 +184,12 @@
   .sector-card {
     background: var(--white); padding: 40px 36px;
     border-left: 5px solid var(--accent);
-    background: linear-gradient(135deg, rgba(91,143,168,0.025) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(74,122,110,0.025) 0%, transparent 60%);
     transition: all 0.3s ease;
   }
   .sector-card:hover {
     transform: translateX(6px);
-    background: linear-gradient(135deg, rgba(91,143,168,0.05) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(74,122,110,0.05) 0%, transparent 60%);
     border-left-color: var(--slate-mid);
   }
   .sector-icon {
@@ -222,15 +222,15 @@
   #investors .section-sub { color: rgba(255,255,255,0.5); }
   .invest-points { display: flex; flex-direction: column; margin-top: 52px; }
   .invest-point {
-    padding: 24px 0; border-bottom: 1px solid rgba(91,143,168,0.15);
+    padding: 24px 0; border-bottom: 1px solid rgba(74,122,110,0.15);
     display: flex; gap: 24px; align-items: flex-start;
   }
-  .invest-point:first-child { border-top: 1px solid rgba(91,143,168,0.15); }
+  .invest-point:first-child { border-top: 1px solid rgba(74,122,110,0.15); }
   .invest-check {
-    width: 22px; height: 22px; border: 2px solid var(--colombia);
+    width: 22px; height: 22px; border: 2px solid var(--niebla-dark);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0; margin-top: 2px; font-size: 12px;
-    color: var(--colombia); font-weight: 700;
+    color: var(--niebla-dark); font-weight: 700;
   }
   .invest-point-text { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.75; }
   .invest-point-text strong {
@@ -272,7 +272,7 @@
   }
   .team-role {
     font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--colombia-yellow); margin-bottom: 16px;
+    text-transform: uppercase; color: var(--niebla-dark); margin-bottom: 16px;
   }
   .team-bio { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
 
@@ -289,7 +289,7 @@
     text-transform: uppercase; color: var(--text-muted);
   }
   .form-input, .form-select, .form-textarea {
-    background: var(--bg); border: 1px solid var(--border);
+    background: var(--white); border: 1px solid var(--border);
     padding: 14px 16px; font-family: 'DM Sans', sans-serif;
     font-size: 15px; font-weight: 400; color: var(--slate-deep);
     outline: none; transition: all 0.2s; width: 100%;
@@ -297,7 +297,7 @@
   }
   .form-input:focus, .form-select:focus, .form-textarea:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(91,143,168,0.1);
+    box-shadow: 0 0 0 3px rgba(74,122,110,0.1);
   }
   .form-textarea { resize: vertical; min-height: 110px; }
   .form-submit {
@@ -327,7 +327,7 @@
   footer {
     background: var(--slate-deep); padding: 40px 52px;
     display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid rgba(91,143,168,0.2);
+    border-top: 1px solid rgba(74,122,110,0.2);
   }
   .footer-logo {
     font-family: 'Playfair Display', serif;
@@ -379,12 +379,9 @@
 <nav>
   <a href="#hero" class="nav-logo">
     <svg width="32" height="26" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#5B8FA8" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#4A7A6E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <div class="nav-logo-text">
-      <span class="name">Arista</span>
-      <span class="sub">Capital Partners</span>
-    </div>
+    <div class="nav-logo-text">Arista <span style="color: var(--accent);">Partners</span></div>
   </a>
   <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -407,7 +404,7 @@
   <div class="hero-content fade-in">
     <div class="hero-eyebrow" data-en="Search Fund — Latin America" data-es="Search Fund — América Latina">Search Fund — Latin America</div>
     <h1 data-en="Acquiring <em>exceptional</em> businesses in Colombia" data-es="Adquiriendo empresas <em>excepcionales</em> en Colombia">Acquiring <em>exceptional</em> businesses in Colombia</h1>
-    <p data-en="Arista Capital Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve." data-es="Arista Capital Partners es un search fund enfocado en identificar, adquirir y operar las mejores pymes de América Latina — generando valor duradero para inversores, operadores y las comunidades que servimos.">Arista Capital Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve.</p>
+    <p data-en="Arista Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve." data-es="Arista Partners es un search fund enfocado en identificar, adquirir y operar las mejores pymes de América Latina — generando valor duradero para inversores, operadores y las comunidades que servimos.">Arista Partners is a search fund focused on identifying, acquiring, and operating premier SMEs across Latin America — building enduring value for investors, operators, and the communities we serve.</p>
     <div class="hero-actions">
       <a href="#investors" class="btn-primary" data-en="Investor Information" data-es="Información para Inversores">Investor Information</a>
       <a href="#about"     class="btn-outline" data-en="Our Thesis"           data-es="Nuestra Tesis">Our Thesis</a>
@@ -459,37 +456,37 @@
   </div>
   <div class="sector-cards fade-in">
     <div class="sector-card">
-      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#5B8FA8" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#4A7A6E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sector-name" data-en="Clinical Laboratories" data-es="Laboratorios Clínicos">Clinical<br>Laboratories</div>
       <div class="sector-desc" data-en="Diagnostic and testing labs serving healthcare providers and direct patients. Recurring demand, essential services, and strong consolidation opportunities." data-es="Laboratorios de diagnóstico con demanda recurrente, servicios esenciales y claras oportunidades de consolidación.">Diagnostic and testing labs serving healthcare providers and direct patients. Recurring demand, essential services, and strong consolidation opportunities.</div>
       <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
-      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#5B8FA8" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#4A7A6E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sector-name" data-en="Engineering Services" data-es="Servicios de Ingeniería">Engineering<br>Services</div>
       <div class="sector-desc" data-en="Specialized engineering firms providing technical consulting, project management, and design services with stable recurring client relationships." data-es="Firmas de ingeniería especializadas con relaciones comerciales recurrentes y estables.">Specialized engineering firms providing technical consulting, project management, and design services with stable recurring client relationships.</div>
       <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
-      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#5B8FA8" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#4A7A6E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sector-name" data-en="Industrial Linen & Laundry" data-es="Lavandería Industrial">Industrial Linen &amp; Laundry</div>
       <div class="sector-desc" data-en="Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation." data-es="Empresas de lavandería y suministro de lencería con ingresos predecibles, altos costos de cambio y notable fragmentación del mercado local.">Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation.</div>
       <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
-      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#5B8FA8" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#4A7A6E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sector-name" data-en="Heavy Equipment Rentals" data-es="Alquiler de Maquinaria Pesada">Heavy Equipment<br>Rentals</div>
       <div class="sector-desc" data-en="Equipment rental companies serving construction, mining, and infrastructure with strong recurring revenue and meaningful barriers to entry." data-es="Empresas de alquiler de equipos con ingresos recurrentes sólidos y barreras de entrada significativas.">Equipment rental companies serving construction, mining, and infrastructure with strong recurring revenue and meaningful barriers to entry.</div>
       <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
-      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#5B8FA8" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#4A7A6E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sector-name" data-en="Specialty Medical Practices" data-es="Consultorios Médicos Especializados">Specialty Medical<br>Practices</div>
       <div class="sector-desc" data-en="Focused specialty medical clinics with defensible patient bases, recurring revenue, and professional management upside with strong local market positions." data-es="Clínicas médicas especializadas con bases de pacientes defendibles e ingresos recurrentes con posiciones sólidas en el mercado local.">Focused specialty medical clinics with defensible patient bases, recurring revenue, and professional management upside with strong local market positions.</div>
       <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
     </div>
     <div class="sector-card">
-      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#5B8FA8" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sector-icon"><svg width="36" height="29" viewBox="0 0 80 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 4 48 L 16 24 L 28 38 L 40 18 L 52 36 L 60 26 L 76 48" stroke="#4A7A6E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="sector-name" data-en="Specialty Chemicals & Pharma" data-es="Química Especializada y Farmacéutica">Specialty Chemicals &amp; Pharma Manufacturing</div>
       <div class="sector-desc" data-en="Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets." data-es="Fabricantes de nicho con formulaciones propias, barreras regulatorias y relaciones consolidadas con clientes en mercados industriales y sanitarios.">Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets.</div>
       <span class="sector-tag" data-en="Target Sector" data-es="Sector Objetivo">Target Sector</span>
@@ -502,7 +499,7 @@
   <div class="fade-in">
     <div class="section-eyebrow" data-en="For Investors" data-es="Para Inversores">For Investors</div>
     <h2 class="section-title" data-en="A differentiated return profile in an emerging market" data-es="Un perfil de retorno diferenciado en un mercado emergente">A differentiated return profile in an emerging market</h2>
-    <p class="section-sub" data-en="The search fund model has generated compelling returns for investors over three decades. Arista Capital Partners applies this proven structure to the Latin American opportunity." data-es="El modelo de search fund ha generado retornos atractivos durante tres décadas. Arista Capital Partners aplica esta estructura probada a la oportunidad latinoamericana.">The search fund model has generated compelling returns for investors over three decades. Arista Capital Partners applies this proven structure to the Latin American opportunity.</p>
+    <p class="section-sub" data-en="The search fund model has generated compelling returns for investors over three decades. Arista Partners applies this proven structure to the Latin American opportunity." data-es="El modelo de search fund ha generado retornos atractivos durante tres décadas. Arista Partners aplica esta estructura probada a la oportunidad latinoamericana.">The search fund model has generated compelling returns for investors over three decades. Arista Partners applies this proven structure to the Latin American opportunity.</p>
     <div class="invest-points">
       <div class="invest-point">
         <div class="invest-check">✓</div>
@@ -571,11 +568,11 @@
     </div>
     <div class="contact-detail">
       <div class="contact-detail-label" data-en="For Investors" data-es="Para Inversores">For Investors</div>
-      <div class="contact-detail-value">investors@aristacapitalpartners.com</div>
+      <div class="contact-detail-value">investors@aristapartners.com</div>
     </div>
     <div class="contact-detail">
       <div class="contact-detail-label" data-en="For Business Owners" data-es="Para Empresarios">For Business Owners</div>
-      <div class="contact-detail-value">acquisitions@aristacapitalpartners.com</div>
+      <div class="contact-detail-value">acquisitions@aristapartners.com</div>
     </div>
   </div>
   <div class="contact-form fade-in">
@@ -606,17 +603,17 @@
     <div class="form-group">
       <label class="form-label" data-en="Message" data-es="Mensaje">Message</label>
       <textarea class="form-textarea"
-        data-placeholder-en="Tell us about your interest in Arista Capital Partners..."
-        data-placeholder-es="Cuéntenos sobre su interés en Arista Capital Partners..."
-        placeholder="Tell us about your interest in Arista Capital Partners..."></textarea>
+        data-placeholder-en="Tell us about your interest in Arista Partners..."
+        data-placeholder-es="Cuéntenos sobre su interés en Arista Partners..."
+        placeholder="Tell us about your interest in Arista Partners..."></textarea>
     </div>
     <button class="form-submit" data-en="Send Message" data-es="Enviar Mensaje">Send Message</button>
   </div>
 </section>
 
 <footer>
-  <div class="footer-logo">Arista <span>Capital Partners</span></div>
-  <div class="footer-text">© <span id="footer-year"></span> Arista Capital Partners · Boston, MA &amp; Bogotá, Colombia</div>
+  <div class="footer-logo">Arista <span>Partners</span></div>
+  <div class="footer-text">© <span id="footer-year"></span> Arista Partners · Boston, MA &amp; Bogotá, Colombia</div>
   <div class="footer-text" data-en="Confidential — Not an offer to sell securities" data-es="Confidencial — No constituye una oferta de venta de valores">Confidential — Not an offer to sell securities</div>
 </footer>
 
@@ -655,7 +652,7 @@
     var canvas = document.getElementById('hero-canvas');
     var ctx    = canvas.getContext('2d');
     var W = 0, H = 0;
-    var R = 91, G = 143, B = 168;
+    var R = 74, G = 122, B = 110;
     var NUM_LINES = 22, STEPS = 120;
     var phases=[],speeds=[],phases2=[],speeds2=[],freqA=[],freqB=[],ampA=[],ampB=[];
     for (var qi = 0; qi < NUM_LINES; qi++) {
