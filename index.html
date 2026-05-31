@@ -117,8 +117,16 @@
     display: flex; align-items: center;
     position: relative; overflow: hidden;
     padding: 130px 56px 90px;
+    width: 100%;
+    box-sizing: border-box;
   }
-  #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.8; }
+  #hero-canvas { 
+    position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.8; display: block;
+    max-width: 100vw; overflow: hidden;
+  }
+  @media (max-width: 960px) {
+    #hero-canvas { opacity: 0.6; }
+  }
   .hero::after {
     content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: radial-gradient(ellipse 80% 70% at 18% 50%, rgba(17,30,43,0.55) 0%, rgba(17,30,43,0) 70%);
@@ -492,11 +500,11 @@
 <!-- HERO -->
 <section class="hero" id="hero" data-screen-label="Hero">
   <canvas id="hero-canvas"></canvas>
-  <div class="hero-content fade-in" style="width: 1000px">
-    <div class="hero-eyebrow" data-en="Search Fund · Latin America" data-es="Search Fund · América Latina" style="width: 1000px">Search Fund · Latin America</div>
-    <h1 data-en="Acquiring <em>exceptional</em> businesses in Colombia" data-es="Adquiriendo empresas <em>excepcionales</em> en Colombia" style="width: 1000px">Acquiring <em>exceptional</em> businesses in Colombia</h1>
-    <p data-en="A search fund formed to acquire and operate a single, high-quality mid-sized business in Colombia – then grow it as owner-operators over a 5–7 year hold." data-es="Un search fund creado para adquirir y operar una única empresa mediana de alta calidad en Colombia – y hacerla crecer como propietarios-operadores durante un horizonte de 5 a 7 años." style="width: 1000px">A search fund formed to acquire and operate a single, high-quality mid-sized business in Colombia – then grow it as owner-operators over a 5–7 year hold.</p>
-    <div class="hero-actions" style="width: 1000px">
+  <div class="hero-content fade-in">
+    <div class="hero-eyebrow" data-en="Search Fund · Latin America" data-es="Search Fund · América Latina">Search Fund · Latin America</div>
+    <h1 data-en="Acquiring <em>exceptional</em> businesses in Colombia" data-es="Adquiriendo empresas <em>excepcionales</em> en Colombia">Acquiring <em>exceptional</em> businesses in Colombia</h1>
+    <p data-en="A search fund formed to acquire and operate a single, high-quality mid-sized business in Colombia – then grow it as owner-operators over a 5–7 year hold." data-es="Un search fund creado para adquirir y operar una única empresa mediana de alta calidad en Colombia – y hacerla crecer como propietarios-operadores durante un horizonte de 5 a 7 años.">A search fund formed to acquire and operate a single, high-quality mid-sized business in Colombia – then grow it as owner-operators over a 5–7 year hold.</p>
+    <div class="hero-actions">
       <a href="#investors" class="btn-primary" data-en="Investor Information" data-es="Información para Inversores">Investor Information</a>
       <a href="#about"     class="btn-outline" data-en="Our Thesis"           data-es="Nuestra Tesis">Our Thesis</a>
     </div>
@@ -720,11 +728,11 @@
     </div>
     <div class="contact-detail">
       <div class="contact-detail-label" data-en="For Investors" data-es="Para Inversores">For Investors</div>
-      <div class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6706030a0e092706150e14130604174904080a">[email&#160;protected]</a></div>
+      <div class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef8e8b828681af8e9d869c9b8e8c9fc18c8082">[email&#160;protected]</a></div>
     </div>
     <div class="contact-detail">
       <div class="contact-detail-label" data-en="For Business Owners" data-es="Para Empresarios">For Business Owners</div>
-      <div class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f2e2b2226210f2e3d263c3b2e2c3f612c2022">[email&#160;protected]</a></div>
+      <div class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3d2d7dedaddf3d2c1dac0c7d2d0c39dd0dcde">[email&#160;protected]</a></div>
     </div>
   </div>
   <div class="contact-form fade-in">
@@ -820,8 +828,15 @@
       pos.sort(function(a,b){return a-b;}); return pos;
     }
     function resize() {
-      var w=window.innerWidth, h=window.innerHeight;
-      if(w!==W||h!==H){W=canvas.width=w; H=canvas.height=h;}
+      var heroEl = canvas.parentElement;
+      var w = heroEl.clientWidth;
+      var h = heroEl.clientHeight;
+      if(w!==W||h!==H){
+        W = w;
+        H = h;
+        canvas.width = w;
+        canvas.height = h;
+      }
     }
     function noise(idx,xf,ts) {
       return ampA[idx]*Math.sin(xf*freqA[idx]*Math.PI*2+ts*speeds[idx]+phases[idx])
