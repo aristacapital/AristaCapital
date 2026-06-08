@@ -216,7 +216,14 @@
     font-weight: 500; line-height: 1.4; letter-spacing: 0.04em;
   }
   .pillar-title { font-family: var(--serif); font-size: 21px; font-weight: 500; color: var(--navy); margin-bottom: 9px; line-height: 1.25; }
-  .pillar-desc { font-size: 14.5px; color: var(--text-muted); line-height: 1.78; }
+  .pillar-desc { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; }
+  .pillar-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .pillar-list li { position: relative; padding-left: 18px; }
+  .pillar-list li::before {
+    content: ''; position: absolute; left: 1px; top: 0.6em;
+    width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.55;
+  }
+  .pillar-desc strong { color: var(--navy); font-weight: 600; }
 
   /* ── SECTORS ── */
   #sectors { background: var(--white); }
@@ -275,6 +282,7 @@
     color: var(--green-muted); letter-spacing: 0.04em; padding-top: 3px;
   }
   .invest-point-text { font-size: 15px; color: rgba(255,255,255,0.62); line-height: 1.75; }
+  .invest-point-text span b { font-weight: 600; color: rgba(255,255,255,0.95); }
   .invest-point-text strong {
     display: block; font-family: var(--serif); font-size: 19px; font-weight: 500;
     color: var(--white); margin-bottom: 8px; line-height: 1.25;
@@ -539,28 +547,28 @@
       <span class="pillar-num">01</span>
       <div>
         <div class="pillar-title" data-en="US PE is overcrowded and underdelivering" data-es="El PE estadounidense está saturado y rinde menos">US PE is overcrowded and underdelivering</div>
-        <div class="pillar-desc" data-en="Too much capital is chasing too few high-quality businesses, with entry multiples at historic highs and the best companies already PE-owned and optimized. US PE returned 5.8% over 2022–25, versus 11.6% for the S&P 500." data-es="Demasiado capital persigue muy pocos negocios de calidad, con múltiplos de entrada en máximos históricos y las mejores empresas ya en manos del PE y optimizadas. El PE estadounidense rindió 5,8% entre 2022 y 2025, frente al 11,6% del S&P 500.">Too much capital is chasing too few high-quality businesses, with entry multiples at historic highs and the best companies already PE-owned and optimized. US PE returned 5.8% over 2022–25, versus 11.6% for the S&amp;P 500.</div>
+        <div class="pillar-desc" data-en="<ul class='pillar-list'><li>Too much capital is chasing <strong>too few high-quality businesses</strong>; entry multiples are at historic highs and the best companies are already PE-owned and optimized</li><li>US PE increasingly relies on <strong>continuation vehicles</strong>, unable to sell assets to make the profits they need</li><li>US PE has returned just <strong>5.8%</strong> over 2022–25, versus <strong>11.6%</strong> for the S&amp;P 500</li></ul>" data-es="<ul class='pillar-list'><li>Demasiado capital persigue <strong>muy pocos negocios de calidad</strong>; los múltiplos de entrada están en máximos históricos y las mejores empresas ya están en manos del PE y optimizadas</li><li>El PE estadounidense depende cada vez más de <strong>vehículos de continuación</strong>, al no poder vender activos para generar las ganancias que necesita</li><li>El PE estadounidense ha rendido apenas <strong>5,8%</strong> entre 2022 y 2025, frente al <strong>11,6%</strong> del S&amp;P 500</li></ul>"><ul class='pillar-list'><li>Too much capital is chasing <strong>too few high-quality businesses</strong>; entry multiples are at historic highs and the best companies are already PE-owned and optimized</li><li>US PE increasingly relies on <strong>continuation vehicles</strong>, unable to sell assets to make the profits they need</li><li>US PE has returned just <strong>5.8%</strong> over 2022–25, versus <strong>11.6%</strong> for the S&amp;P 500</li></ul></div>
       </div>
     </div>
     <div class="pillar">
       <span class="pillar-num">02</span>
       <div>
         <div class="pillar-title" data-en="Colombian SMEs are undervalued" data-es="Las pymes colombianas están infravaloradas">Colombian SMEs are undervalued</div>
-        <div class="pillar-desc" data-en="A large runway exists to professionalize founder-run firms using proven US private-equity operating playbooks, while highly fragmented industries open attractive roll-up paths. Companies trade at 3–6× EBITDA versus 7–12× in the US." data-es="Existe un amplio recorrido para profesionalizar empresas de fundadores aplicando los manuales operativos del private equity estadounidense, mientras que las industrias muy fragmentadas abren atractivas rutas de consolidación. Las empresas se cotizan a 3–6× EBITDA frente a 7–12× en EE. UU.">A large runway exists to professionalize founder-run firms using proven US private-equity operating playbooks, while highly fragmented industries open attractive roll-up paths. Companies trade at 3–6× EBITDA versus 7–12× in the US.</div>
+        <div class="pillar-desc" data-en="<ul class='pillar-list'><li>A large runway exists in LATAM to <strong>professionalize founder-run firms</strong> using proven US private-equity operating playbooks</li><li>LATAM is <strong>highly fragmented</strong>, creating attractive roll-up paths</li><li>Companies trade at <strong>3–6× EBITDA</strong> versus 7–12× in the US</li></ul>" data-es="<ul class='pillar-list'><li>Existe un amplio recorrido en LATAM para <strong>profesionalizar empresas de fundadores</strong> aplicando los manuales operativos del private equity estadounidense</li><li>LATAM está <strong>muy fragmentada</strong>, lo que crea atractivas rutas de consolidación</li><li>Las empresas se cotizan a <strong>3–6× EBITDA</strong> frente a 7–12× en EE. UU.</li></ul>"><ul class='pillar-list'><li>A large runway exists in LATAM to <strong>professionalize founder-run firms</strong> using proven US private-equity operating playbooks</li><li>LATAM is <strong>highly fragmented</strong>, creating attractive roll-up paths</li><li>Companies trade at <strong>3–6× EBITDA</strong> versus 7–12× in the US</li></ul></div>
       </div>
     </div>
     <div class="pillar">
       <span class="pillar-num">03</span>
       <div>
         <div class="pillar-title" data-en="Search funds fit Colombia" data-es="Los search funds encajan en Colombia">Search funds fit Colombia</div>
-        <div class="pillar-desc" data-en="The market is too fragmented for traditional PE to enter efficiently – yet the model is already proven, with ~50% average IRR for LATAM search funds in 2025 and 60+ LATAM acquisitions completed since 2008." data-es="El mercado está demasiado fragmentado para que el PE tradicional entre con eficiencia, pero el modelo ya está comprobado: ~50% de TIR promedio para los search funds de LATAM en 2025 y más de 60 adquisiciones completadas desde 2008.">The market is too fragmented for traditional PE to enter efficiently – yet the model is already proven, with ~50% average IRR for LATAM search funds in 2025 and 60+ LATAM acquisitions completed since 2008.</div>
+        <div class="pillar-desc" data-en="<ul class='pillar-list'><li>The market is <strong>too fragmented</strong> for traditional PE to enter LATAM efficiently; company sizes are too small</li><li>Search funds are <strong>perfect entry vehicles</strong> for acquiring and rolling up LATAM's SMEs</li><li><strong>~50% average IRR</strong> for LATAM search funds in 2025, and <strong>60+ acquisitions</strong> completed since 2008</li></ul>" data-es="<ul class='pillar-list'><li>El mercado está <strong>demasiado fragmentado</strong> y las empresas son demasiado pequeñas para que el PE tradicional entre en LATAM con eficiencia</li><li>Los search funds son <strong>vehículos de entrada ideales</strong> para adquirir y consolidar las pymes de LATAM</li><li><strong>~50% de TIR promedio</strong> para los search funds de LATAM en 2025, y <strong>más de 60 adquisiciones</strong> completadas desde 2008</li></ul>"><ul class='pillar-list'><li>The market is <strong>too fragmented</strong> for traditional PE to enter LATAM efficiently; company sizes are too small</li><li>Search funds are <strong>perfect entry vehicles</strong> for acquiring and rolling up LATAM's SMEs</li><li><strong>~50% average IRR</strong> for LATAM search funds in 2025, and <strong>60+ acquisitions</strong> completed since 2008</li></ul></div>
       </div>
     </div>
     <div class="pillar">
       <span class="pillar-num">04</span>
       <div>
         <div class="pillar-title" data-en="The LATAM economy is growing – and Colombia leads" data-es="La economía de LATAM crece – y Colombia lidera">The LATAM economy is growing – and Colombia leads</div>
-        <div class="pillar-desc" data-en="LATAM GDP is forecast to outpace the US and most Western economies. Colombia is the crown jewel of the region – political stability, strong ties to the US, a booming middle class, and an economy diversified across tourism, agriculture and energy." data-es="Se prevé que el PIB de LATAM supere al de EE. UU. y al de la mayoría de las economías occidentales. Colombia es la joya de la región: estabilidad política, fuertes lazos con EE. UU., una clase media en auge y una economía diversificada en turismo, agricultura y energía.">LATAM GDP is forecast to outpace the US and most Western economies. Colombia is the crown jewel of the region – political stability, strong ties to the US, a booming middle class, and an economy diversified across tourism, agriculture and energy.</div>
+        <div class="pillar-desc" data-en="<ul class='pillar-list'><li>LATAM GDP is forecast to <strong>outpace the US</strong> and most Western economies</li><li>Colombia is the <strong>crown jewel of the region</strong>: political stability, strong ties to the US, a booming middle class, and an economy diversified across tourism, agriculture and energy</li></ul>" data-es="<ul class='pillar-list'><li>Se prevé que el PIB de LATAM <strong>supere al de EE. UU.</strong> y al de la mayoría de las economías occidentales</li><li>Colombia es la <strong>joya de la región</strong>: estabilidad política, fuertes lazos con EE. UU., una clase media en auge y una economía diversificada en turismo, agricultura y energía</li></ul>"><ul class='pillar-list'><li>LATAM GDP is forecast to <strong>outpace the US</strong> and most Western economies</li><li>Colombia is the <strong>crown jewel of the region</strong>: political stability, strong ties to the US, a booming middle class, and an economy diversified across tourism, agriculture and energy</li></ul></div>
       </div>
     </div>
   </div>
@@ -598,32 +606,32 @@
     <div class="sector-card">
       <div class="sector-index">01</div>
       <div class="sector-name" data-en="Clinical Laboratories" data-es="Laboratorios Clínicos">Clinical Laboratories</div>
-      <div class="sector-desc" data-en="Recurring B2B contracts with insurers and EPS, underpinned by ~97% national health coverage that drives steady volume. Synlab is already consolidating diagnostics – while imaging labs remain largely untouched." data-es="Contratos B2B recurrentes con aseguradoras y EPS, respaldados por una cobertura de salud de ~97% que impulsa un volumen estable. Synlab ya está consolidando el diagnóstico, mientras que los laboratorios de imagen siguen prácticamente intactos.">Recurring B2B contracts with insurers and EPS, underpinned by ~97% national health coverage that drives steady volume. Synlab is already consolidating diagnostics – while imaging labs remain largely untouched.</div>
+      <div class="sector-desc" data-en="Recurring B2B contracts with insurers and EPS, underpinned by ~97% national health coverage that drives steady volume" data-es="Contratos B2B recurrentes con aseguradoras y EPS, respaldados por una cobertura de salud de ~97% que impulsa un volumen estable">Recurring B2B contracts with insurers and EPS, underpinned by ~97% national health coverage that drives steady volume</div>
     </div>
     <div class="sector-card">
       <div class="sector-index">02</div>
       <div class="sector-name" data-en="Engineering Services" data-es="Servicios de Ingeniería">Engineering Services</div>
-      <div class="sector-desc" data-en="Architecture, civil, MEP and oil & gas firms – asset-light businesses with multi-year demand tailwinds, including the 13 'Roads for Peace' corridors funded for 2026–35." data-es="Firmas de arquitectura, civil, MEP y de petróleo y gas: negocios poco intensivos en activos con demanda sostenida durante años, incluidos los 13 corredores de las 'Vías para la Paz' financiados para 2026–35.">Architecture, civil, MEP and oil &amp; gas firms – asset-light businesses with multi-year demand tailwinds, including the 13 'Roads for Peace' corridors funded for 2026–35.</div>
+      <div class="sector-desc" data-en="Architecture, civil, MEP and oil & gas firms – asset-light businesses with multi-year demand tailwinds, including the 13 'Roads for Peace' corridors funded for 2026–35" data-es="Firmas de arquitectura, civil, MEP y de petróleo y gas: negocios poco intensivos en activos con demanda sostenida durante años, incluidos los 13 corredores de las 'Vías para la Paz' financiados para 2026–35">Architecture, civil, MEP and oil &amp; gas firms – asset-light businesses with multi-year demand tailwinds, including the 13 'Roads for Peace' corridors funded for 2026–35</div>
     </div>
     <div class="sector-card">
       <div class="sector-index">03</div>
       <div class="sector-name" data-en="Industrial Linen & Laundry" data-es="Lavandería Industrial">Industrial Linen &amp; Laundry</div>
-      <div class="sector-desc" data-en="Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation." data-es="Empresas de lavandería y suministro de lencería con ingresos predecibles, altos costos de cambio y notable fragmentación del mercado local.">Commercial laundry and linen supply businesses serving hospitality, healthcare, and industrial clients. Predictable revenue, high switching costs, and significant local market fragmentation.</div>
+      <div class="sector-desc" data-en="Commercial laundry and linen supply for hospitality, healthcare, and industrial clients, with predictable revenue, high switching costs, and significant local market fragmentation" data-es="Lavandería comercial y suministro de lencería para hostelería, salud e industria, con ingresos predecibles, altos costos de cambio y notable fragmentación del mercado local">Commercial laundry and linen supply for hospitality, healthcare, and industrial clients, with predictable revenue, high switching costs, and significant local market fragmentation</div>
     </div>
     <div class="sector-card">
       <div class="sector-index">04</div>
       <div class="sector-name" data-en="Heavy Equipment Rentals" data-es="Alquiler de Maquinaria Pesada">Heavy Equipment Rentals</div>
-      <div class="sector-desc" data-en="Serving construction, industrial and oil & gas. Owned fleets act as hard collateral for leverage, and peso devaluation steadily tips demand toward rentals over outright capex." data-es="Al servicio de la construcción, la industria y el petróleo y gas. Las flotas en propiedad sirven como garantía sólida para apalancamiento, y la devaluación del peso inclina la demanda hacia el alquiler frente a la compra de capital.">Serving construction, industrial and oil &amp; gas. Owned fleets act as hard collateral for leverage, and peso devaluation steadily tips demand toward rentals over outright capex.</div>
+      <div class="sector-desc" data-en="Serving construction, industrial and oil & gas, where owned fleets act as hard collateral for leverage and peso devaluation steadily tips demand toward rentals over outright capex" data-es="Al servicio de la construcción, la industria y el petróleo y gas, donde las flotas en propiedad sirven como garantía sólida para apalancamiento y la devaluación del peso inclina la demanda hacia el alquiler frente a la compra de capital">Serving construction, industrial and oil &amp; gas, where owned fleets act as hard collateral for leverage and peso devaluation steadily tips demand toward rentals over outright capex</div>
     </div>
     <div class="sector-card">
       <div class="sector-index">05</div>
       <div class="sector-name" data-en="Specialty Medical Practices" data-es="Consultorios Médicos Especializados">Specialty Medical Practices</div>
-      <div class="sector-desc" data-en="The largest healthcare sub-sector – spanning plastics, cardiology, oncology and fertility – with structural growth driven by an aging population and defensible patient bases." data-es="El mayor subsector de salud –que abarca cirugía plástica, cardiología, oncología y fertilidad– con crecimiento estructural impulsado por el envejecimiento de la población y bases de pacientes defendibles.">The largest healthcare sub-sector – spanning plastics, cardiology, oncology and fertility – with structural growth driven by an aging population and defensible patient bases.</div>
+      <div class="sector-desc" data-en="The largest healthcare sub-sector – spanning plastics, cardiology, oncology and fertility – with structural growth driven by an aging population and defensible patient bases" data-es="El mayor subsector de salud –que abarca cirugía plástica, cardiología, oncología y fertilidad– con crecimiento estructural impulsado por el envejecimiento de la población y bases de pacientes defendibles">The largest healthcare sub-sector – spanning plastics, cardiology, oncology and fertility – with structural growth driven by an aging population and defensible patient bases</div>
     </div>
     <div class="sector-card">
       <div class="sector-index">06</div>
       <div class="sector-name" data-en="Specialty Chemicals & Pharma" data-es="Química Especializada y Farmacéutica">Specialty Chemicals &amp; Pharma</div>
-      <div class="sector-desc" data-en="Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets." data-es="Fabricantes de nicho con formulaciones propias, barreras regulatorias y relaciones consolidadas con clientes en mercados industriales y sanitarios.">Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets.</div>
+      <div class="sector-desc" data-en="Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets" data-es="Fabricantes de nicho con formulaciones propias, barreras regulatorias y relaciones consolidadas con clientes en mercados industriales y sanitarios">Niche chemical and pharmaceutical manufacturers with proprietary formulations, regulatory moats, and established customer relationships in industrial and healthcare end markets</div>
     </div>
   </div>
   <div class="sectors-foot fade-in">
@@ -644,35 +652,35 @@
         <div class="invest-num">01</div>
         <div class="invest-point-text">
           <strong data-en="Early-stage inflection" data-es="Punto de inflexión temprano">Early-stage inflection</strong>
-          <span data-en="LATAM's SME middle market is at an early-stage inflection – the same opportunity US search funds had in the 2010s." data-es="El mercado medio de pymes de LATAM está en un punto de inflexión temprano: la misma oportunidad que tuvieron los search funds de EE. UU. en la década de 2010.">LATAM's SME middle market is at an early-stage inflection – the same opportunity US search funds had in the 2010s.</span>
+          <span data-en="LATAM's SME middle market is at an early-stage inflection – <b>the same opportunity US search funds had in the 2010s</b>" data-es="El mercado medio de pymes de LATAM está en un punto de inflexión temprano: <b>la misma oportunidad que tuvieron los search funds de EE. UU. en la década de 2010</b>">LATAM's SME middle market is at an early-stage inflection – <b>the same opportunity US search funds had in the 2010s</b></span>
         </div>
       </div>
       <div class="invest-point">
         <div class="invest-num">02</div>
         <div class="invest-point-text">
           <strong data-en="A structural discount" data-es="Un descuento estructural">A structural discount</strong>
-          <span data-en="Entry multiples run 40–50% below US comparables for equivalent business quality." data-es="Los múltiplos de entrada son entre 40% y 50% más bajos que los comparables de EE. UU. para una calidad de negocio equivalente.">Entry multiples run 40–50% below US comparables for equivalent business quality.</span>
+          <span data-en="Entry multiples run <b>40–50% below US comparables</b> for equivalent business quality" data-es="Los múltiplos de entrada son <b>entre 40% y 50% más bajos</b> que los comparables de EE. UU. para una calidad de negocio equivalente">Entry multiples run <b>40–50% below US comparables</b> for equivalent business quality</span>
         </div>
       </div>
       <div class="invest-point">
         <div class="invest-num">03</div>
         <div class="invest-point-text">
           <strong data-en="More room to improve" data-es="Más margen de mejora">More room to improve</strong>
-          <span data-en="Operational-improvement potential is higher in under-professionalized businesses." data-es="El potencial de mejora operativa es mayor en negocios poco profesionalizados.">Operational-improvement potential is higher in under-professionalized businesses.</span>
+          <span data-en="Operational-improvement potential is <b>higher in under-professionalized businesses</b>" data-es="El potencial de mejora operativa es <b>mayor en negocios poco profesionalizados</b>">Operational-improvement potential is <b>higher in under-professionalized businesses</b></span>
         </div>
       </div>
       <div class="invest-point">
         <div class="invest-num">04</div>
         <div class="invest-point-text">
           <strong data-en="A proven model" data-es="Un modelo comprobado">A proven model</strong>
-          <span data-en="60+ search-fund deals completed in LATAM, with ~50% average IRR for investors in 2025." data-es="Más de 60 operaciones de search funds completadas en LATAM, con ~50% de TIR promedio para inversores en 2025.">60+ search-fund deals completed in LATAM, with ~50% average IRR for investors in 2025.</span>
+          <span data-en="<b>60+ search-fund deals</b> completed in LATAM, with <b>~50% average IRR</b> for investors in 2025" data-es="<b>Más de 60 operaciones</b> de search funds completadas en LATAM, con <b>~50% de TIR promedio</b> para inversores en 2025"><b>60+ search-fund deals</b> completed in LATAM, with <b>~50% average IRR</b> for investors in 2025</span>
         </div>
       </div>
       <div class="invest-point">
         <div class="invest-num">05</div>
         <div class="invest-point-text">
           <strong data-en="Operators, not just analysts" data-es="Operadores, no solo analistas">Operators, not just analysts</strong>
-          <span data-en="Two principals who pair due-diligence expertise with real, on-the-ground operating experience." data-es="Dos socios que combinan experiencia en due diligence con experiencia operativa real sobre el terreno.">Two principals who pair due-diligence expertise with real, on-the-ground operating experience.</span>
+          <span data-en="Two principals who pair due-diligence expertise with <b>real, on-the-ground operating experience</b>" data-es="Dos socios que combinan experiencia en due diligence con <b>experiencia operativa real sobre el terreno</b>">Two principals who pair due-diligence expertise with <b>real, on-the-ground operating experience</b></span>
         </div>
       </div>
     </div>
