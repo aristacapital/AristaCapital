@@ -218,10 +218,9 @@
   .pillar-title { font-family: var(--serif); font-size: 21px; font-weight: 500; color: var(--navy); margin-bottom: 9px; line-height: 1.25; }
   .pillar-desc { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; }
   .pillar-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  .pillar-list li { position: relative; padding-left: 18px; }
+  .pillar-list li { position: relative; }
   .pillar-list li::before {
-    content: ''; position: absolute; left: 1px; top: 0.6em;
-    width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.55;
+    content: none;
   }
   .pillar-desc strong { color: var(--navy); font-weight: 600; }
 
@@ -274,18 +273,19 @@
   .invest-points { display: flex; flex-direction: column; }
   .invest-point {
     padding: 28px 0; border-bottom: 1px solid var(--navy-line);
-    display: grid; grid-template-columns: 48px 1fr; gap: 24px; align-items: start;
+    display: grid; grid-template-columns: 48px minmax(180px, 240px) 1fr; gap: 32px; align-items: baseline;
   }
   .invest-point:first-child { border-top: 1px solid var(--navy-line); }
   .invest-num {
     font-family: var(--mono); font-size: 14px; font-weight: 500;
-    color: var(--green-muted); letter-spacing: 0.04em; padding-top: 3px;
+    color: var(--green-muted); letter-spacing: 0.04em;
   }
-  .invest-point-text { font-size: 15px; color: rgba(255,255,255,0.62); line-height: 1.75; }
+  .invest-point-text { display: contents; }
+  .invest-point-text span { font-size: 15px; color: rgba(255,255,255,0.62); line-height: 1.6; }
   .invest-point-text span b { font-weight: 600; color: rgba(255,255,255,0.95); }
   .invest-point-text strong {
-    display: block; font-family: var(--serif); font-size: 19px; font-weight: 500;
-    color: var(--white); margin-bottom: 8px; line-height: 1.25;
+    font-family: var(--serif); font-size: 19px; font-weight: 500;
+    color: var(--white); line-height: 1.3;
   }
 
   /* ── TEAM ── */
@@ -326,13 +326,8 @@
   }
   .team-bio { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; }
   .bio-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
-  .bio-list li { position: relative; padding-left: 19px; }
-  .bio-list li::before {
-    content: ''; position: absolute; left: 1px; top: 0.62em;
-    width: 5px; height: 5px; border-radius: 50%; background: currentColor;
-  }
-  .bio-list li:first-child { padding-left: 0; }
-  .bio-list li:first-child::before { display: none; }
+  .bio-list li { position: relative; }
+  .bio-list li::before { content: none; }
   .about-text p strong { color: var(--navy); font-weight: 600; }
 
   /* ── CONTACT ── */
