@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arista Capital Partners | Search fund, Colombia</title>
-<meta name="description" content="Arista Capital Partners is a search fund led by Louis Abrassard and Mateo Morales, looking to acquire and run one founder-owned company in Colombia.">
+<meta name="description" content="Arista Capital Partners is a search fund acquiring and leading one profitable, founder-owned business in Colombia.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111E2B'/%3E%3Cg transform='translate(8 14) scale(0.4)'%3E%3Cpolygon points='32,80 74.5,12 117,80' fill='%237E9796'/%3E%3Cpolygon points='21.5,80 56.5,24 91.5,80' fill='%233D7A6B'/%3E%3Cpolyline points='56.5,24 91.5,80' fill='none' stroke='%23111E2B' stroke-width='6'/%3E%3Cpolygon points='3,80 30.5,36 58,80' fill='%23F4F6F8'/%3E%3Cpolyline points='30.5,36 58,80' fill='none' stroke='%23111E2B' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,7 +92,6 @@
   #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
   .hero-text { position: relative; z-index: 2; padding-bottom: 136px; }
   .hero-text > * { max-width: 760px; }
-  .hero-place { font-size: 14px; letter-spacing: 0.04em; color: var(--green-pale); margin-bottom: 28px; }
   .hero h1 { font-size: clamp(40px, 5.4vw, 68px); line-height: 1.08; margin-bottom: 28px; }
   .hero p { font-size: 19px; line-height: 1.6; color: rgba(255,255,255,0.74); max-width: 600px; margin-bottom: 36px; }
   .hero-links { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
@@ -200,7 +199,7 @@
   .sector-data { display: block; margin-top: 8px; font-style: normal; font-size: 13.5px; font-weight: 600; color: var(--green); font-variant-numeric: tabular-nums; }
   .fine { margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.55); }
   .advisors { margin-top: 80px; }
-  .advisor-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 40px; }
+  .advisor-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 56px; }
   .advisor { border-top: 2px solid var(--navy); padding-top: 18px; }
   .advisor h3 { font-size: 20px; margin-bottom: 2px; }
   .advisor p:last-child { font-size: 15px; color: var(--muted); }
@@ -219,6 +218,16 @@
   .points li { position: relative; padding: 12px 0 12px 22px; border-top: 1px solid var(--rule); font-size: 15.5px; color: var(--ink-2); }
   .points li::before { content: "+"; position: absolute; left: 0; top: 10px; color: var(--green); font-weight: 600; font-size: 17px; }
   @media (max-width: 960px) { .pillars { grid-template-columns: 1fr; gap: 48px; } }
+
+  .dark { background: var(--navy); color: var(--white); }
+  .dark .kicker, .dark .pillar-n, .dark .sector-data { color: var(--green-pale); }
+  .dark .criteria-intro, .dark .pillar-lead, .dark .sector-list span { color: rgba(255,255,255,0.68); }
+  .dark .pillar-col { border-top-color: rgba(255,255,255,0.7); }
+  .dark .facts div, .dark .points li, .dark .sector-list li { border-top-color: var(--rule-light); }
+  .dark .facts dt { color: rgba(255,255,255,0.6); }
+  .dark .points li { color: rgba(255,255,255,0.86); }
+  .dark .points li::before { color: var(--green-pale); }
+  .dark .sector-note { color: rgba(255,255,255,0.55); }
 
   /* MOBILE */
   @media (max-width: 960px) {
@@ -285,7 +294,6 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#owners" data-en="For owners" data-es="Para empresarios">For owners</a></li>
         <li><a href="#criteria" data-en="What we look for" data-es="Qué buscamos">What we look for</a></li>
-        <li><a href="#investors" data-en="Investors" data-es="Inversionistas">Investors</a></li>
         <li><a href="#team" data-en="Team" data-es="Equipo">Team</a></li>
         <li><a href="#contact" class="nav-contact" data-en="Contact" data-es="Contacto">Contact</a></li>
       </ul>
@@ -303,12 +311,11 @@
 <header class="hero" id="top">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="wrap hero-text">
-    <p class="hero-place" data-en="Search fund · Bogotá and Boston" data-es="Search fund · Bogotá y Boston">Search fund · Bogotá and Boston</p>
-    <h1 data-en="We want to buy one good company in Colombia, and run it for the long term." data-es="Queremos comprar una buena empresa en Colombia y dirigirla a largo plazo.">We want to buy one good company in Colombia, and run it for the long term.</h1>
-    <p data-en="Arista Capital Partners is a search fund led by Mateo Morales and Louis Abrassard, both from Bain &amp; Company. We are looking for one profitable, founder-owned business in Colombia whose owner is ready to step back. When we find it, both of us join full time and lead it." data-es="Arista Capital Partners es un search fund liderado por Mateo Morales y Louis Abrassard, ambos de Bain &amp; Company. Buscamos una empresa rentable de fundador en Colombia, cuyo dueño esté listo para dar un paso al costado. Cuando la encontremos, ambos nos dedicaremos a dirigirla de tiempo completo.">Arista Capital Partners is a search fund led by Mateo Morales and Louis Abrassard, both from Bain &amp; Company. We are looking for one profitable, founder-owned business in Colombia whose owner is ready to step back. When we find it, both of us join full time and lead it.</p>
+    <h1 data-en="Acquiring and leading one founder-owned business in Colombia." data-es="Adquirir y dirigir una empresa de fundador en Colombia.">Acquiring and leading one founder-owned business in Colombia.</h1>
+    <p data-en="Arista Capital Partners is a search fund backed by experienced investors. We acquire one profitable Colombian company and lead it full time as its next generation of management." data-es="Arista Capital Partners es un search fund respaldado por inversionistas con experiencia. Adquirimos una empresa colombiana rentable y la dirigimos de tiempo completo como su nueva generación directiva.">Arista Capital Partners is a search fund backed by experienced investors. We acquire one profitable Colombian company and lead it full time as its next generation of management.</p>
     <div class="hero-links">
-      <a href="#owners" class="btn" data-en="If you own a business" data-es="Si usted es empresario">If you own a business</a>
-      <a href="#investors" class="text-link" data-en="Information for investors" data-es="Información para inversionistas">Information for investors</a>
+      <a href="#owners" class="btn" data-en="For business owners" data-es="Para empresarios">For business owners</a>
+      <a href="#contact" class="text-link" data-en="Contact us" data-es="Contáctenos">Contact us</a>
     </div>
   </div>
 </header>
@@ -319,48 +326,47 @@
     <div class="split">
       <div>
         <p class="kicker" data-en="For business owners" data-es="Para empresarios">For business owners</p>
-        <h2 data-en="A different kind of buyer for the company you built" data-es="Otro tipo de comprador para la empresa que usted construyó">A different kind of buyer for the company you built</h2>
+        <h2 data-en="A succession partner for founders" data-es="Un socio para la sucesión">A succession partner for founders</h2>
       </div>
       <div class="prose">
-        <p class="lede" data-en="Most of the companies we talk to were built by one person over twenty or thirty years. When that person starts thinking about succession, the usual options are a strategic buyer who folds the business into its own, a fund that plans to sell it again in a few years, or a family member who may not want the job." data-es="La mayoría de las empresas con las que hablamos fueron construidas por una sola persona a lo largo de veinte o treinta años. Cuando esa persona empieza a pensar en la sucesión, las opciones habituales son un comprador estratégico que absorbe el negocio, un fondo que planea venderlo de nuevo en pocos años, o un familiar que tal vez no quiera el cargo.">Most of the companies we talk to were built by one person over twenty or thirty years. When that person starts thinking about succession, the usual options are a strategic buyer who folds the business into its own, a fund that plans to sell it again in a few years, or a family member who may not want the job.</p>
-        <p data-en="A search fund is another option. We are two people backed by a small group of experienced investors, and we are buying a single company. We do not run a portfolio. After closing, we join the business and lead it every day, with the name, the team and the customer relationships kept intact." data-es="Un search fund es otra alternativa. Somos dos personas respaldadas por un grupo reducido de inversionistas con experiencia, y vamos a comprar una sola empresa. No manejamos un portafolio. Después del cierre, nos integramos a la empresa y la dirigimos día a día, manteniendo su nombre, su equipo y sus relaciones con clientes.">A search fund is another option. We are two people backed by a small group of experienced investors, and we are buying a single company. We do not run a portfolio. After closing, we join the business and lead it every day, with the name, the team and the customer relationships kept intact.</p>
-        <p data-en="You decide how involved you stay. Some owners leave after a short handover; others keep a board seat, a minority stake, or finance part of the price so they share in what comes next. We also keep the management team you built." data-es="Usted decide qué tan involucrado sigue. Algunos dueños se retiran tras una transición corta; otros conservan un puesto en la junta, una participación minoritaria o financian parte del precio para compartir lo que viene. Además, mantenemos el equipo directivo que usted construyó.">You decide how involved you stay. Some owners leave after a short handover; others keep a board seat, a minority stake, or finance part of the price so they share in what comes next. We also keep the management team you built.</p>
+        <p class="lede" data-en="For founders planning succession, the usual options are a strategic buyer, a private equity fund or a family handover. A search fund offers a fourth: two operators, backed by experienced investors, who acquire a single company and lead it full time." data-es="Para los fundadores que planean su sucesión, las opciones habituales son un comprador estratégico, un fondo de private equity o un relevo familiar. Un search fund ofrece una cuarta: dos operadores, respaldados por inversionistas con experiencia, que adquieren una sola empresa y la dirigen de tiempo completo.">For founders planning succession, the usual options are a strategic buyer, a private equity fund or a family handover. A search fund offers a fourth: two operators, backed by experienced investors, who acquire a single company and lead it full time.</p>
+        <p data-en="We preserve the company's name, team and customer relationships. Owners choose their involvement after closing, from a short handover to a board seat or a retained stake." data-es="Preservamos el nombre, el equipo y las relaciones con clientes de la empresa. Cada dueño decide su participación después del cierre, desde una transición corta hasta un puesto en la junta o una participación retenida.">We preserve the company's name, team and customer relationships. Owners choose their involvement after closing, from a short handover to a board seat or a retained stake.</p>
       </div>
     </div>
 
     <div class="steps">
       <div class="step">
-        <h3 data-en="A private first conversation" data-es="Una primera conversación privada">A private first conversation</h3>
-        <p data-en="No documents needed. We sign a confidentiality agreement before you share anything sensitive." data-es="Sin documentos. Firmamos un acuerdo de confidencialidad antes de que usted comparta cualquier información sensible.">No documents needed. We sign a confidentiality agreement before you share anything sensitive.</p>
+        <h3 data-en="Confidential introduction" data-es="Introducción confidencial">Confidential introduction</h3>
+        <p data-en="An NDA is signed before any sensitive information is shared." data-es="Se firma un acuerdo de confidencialidad antes de compartir información sensible.">An NDA is signed before any sensitive information is shared.</p>
       </div>
       <div class="step">
-        <h3 data-en="A clear, early offer" data-es="Una oferta clara y temprana">A clear, early offer</h3>
-        <p data-en="If there is a fit, we put a non-binding letter of intent in writing, with price and structure spelled out." data-es="Si hay encaje, presentamos por escrito una carta de intención no vinculante, con precio y estructura detallados.">If there is a fit, we put a non-binding letter of intent in writing, with price and structure spelled out.</p>
+        <h3 data-en="Letter of intent" data-es="Carta de intención">Letter of intent</h3>
+        <p data-en="A written, non-binding offer setting out price and structure." data-es="Una oferta escrita no vinculante con precio y estructura.">A written, non-binding offer setting out price and structure.</p>
       </div>
       <div class="step">
-        <h3 data-en="Focused diligence" data-es="Una due diligence enfocada">Focused diligence</h3>
-        <p data-en="We do the work with our investors and advisors and keep the process quiet inside your company." data-es="Hacemos el trabajo con nuestros inversionistas y asesores, con total discreción dentro de su empresa.">We do the work with our investors and advisors and keep the process quiet inside your company.</p>
+        <h3 data-en="Due diligence" data-es="Due diligence">Due diligence</h3>
+        <p data-en="Conducted discreetly with our investors and advisors." data-es="Realizada con discreción junto a nuestros inversionistas y asesores.">Conducted discreetly with our investors and advisors.</p>
       </div>
       <div class="step">
-        <h3 data-en="A real handover" data-es="Una transición de verdad">A real handover</h3>
-        <p data-en="We plan the transition with you, at your pace, so employees and clients hear it from both of us." data-es="Planeamos la transición con usted, a su ritmo, para que empleados y clientes lo escuchen de ambos.">We plan the transition with you, at your pace, so employees and clients hear it from both of us.</p>
+        <h3 data-en="Transition" data-es="Transición">Transition</h3>
+        <p data-en="Planned with the owner, at the owner's pace." data-es="Planeada con el dueño, a su ritmo.">Planned with the owner, at the owner's pace.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CRITERIA -->
-<section id="criteria">
+<section class="dark" id="criteria">
   <div class="wrap">
     <p class="kicker" data-en="What we look for" data-es="Qué buscamos">What we look for</p>
-    <h2 data-en="One company, chosen carefully" data-es="Una sola empresa, elegida con cuidado">One company, chosen carefully</h2>
-    <p class="criteria-intro" data-en="We have screened the public filings of Colombia's 10,000 largest companies through Supersociedades, so we may reach out even if your company is not for sale. This is what we look for." data-es="Revisamos los estados financieros públicos de las 10.000 empresas más grandes de Colombia a través de Supersociedades, así que es posible que lo contactemos aunque su empresa no esté en venta. Esto es lo que buscamos.">We have screened the public filings of Colombia's 10,000 largest companies through Supersociedades, so we may reach out even if your company is not for sale. This is what we look for.</p>
+    <h2 data-en="Acquisition criteria" data-es="Criterios de adquisición">Acquisition criteria</h2>
+    <p class="criteria-intro" data-en="We screen the filings of Colombia&#39;s 10,000 largest companies through Supersociedades and approach owners directly, whether or not a company is for sale." data-es="Analizamos los estados financieros de las 10.000 empresas más grandes de Colombia a través de Supersociedades y contactamos directamente a sus dueños, estén o no en venta.">We screen the filings of Colombia&#39;s 10,000 largest companies through Supersociedades and approach owners directly, whether or not a company is for sale.</p>
 
     <div class="pillars">
       <div class="pillar-col">
         <p class="pillar-n">1</p>
         <h3 data-en="Solid fundamentals" data-es="Fundamentos sólidos">Solid fundamentals</h3>
-        <p class="pillar-lead" data-en="A profitable, established business with numbers that hold up." data-es="Una empresa rentable y consolidada, con cifras que resisten el análisis.">A profitable, established business with numbers that hold up.</p>
+        <p class="pillar-lead" data-en="Profitable, established and resilient." data-es="Rentable, consolidada y resiliente.">Profitable, established and resilient.</p>
         <dl class="facts">
           <div><dt data-en="Revenue" data-es="Ingresos">Revenue</dt><dd data-en="US$15M to US$30M" data-es="US$15M a US$30M">US$15M to US$30M</dd></div>
           <div><dt>EBITDA</dt><dd data-en="US$4M to US$8M (US$1M to US$4M for add-ons)" data-es="US$4M a US$8M (US$1M a US$4M para adquisiciones complementarias)">US$4M to US$8M (US$1M to US$4M for add-ons)</dd></div>
@@ -372,63 +378,35 @@
       <div class="pillar-col">
         <p class="pillar-n">2</p>
         <h3 data-en="In an attractive sector" data-es="En un sector atractivo">In an attractive sector</h3>
-        <p class="pillar-lead" data-en="An industry with steady demand and room to grow." data-es="Una industria con demanda estable y espacio para crecer.">An industry with steady demand and room to grow.</p>
+        <p class="pillar-lead" data-en="Steady demand and room to grow." data-es="Demanda estable y espacio para crecer.">Steady demand and room to grow.</p>
         <ul class="points">
-          <li data-en="Durable demand: B2B contracts, regulated services and loyal customers" data-es="Demanda estable: contratos B2B, servicios regulados y clientes fieles">Durable demand: B2B contracts, regulated services and loyal customers</li>
-          <li data-en="Fragmented markets where one company can grow by acquiring others" data-es="Mercados fragmentados donde una empresa puede crecer comprando otras">Fragmented markets where one company can grow by acquiring others</li>
-          <li data-en="Hard assets and know-how that keep new competitors out: fleets, lab equipment, licenses" data-es="Activos y conocimiento que frenan a nuevos competidores: flotas, equipos de laboratorio, licencias">Hard assets and know-how that keep new competitors out: fleets, lab equipment, licenses</li>
+          <li data-en="Recurring demand: B2B contracts, regulated services, loyal customers" data-es="Demanda recurrente: contratos B2B, servicios regulados, clientes fieles">Recurring demand: B2B contracts, regulated services, loyal customers</li>
+          <li data-en="Fragmented markets with room for add-on acquisitions" data-es="Mercados fragmentados con espacio para adquisiciones complementarias">Fragmented markets with room for add-on acquisitions</li>
+          <li data-en="Hard assets and technical know-how that deter new entrants" data-es="Activos y conocimiento técnico que frenan a nuevos competidores">Hard assets and technical know-how that deter new entrants</li>
         </ul>
       </div>
       <div class="pillar-col">
         <p class="pillar-n">3</p>
         <h3 data-en="In a moment of transition" data-es="En un momento de transición">In a moment of transition</h3>
-        <p class="pillar-lead" data-en="An owner who built something lasting and is ready for what comes next." data-es="Un dueño que construyó algo duradero y está listo para lo que sigue.">An owner who built something lasting and is ready for what comes next.</p>
+        <p class="pillar-lead" data-en="A founder ready for the next chapter." data-es="Un fundador listo para el siguiente capítulo.">A founder ready for the next chapter.</p>
         <ul class="points">
           <li data-en="Founder or family owned" data-es="De fundador o familiar">Founder or family owned</li>
-          <li data-en="An owner thinking about succession or retirement, without an obvious successor" data-es="Un dueño que piensa en la sucesión o el retiro, sin un sucesor claro">An owner thinking about succession or retirement, without an obvious successor</li>
-          <li data-en="A management team we can keep and build on" data-es="Un equipo directivo que podamos mantener y fortalecer">A management team we can keep and build on</li>
-          <li data-en="Openness to a handover at the owner's pace" data-es="Disposición a una transición al ritmo del dueño">Openness to a handover at the owner's pace</li>
+          <li data-en="Owner planning succession or retirement" data-es="Dueño que planea su sucesión o retiro">Owner planning succession or retirement</li>
+          <li data-en="A management team to retain and develop" data-es="Un equipo directivo para retener y desarrollar">A management team to retain and develop</li>
+          <li data-en="A handover at the owner&#39;s pace" data-es="Una transición al ritmo del dueño">A handover at the owner&#39;s pace</li>
         </ul>
       </div>
     </div>
 
     <div class="sectors">
-      <p class="kicker" data-en="Where we are looking first" data-es="Dónde estamos buscando primero">Where we are looking first</p>
+      <p class="kicker" data-en="Priority sectors" data-es="Sectores prioritarios">Priority sectors</p>
       <ul class="sector-list">
         <li><strong data-en="Energy and engineering services" data-es="Servicios de energía e ingeniería">Energy and engineering services</strong><span data-en="Engineering, oilfield, power and gas services, needed whatever the energy mix" data-es="Ingeniería y servicios petroleros, eléctricos y de gas, necesarios sea cual sea la matriz energética">Engineering, oilfield, power and gas services, needed whatever the energy mix</span><em class="sector-data" data-en="172 companies · 62 in our size range" data-es="172 empresas · 62 en nuestro rango de tamaño">172 companies · 62 in our size range</em></li>
         <li><strong data-en="Clinical laboratories" data-es="Laboratorios clínicos">Clinical laboratories</strong><span data-en="Recurring contracts with EPS and insurers, backed by about 97% health coverage" data-es="Contratos recurrentes con EPS y aseguradoras, respaldados por una cobertura de salud cercana al 97%">Recurring contracts with EPS and insurers, backed by about 97% health coverage</span><em class="sector-data" data-en="42 companies · 11 in our size range" data-es="42 empresas · 11 en nuestro rango de tamaño">42 companies · 11 in our size range</em></li>
         <li><strong data-en="Heavy equipment rental" data-es="Alquiler de maquinaria pesada">Heavy equipment rental</strong><span data-en="Owned fleets for construction, industry and oil and gas; a weaker peso favors renting over buying" data-es="Flotas propias para construcción, industria y petróleo y gas; un peso más débil favorece el alquiler frente a la compra">Owned fleets for construction, industry and oil and gas; a weaker peso favors renting over buying</span><em class="sector-data" data-en="41 companies · 23 in our size range" data-es="41 empresas · 23 en nuestro rango de tamaño">41 companies · 23 in our size range</em></li>
         <li><strong data-en="Specialty medical practices" data-es="Medicina especializada">Specialty medical practices</strong><span data-en="Cardiology, oncology, fertility and plastic surgery, with growth from an aging population" data-es="Cardiología, oncología, fertilidad y cirugía plástica, con crecimiento por el envejecimiento de la población">Cardiology, oncology, fertility and plastic surgery, with growth from an aging population</span><em class="sector-data" data-en="141 companies · 48 in our size range" data-es="141 empresas · 48 en nuestro rango de tamaño">141 companies · 48 in our size range</em></li>
       </ul>
-      <p class="sector-note" data-en="Company counts from 2024 Supersociedades filings. Sector is a lens, not a filter: if your company fits the criteria above, we want to hear from you whatever its industry." data-es="Cifras de los estados financieros 2024 reportados a Supersociedades. El sector es una guía, no un filtro: si su empresa cumple los criterios, queremos conocerla sin importar su industria.">Company counts from 2024 Supersociedades filings. Sector is a lens, not a filter: if your company fits the criteria above, we want to hear from you whatever its industry.</p>
-    </div>
-  </div>
-</section>
-
-<!-- INVESTORS -->
-<section class="investors" id="investors">
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <p class="kicker" data-en="For investors" data-es="Para inversionistas">For investors</p>
-        <h2 data-en="A traditional search fund, applied to Colombia" data-es="Un search fund tradicional, aplicado a Colombia">A traditional search fund, applied to Colombia</h2>
-      </div>
-      <div>
-        <div class="prose">
-          <p data-en="We follow the structure developed at Stanford and Harvard and refined over four decades in the US, Europe and Latin America. A small group of investors funds the search, and each has the right, not the obligation, to invest in the acquisition. We plan to hold for five to seven years, with both of us working in the business full time." data-es="Seguimos la estructura desarrollada en Stanford y Harvard y perfeccionada durante cuatro décadas en Estados Unidos, Europa y América Latina. Un grupo reducido de inversionistas financia la búsqueda, y cada uno tiene el derecho, no la obligación, de invertir en la adquisición. Planeamos mantener la empresa entre cinco y siete años, con ambos dedicados a ella de tiempo completo.">We follow the structure developed at Stanford and Harvard and refined over four decades in the US, Europe and Latin America. A small group of investors funds the search, and each has the right, not the obligation, to invest in the acquisition. We plan to hold for five to seven years, with both of us working in the business full time.</p>
-          <p data-en="Colombia is an early but proven market. Eight search funds have launched there in the past decade and four have acquired companies, which have grown revenue by roughly 15 to 30% a year since, according to their public filings." data-es="Colombia es un mercado incipiente pero probado. En la última década se lanzaron ocho search funds en el país y cuatro adquirieron empresas, cuyos ingresos han crecido entre un 15% y un 30% anual desde entonces, según sus estados financieros públicos.">Colombia is an early but proven market. Eight search funds have launched there in the past decade and four have acquired companies, which have grown revenue by roughly 15 to 30% a year since, according to their public filings.</p>
-          <p data-en="Our search starts from data. Having mapped Colombia's 10,000 largest companies, we expect to qualify 300 to 500 targets, hold 50 to 100 owner conversations and sign 3 to 5 letters of intent on the way to one acquisition." data-es="Nuestra búsqueda parte de los datos. Tras mapear las 10.000 empresas más grandes de Colombia, esperamos calificar entre 300 y 500 objetivos, sostener entre 50 y 100 conversaciones con dueños y firmar de 3 a 5 cartas de intención en el camino hacia una adquisición.">Our search starts from data. Having mapped Colombia's 10,000 largest companies, we expect to qualify 300 to 500 targets, hold 50 to 100 owner conversations and sign 3 to 5 letters of intent on the way to one acquisition.</p>
-        </div>
-        <dl class="terms">
-          <div><dt data-en="Structure" data-es="Estructura">Structure</dt><dd data-en="Traditional search fund, Stanford and Harvard conventions" data-es="Search fund tradicional, según las convenciones de Stanford y Harvard">Traditional search fund, Stanford and Harvard conventions</dd></div>
-          <div><dt data-en="Search period" data-es="Periodo de búsqueda">Search period</dt><dd data-en="24 months, based in Bogotá" data-es="24 meses, desde Bogotá">24 months, based in Bogotá</dd></div>
-          <div><dt data-en="Target" data-es="Objetivo">Target</dt><dd data-en="Founder-owned Colombian company, US$4M to US$8M EBITDA" data-es="Empresa colombiana de fundador, EBITDA de US$4M a US$8M">Founder-owned Colombian company, US$4M to US$8M EBITDA</dd></div>
-          <div><dt data-en="Entry multiples" data-es="Múltiplos de entrada">Entry multiples</dt><dd data-en="Typically 3 to 6× EBITDA in Colombia, versus 7 to 12× in the US" data-es="Normalmente de 3 a 6× EBITDA en Colombia, frente a 7 a 12× en EE. UU.">Typically 3 to 6× EBITDA in Colombia, versus 7 to 12× in the US</dd></div>
-          <div><dt data-en="Hold period" data-es="Horizonte de inversión">Hold period</dt><dd data-en="5 to 7 years" data-es="De 5 a 7 años">5 to 7 years</dd></div>
-        </dl>
-        <a href="#contact" class="btn" data-en="Request the investor memorandum" data-es="Solicitar el memorando para inversionistas">Request the investor memorandum</a>
-        <p class="fine" data-en="Raise size, terms and the full memorandum are shared privately with prospective investors." data-es="El tamaño de la ronda, los términos y el memorando completo se comparten de forma privada con potenciales inversionistas.">Raise size, terms and the full memorandum are shared privately with prospective investors.</p>
-      </div>
+      <p class="sector-note" data-en="Company counts: Supersociedades 2024 filings. Sector is a lens, not a filter; we review any company that fits the criteria." data-es="Cifras: estados financieros 2024 de Supersociedades. El sector es una guía, no un filtro; evaluamos cualquier empresa que cumpla los criterios.">Company counts: Supersociedades 2024 filings. Sector is a lens, not a filter; we review any company that fits the criteria.</p>
     </div>
   </div>
 </section>
@@ -436,8 +414,8 @@
 <!-- TEAM -->
 <section class="paper" id="team">
   <div class="wrap">
-    <p class="kicker" data-en="Who we are" data-es="Quiénes somos">Who we are</p>
-    <h2 data-en="Two partners, one company" data-es="Dos socios, una empresa">Two partners, one company</h2>
+    <p class="kicker" data-en="Team" data-es="Equipo">Team</p>
+    <h2 data-en="Principals and advisors" data-es="Socios y asesores">Principals and advisors</h2>
 
     <div class="team-grid">
       <article class="person">
@@ -464,6 +442,11 @@
       <p class="kicker" data-en="Advisors" data-es="Asesores">Advisors</p>
       <div class="advisor-grid">
         <div class="advisor">
+          <h3>Tom Reinhart</h3>
+          <p class="role" data-en="Former COO, TPG" data-es="Ex COO de TPG">Former COO, TPG</p>
+          <p data-en="Former Chief Operating Officer of TPG, one of the world&#39;s largest alternative asset managers. Advises Arista on governance and on building the operating and reporting systems of the company we acquire." data-es="Ex director de operaciones (COO) de TPG, una de las mayores gestoras de activos alternativos del mundo. Asesora a Arista en gobierno corporativo y en la construcción de los sistemas operativos y de reporte de la empresa que adquiramos.">Former Chief Operating Officer of TPG, one of the world&#39;s largest alternative asset managers. Advises Arista on governance and on building the operating and reporting systems of the company we acquire.</p>
+        </div>
+        <div class="advisor">
           <h3>Steve Pirri</h3>
           <p class="role" data-en="Healthcare roll-up operator" data-es="Operador de consolidaciones en salud">Healthcare roll-up operator</p>
           <p data-en="Built two PE-backed healthcare roll-ups from scratch: 125 dialysis clinics at US Renal Care, then more than 100 dermatology practices at PhyNet." data-es="Construyó desde cero dos consolidaciones en salud respaldadas por private equity: 125 clínicas de diálisis en US Renal Care y luego más de 100 consultorios de dermatología en PhyNet.">Built two PE-backed healthcare roll-ups from scratch: 125 dialysis clinics at US Renal Care, then more than 100 dermatology practices at PhyNet.</p>
@@ -489,8 +472,8 @@
     <div class="split">
       <div>
         <p class="kicker" data-en="Contact" data-es="Contacto">Contact</p>
-        <h2 data-en="Write to us" data-es="Escríbanos">Write to us</h2>
-        <p class="lede" data-en="Owners, advisors and investors are all welcome. Everything you send stays between us." data-es="Empresarios, asesores e inversionistas son bienvenidos. Todo lo que nos envíe es confidencial.">Owners, advisors and investors are all welcome. Everything you send stays between us.</p>
+        <h2 data-en="Get in touch" data-es="Contáctenos">Get in touch</h2>
+        <p class="lede" data-en="Business owners, advisors and investors are welcome to reach out. All enquiries are confidential, and investors may request our memorandum." data-es="Dueños de empresa, asesores e inversionistas pueden escribirnos. Toda consulta es confidencial y los inversionistas pueden solicitar nuestro memorando.">Business owners, advisors and investors are welcome to reach out. All enquiries are confidential, and investors may request our memorandum.</p>
         <dl class="contact-direct">
           <div><dt data-en="Email" data-es="Correo">Email</dt><dd><a href="mailto:outreach@aristacp.com">outreach@aristacp.com</a></dd></div>
           <div><dt data-en="Offices" data-es="Oficinas">Offices</dt><dd data-en="Bogotá, Colombia and Boston, MA" data-es="Bogotá, Colombia y Boston, MA">Bogotá, Colombia and Boston, MA</dd></div>
