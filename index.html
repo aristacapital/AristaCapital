@@ -15,9 +15,9 @@
   :root {
     --navy:       #111E2B;
     --navy-2:     #1C2A38;
-    --green:      #3D7A6B;
-    --green-dark: #2F6457;
-    --green-pale: #8FC1B3;
+    --green:      #25392C;
+    --green-dark: #34503E;
+    --green-pale: #A3B8A8;
     --sage:       #7E9796;
     --paper:      #F4F6F8;
     --white:      #FFFFFF;
@@ -90,7 +90,7 @@
   /* HERO */
   .hero { position: relative; background: var(--navy); color: var(--white); padding: 168px 0 0; overflow: hidden; }
   #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
-  .hero-text { position: relative; z-index: 2; padding-bottom: 56px; }
+  .hero-text { position: relative; z-index: 2; padding-bottom: 136px; }
   .hero-text > * { max-width: 760px; }
   .hero-place { font-size: 14px; letter-spacing: 0.04em; color: var(--green-pale); margin-bottom: 28px; }
   .hero h1 { font-size: clamp(40px, 5.4vw, 68px); line-height: 1.08; margin-bottom: 28px; }
@@ -105,10 +105,10 @@
   }
   .btn:hover { background: var(--green-dark); color: var(--white); }
   .btn:disabled { opacity: 0.6; cursor: wait; }
+  .hero .btn, .investors .btn { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.32); }
   .text-link { color: var(--white); font-size: 15px; text-underline-offset: 5px; text-decoration-color: var(--green-pale); }
   .text-link:hover { color: var(--green-pale); }
 
-  .ridges { position: relative; z-index: 2; display: block; width: 100%; height: clamp(120px, 19vw, 260px); }
 
   /* SECTIONS */
   section { padding: 104px 0; }
@@ -236,7 +236,7 @@
     .nav-links.open { display: flex; }
     .nav-links a { display: block; padding: 16px 24px; border-top: 1px solid var(--rule); }
 
-    .hero { padding-top: 120px; }
+    .hero { padding-top: 120px; } .hero-text { padding-bottom: 88px; }
     section { padding: 72px 0; }
     .split, .criteria-grid { grid-template-columns: 1fr; gap: 40px; }
     .steps { grid-template-columns: 1fr 1fr; }
@@ -311,12 +311,6 @@
       <a href="#investors" class="text-link" data-en="Information for investors" data-es="Información para inversionistas">Information for investors</a>
     </div>
   </div>
-  <svg class="ridges" viewBox="0 0 1440 280" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <polygon fill="#22364A" points="0,170 120,120 210,150 330,70 420,120 520,95 640,30 760,110 860,80 980,140 1080,60 1200,120 1300,90 1440,140 1440,280 0,280"/>
-    <polygon fill="#7E9796" opacity="0.55" points="640,30 670,50 655,46 642,55 630,47 603,50"/>
-    <polygon fill="#3D7A6B" points="0,210 140,150 250,190 380,120 500,180 620,140 740,200 880,130 1010,190 1130,150 1260,200 1360,160 1440,190 1440,280 0,280"/>
-    <polygon fill="#F4F6F8" points="0,250 160,205 300,240 460,195 600,245 760,215 900,250 1060,210 1220,248 1340,220 1440,240 1440,280 0,280"/>
-  </svg>
 </header>
 
 <!-- OWNERS -->
@@ -631,7 +625,7 @@
       .then(function (res) {
         if (!res.ok) throw new Error();
         form.reset();
-        statusEl.style.color = '#3D7A6B';
+        statusEl.style.color = '#25392C';
         statusEl.textContent = STR[currentLang].ok;
       })
       .catch(function () {
@@ -679,7 +673,7 @@
           var x = (s / STEPS) * W, y = base[li] + noise(li, s / STEPS, t) * amp;
           if (s === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = 'rgba(61,122,107,' + alpha.toFixed(3) + ')';
+        ctx.strokeStyle = 'rgba(163,184,168,' + (alpha * 0.8).toFixed(3) + ')';
         ctx.lineWidth = 0.9; ctx.stroke();
       }
       requestAnimationFrame(draw);
