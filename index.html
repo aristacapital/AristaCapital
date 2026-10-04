@@ -207,6 +207,19 @@
   @media (max-width: 960px) { .advisor-grid { grid-template-columns: 1fr; } }
   @media (max-width: 560px) { .sector-list { grid-template-columns: 1fr !important; } }
 
+  .pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+  .pillar-col { border-top: 2px solid var(--navy); padding-top: 20px; }
+  .pillar-n { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--green); margin-bottom: 6px; }
+  .pillar-col h3 { font-size: 24px; margin-bottom: 8px; }
+  .pillar-lead { color: var(--muted); font-size: 16px; margin-bottom: 18px; }
+  .facts div { padding: 12px 0; border-top: 1px solid var(--rule); }
+  .facts dt { font-size: 13.5px; color: var(--muted); }
+  .facts dd { font-size: 15.5px; font-variant-numeric: tabular-nums; }
+  .points { list-style: none; }
+  .points li { position: relative; padding: 12px 0 12px 22px; border-top: 1px solid var(--rule); font-size: 15.5px; color: var(--ink-2); }
+  .points li::before { content: "+"; position: absolute; left: 0; top: 10px; color: var(--green); font-weight: 600; font-size: 17px; }
+  @media (max-width: 960px) { .pillars { grid-template-columns: 1fr; gap: 48px; } }
+
   /* MOBILE */
   @media (max-width: 960px) {
     .wrap { padding: 0 24px; }
@@ -349,36 +362,39 @@
     <h2 data-en="One company, chosen carefully" data-es="Una sola empresa, elegida con cuidado">One company, chosen carefully</h2>
     <p class="criteria-intro" data-en="We have screened the public filings of Colombia's 10,000 largest companies through Supersociedades, so we may reach out even if your company is not for sale. This is what we look for." data-es="Revisamos los estados financieros públicos de las 10.000 empresas más grandes de Colombia a través de Supersociedades, así que es posible que lo contactemos aunque su empresa no esté en venta. Esto es lo que buscamos.">We have screened the public filings of Colombia's 10,000 largest companies through Supersociedades, so we may reach out even if your company is not for sale. This is what we look for.</p>
 
-    <div class="criteria-grid">
-      <table class="ledger">
-        <caption data-en="Acquisition criteria" data-es="Criterios de adquisición">Acquisition criteria</caption>
-        <tbody>
-          <tr><th scope="row" data-en="Location" data-es="Ubicación">Location</th><td data-en="Headquartered in Colombia" data-es="Sede en Colombia">Headquartered in Colombia</td></tr>
-          <tr><th scope="row" data-en="Revenue" data-es="Ingresos">Revenue</th><td data-en="US$15M to US$30M" data-es="US$15M a US$30M">US$15M to US$30M</td></tr>
-          <tr><th scope="row">EBITDA</th><td data-en="US$4M to US$8M for the main acquisition; US$1M to US$4M for later add-ons" data-es="US$4M a US$8M para la adquisición principal; US$1M a US$4M para adquisiciones complementarias">US$4M to US$8M for the main acquisition; US$1M to US$4M for later add-ons</td></tr>
-          <tr><th scope="row" data-en="Track record" data-es="Trayectoria">Track record</th><td data-en="10+ years in business" data-es="Más de 10 años de operación">10+ years in business</td></tr>
-          <tr><th scope="row" data-en="Ownership" data-es="Propiedad">Ownership</th><td data-en="Founder-owned, with the owner thinking about succession" data-es="De fundador, con un dueño que piensa en la sucesión">Founder-owned, with the owner thinking about succession</td></tr>
-          <tr><th scope="row" data-en="Customers" data-es="Clientes">Customers</th><td data-en="Recurring or high-retention, ideally no client above 15% of sales" data-es="Recurrentes o de alta retención, idealmente ningún cliente por encima del 15% de las ventas">Recurring or high-retention, ideally no client above 15% of sales</td></tr>
-        </tbody>
-      </table>
-
-      <div>
-        <div class="avoid like">
-          <h3 data-en="What we like" data-es="Lo que nos gusta">What we like</h3>
-          <ul>
-            <li data-en="Durable demand: B2B contracts, regulated services and loyal customers" data-es="Demanda estable: contratos B2B, servicios regulados y clientes fieles">Durable demand: B2B contracts, regulated services and loyal customers</li>
-            <li data-en="Fragmented markets where one company can grow by acquiring others" data-es="Mercados fragmentados donde una empresa puede crecer comprando otras">Fragmented markets where one company can grow by acquiring others</li>
-            <li data-en="Hard assets and know-how: fleets, lab equipment, licenses, technical expertise" data-es="Activos y conocimiento difíciles de replicar: flotas, equipos de laboratorio, licencias, experiencia técnica">Hard assets and know-how: fleets, lab equipment, licenses, technical expertise</li>
-          </ul>
-        </div>
-        <div class="avoid" style="margin-top: 36px;">
-          <h3 data-en="What we will not buy" data-es="Lo que no compramos">What we will not buy</h3>
-          <ul>
-            <li data-en="Turnarounds or loss-making businesses" data-es="Reestructuraciones o negocios con pérdidas">Turnarounds or loss-making businesses</li>
-            <li data-en="Companies that depend on government contracts or one customer" data-es="Empresas que dependen de contratos con el Estado o de un solo cliente">Companies that depend on government contracts or one customer</li>
-            <li data-en="Early-stage or venture-type companies" data-es="Empresas en etapa temprana o tipo venture">Early-stage or venture-type companies</li>
-          </ul>
-        </div>
+    <div class="pillars">
+      <div class="pillar-col">
+        <p class="pillar-n">1</p>
+        <h3 data-en="Solid fundamentals" data-es="Fundamentos sólidos">Solid fundamentals</h3>
+        <p class="pillar-lead" data-en="A profitable, established business with numbers that hold up." data-es="Una empresa rentable y consolidada, con cifras que resisten el análisis.">A profitable, established business with numbers that hold up.</p>
+        <dl class="facts">
+          <div><dt data-en="Revenue" data-es="Ingresos">Revenue</dt><dd data-en="US$15M to US$30M" data-es="US$15M a US$30M">US$15M to US$30M</dd></div>
+          <div><dt>EBITDA</dt><dd data-en="US$4M to US$8M (US$1M to US$4M for add-ons)" data-es="US$4M a US$8M (US$1M a US$4M para adquisiciones complementarias)">US$4M to US$8M (US$1M to US$4M for add-ons)</dd></div>
+          <div><dt data-en="Track record" data-es="Trayectoria">Track record</dt><dd data-en="10+ years in business" data-es="Más de 10 años de operación">10+ years in business</dd></div>
+          <div><dt data-en="Customers" data-es="Clientes">Customers</dt><dd data-en="Recurring or high-retention, no client above 15% of sales" data-es="Recurrentes o de alta retención, ningún cliente por encima del 15% de las ventas">Recurring or high-retention, no client above 15% of sales</dd></div>
+          <div><dt data-en="Location" data-es="Ubicación">Location</dt><dd data-en="Headquartered in Colombia" data-es="Sede en Colombia">Headquartered in Colombia</dd></div>
+        </dl>
+      </div>
+      <div class="pillar-col">
+        <p class="pillar-n">2</p>
+        <h3 data-en="In an attractive sector" data-es="En un sector atractivo">In an attractive sector</h3>
+        <p class="pillar-lead" data-en="An industry with steady demand and room to grow." data-es="Una industria con demanda estable y espacio para crecer.">An industry with steady demand and room to grow.</p>
+        <ul class="points">
+          <li data-en="Durable demand: B2B contracts, regulated services and loyal customers" data-es="Demanda estable: contratos B2B, servicios regulados y clientes fieles">Durable demand: B2B contracts, regulated services and loyal customers</li>
+          <li data-en="Fragmented markets where one company can grow by acquiring others" data-es="Mercados fragmentados donde una empresa puede crecer comprando otras">Fragmented markets where one company can grow by acquiring others</li>
+          <li data-en="Hard assets and know-how that keep new competitors out: fleets, lab equipment, licenses" data-es="Activos y conocimiento que frenan a nuevos competidores: flotas, equipos de laboratorio, licencias">Hard assets and know-how that keep new competitors out: fleets, lab equipment, licenses</li>
+        </ul>
+      </div>
+      <div class="pillar-col">
+        <p class="pillar-n">3</p>
+        <h3 data-en="In a moment of transition" data-es="En un momento de transición">In a moment of transition</h3>
+        <p class="pillar-lead" data-en="An owner who built something lasting and is ready for what comes next." data-es="Un dueño que construyó algo duradero y está listo para lo que sigue.">An owner who built something lasting and is ready for what comes next.</p>
+        <ul class="points">
+          <li data-en="Founder or family owned" data-es="De fundador o familiar">Founder or family owned</li>
+          <li data-en="An owner thinking about succession or retirement, without an obvious successor" data-es="Un dueño que piensa en la sucesión o el retiro, sin un sucesor claro">An owner thinking about succession or retirement, without an obvious successor</li>
+          <li data-en="A management team we can keep and build on" data-es="Un equipo directivo que podamos mantener y fortalecer">A management team we can keep and build on</li>
+          <li data-en="Openness to a handover at the owner's pace" data-es="Disposición a una transición al ritmo del dueño">Openness to a handover at the owner's pace</li>
+        </ul>
       </div>
     </div>
 
