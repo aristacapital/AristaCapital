@@ -410,6 +410,32 @@
   .logo-name { font-family: 'DM Sans', system-ui, sans-serif; font-weight: 500; letter-spacing: 0.14em; font-size: 18px; }
   .foot .logo-name { font-size: 16px; }
 
+  /* Process cards (after thomabravo.com tiles) */
+  #owners .steps-label { margin-top: 112px; margin-bottom: 28px; }
+  #owners .steps { margin-top: 0; border-top: none; gap: 16px; }
+  #owners .step, #owners .step + .step {
+    border: none; padding: 30px 28px 34px; min-height: 290px;
+    display: flex; flex-direction: column;
+    background: linear-gradient(200deg, #FFFFFF 0%, #E2EAE8 100%);
+    box-shadow: inset 0 0 0 1px rgba(1,63,80,0.08);
+  }
+  #owners .step:nth-child(odd) { border-radius: 10px 56px 56px 56px; }
+  #owners .step:nth-child(even) { border-radius: 56px 10px 56px 56px; }
+  #owners .step .step-n { font-weight: 200; font-size: 64px; line-height: 1; color: var(--deep-teal); letter-spacing: -0.02em; margin-bottom: 0; padding-bottom: 56px; }
+  #owners .step h3 { min-height: 2.6em; display: flex; align-items: flex-end; font-size: 14px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--deep-teal); margin-bottom: 10px; }
+  #owners .step p:last-child { font-size: 16px; color: var(--ink-2); }
+  @media (max-width: 960px) {
+    #owners .steps { grid-template-columns: 1fr 1fr; }
+    #owners .step { min-height: 230px; }
+    #owners .steps-label { margin-top: 72px; }
+  }
+  @media (max-width: 560px) {
+    #owners .steps { grid-template-columns: 1fr; }
+    #owners .step { min-height: 0; }
+    #owners .step .step-n { font-size: 48px; padding-bottom: 24px; }
+    #owners .step h3 { min-height: 0; }
+  }
+
   /* MOBILE */
   @media (max-width: 960px) {
     .wrap { padding: 0 24px; }
@@ -500,26 +526,30 @@
         <h2 data-en="A succession partner for founders" data-es="Un socio para la sucesión">A succession partner for founders</h2>
       </div>
       <div class="prose">
-        <p class="lede" data-en="For founders planning succession, the usual options are a strategic buyer, a private equity fund or a family handover. A search fund offers a fourth: two operators, backed by experienced investors, who acquire a single company and lead it full time." data-es="Para los fundadores que planean su sucesión, las opciones habituales son un comprador estratégico, un fondo de private equity o un relevo familiar. Un search fund ofrece una cuarta: dos operadores, respaldados por inversionistas con experiencia, que adquieren una sola empresa y la dirigen de tiempo completo.">For founders planning succession, the usual options are a strategic buyer, a private equity fund or a family handover. A search fund offers a fourth: two operators, backed by experienced investors, who acquire a single company and lead it full time.</p>
-        <p data-en="We preserve the company's name, team and customer relationships. Owners choose their involvement after closing, from a short handover to a board seat or a retained stake." data-es="Preservamos el nombre, el equipo y las relaciones con clientes de la empresa. Cada dueño decide su participación después del cierre, desde una transición corta hasta un puesto en la junta o una participación retenida.">We preserve the company's name, team and customer relationships. Owners choose their involvement after closing, from a short handover to a board seat or a retained stake.</p>
-        <p data-en="Many owners also keep part of the financing in the business, through a seller note or rolled equity, and share in the company&#39;s next stage of growth." data-es="Muchos dueños también mantienen parte del financiamiento en la empresa, mediante una nota del vendedor o una participación reinvertida, y comparten la siguiente etapa de crecimiento.">Many owners also keep part of the financing in the business, through a seller note or rolled equity, and share in the company&#39;s next stage of growth.</p>
+        <p class="lede" data-en="A search fund offers founders an alternative to a strategic sale or private equity: two operators, backed by experienced investors, who acquire one company and lead it full time." data-es="Un search fund ofrece a los fundadores una alternativa a la venta estratégica o al private equity: dos operadores, respaldados por inversionistas con experiencia, que adquieren una sola empresa y la dirigen de tiempo completo.">A search fund offers founders an alternative to a strategic sale or private equity: two operators, backed by experienced investors, who acquire one company and lead it full time.</p>
+        <p data-en="We preserve the company&#39;s name, team and client relationships. Founders set their level of involvement after closing and may retain equity or provide seller financing." data-es="Preservamos el nombre, el equipo y las relaciones con clientes de la empresa. Los fundadores definen su participación después del cierre y pueden conservar acciones o financiar parte del precio.">We preserve the company&#39;s name, team and client relationships. Founders set their level of involvement after closing and may retain equity or provide seller financing.</p>
       </div>
     </div>
 
+    <p class="kicker steps-label" data-en="How a sale works" data-es="Cómo funciona una venta">How a sale works</p>
     <div class="steps">
       <div class="step">
+        <p class="step-n">01</p>
         <h3 data-en="Confidential introduction" data-es="Introducción confidencial">Confidential introduction</h3>
         <p data-en="An NDA is signed before any sensitive information is shared." data-es="Se firma un acuerdo de confidencialidad antes de compartir información sensible.">An NDA is signed before any sensitive information is shared.</p>
       </div>
       <div class="step">
+        <p class="step-n">02</p>
         <h3 data-en="Letter of intent" data-es="Carta de intención">Letter of intent</h3>
         <p data-en="A written, non-binding offer setting out price and structure." data-es="Una oferta escrita no vinculante con precio y estructura.">A written, non-binding offer setting out price and structure.</p>
       </div>
       <div class="step">
+        <p class="step-n">03</p>
         <h3 data-en="Due diligence" data-es="Due diligence">Due diligence</h3>
         <p data-en="Conducted discreetly with our investors and advisors." data-es="Realizada con discreción junto a nuestros inversionistas y asesores.">Conducted discreetly with our investors and advisors.</p>
       </div>
       <div class="step">
+        <p class="step-n">04</p>
         <h3 data-en="Transition" data-es="Transición">Transition</h3>
         <p data-en="Planned with the owner, at the owner's pace." data-es="Planeada con el dueño, a su ritmo.">Planned with the owner, at the owner's pace.</p>
       </div>
