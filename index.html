@@ -347,6 +347,56 @@
     .glance-grid > div + div { padding-left: 0; border-left: none; border-top: 1px solid rgba(1,63,80,0.22); padding-top: 28px; }
   }
 
+  /* Contact: navy, outlined wordmark behind, light form card (after thomabravo.com) */
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  #contact.contact { background: var(--navy); color: var(--white); overflow: hidden; padding: 176px 0 184px; }
+  .contact-word {
+    position: absolute; left: -1.5vw; top: 52%; transform: translateY(-50%);
+    font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 31vw; line-height: 1; letter-spacing: -0.02em;
+    color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.1); white-space: nowrap;
+    pointer-events: none; user-select: none;
+  }
+  .contact-inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 580px); gap: 72px; align-items: center; }
+  .contact .kicker { color: var(--white); margin-bottom: 22px; }
+  .contact h2 { color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; text-transform: uppercase; font-size: clamp(34px, 3.4vw, 46px); letter-spacing: 0; margin-bottom: 20px; }
+  .contact-mail a { color: var(--green-pale); font-size: 15px; text-underline-offset: 4px; }
+  .contact-mail a:hover { color: var(--white); }
+
+  .contact-card {
+    background: linear-gradient(200deg, #E2E9E7 0%, #C3CFCC 100%);
+    border-radius: 40px 88px 40px 88px; padding: 28px 28px 40px;
+    display: grid; gap: 16px; color: var(--navy);
+  }
+  .contact-card .req { text-align: center; font-size: 14px; color: var(--ink-2); }
+  .contact-card input, .contact-card select, .contact-card textarea {
+    background: transparent; border: 1px solid rgba(17,30,43,0.55); border-radius: 999px;
+    height: 60px; padding: 0 28px; font-size: 16px; color: var(--navy);
+  }
+  .contact-card textarea { border-radius: 22px; height: 150px; padding: 18px 28px; resize: vertical; }
+  .contact-card ::placeholder { color: rgba(17,30,43,0.78); opacity: 1; }
+  .contact-card select {
+    appearance: none; -webkit-appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1.5 7 7.5 13 1.5' fill='none' stroke='%23111E2B' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 26px center;
+  }
+  .contact-card select:invalid { color: rgba(17,30,43,0.78); }
+  .contact-card input:focus, .contact-card select:focus, .contact-card textarea:focus { outline: 2px solid var(--deep-teal); outline-offset: 2px; border-color: var(--deep-teal); }
+  .pill-submit {
+    justify-self: center; margin-top: 8px; display: inline-flex; align-items: center; gap: 10px;
+    background: var(--navy); color: var(--white); border: none; border-radius: 999px;
+    height: 56px; padding: 0 32px; font: inherit; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.2s;
+  }
+  .pill-submit:hover { background: var(--deep-teal); }
+  .pill-submit:disabled { opacity: 0.6; cursor: wait; }
+  .contact-card .form-status { text-align: center; font-size: 14.5px; min-height: 1.2em; }
+  footer { border-top: none; padding-top: 24px; }
+  @media (max-width: 960px) {
+    #contact.contact { padding: 112px 0 120px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .contact-word { font-size: 36vw; top: 18%; }
+    .contact-card { border-radius: 28px 56px 28px 56px; padding: 24px 18px 32px; }
+  }
+
   /* MOBILE */
   @media (max-width: 960px) {
     .wrap { padding: 0 24px; }
@@ -612,52 +662,37 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <p class="kicker" data-en="Contact" data-es="Contacto">Contact</p>
-        <h2 data-en="Get in touch" data-es="Contáctenos">Get in touch</h2>
-        <p class="lede" data-en="Business owners, advisors and investors are welcome to reach out. All enquiries are confidential, and investors may request our memorandum." data-es="Dueños de empresa, asesores e inversionistas pueden escribirnos. Toda consulta es confidencial y los inversionistas pueden solicitar nuestro memorando.">Business owners, advisors and investors are welcome to reach out. All enquiries are confidential, and investors may request our memorandum.</p>
-        <dl class="contact-direct">
-          <div><dt data-en="Email" data-es="Correo">Email</dt><dd><a href="mailto:outreach@aristacp.com">outreach@aristacp.com</a></dd></div>
-          <div><dt data-en="Offices" data-es="Oficinas">Offices</dt><dd data-en="Bogotá, Colombia and Boston, MA" data-es="Bogotá, Colombia y Boston, MA">Bogotá, Colombia and Boston, MA</dd></div>
-        </dl>
-      </div>
-
-      <form id="contactForm" action="https://formspree.io/f/mkoenogq" method="POST">
-        <div class="row">
-          <div class="field">
-            <label for="fname" data-en="First name" data-es="Nombre">First name</label>
-            <input id="fname" name="first_name" type="text" autocomplete="given-name" required>
-          </div>
-          <div class="field">
-            <label for="lname" data-en="Last name" data-es="Apellido">Last name</label>
-            <input id="lname" name="last_name" type="text" autocomplete="family-name" required>
-          </div>
-        </div>
-        <div class="field">
-          <label for="email" data-en="Email" data-es="Correo electrónico">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="who" data-en="I am" data-es="Soy">I am</label>
-          <select id="who" name="type">
-            <option value="Business owner" data-en="A business owner" data-es="Dueño de empresa">A business owner</option>
-            <option value="Advisor or intermediary" data-en="An advisor or intermediary" data-es="Asesor o intermediario">An advisor or intermediary</option>
-            <option value="Investor" data-en="An investor" data-es="Inversionista">An investor</option>
-            <option value="Other" data-en="Something else" data-es="Otro">Something else</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="msg" data-en="Message" data-es="Mensaje">Message</label>
-          <textarea id="msg" name="message" required></textarea>
-        </div>
-        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button type="submit" class="btn" style="justify-self: start;" data-en="Send" data-es="Enviar">Send</button>
-        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-      </form>
+<section class="contact" id="contact">
+  <div class="contact-word" aria-hidden="true">ARISTA</div>
+  <div class="wrap contact-inner">
+    <div class="contact-copy">
+      <p class="kicker" data-en="Confidential enquiries" data-es="Consultas confidenciales">Confidential enquiries</p>
+      <h2 data-en="Get in touch" data-es="Contáctenos">Get in touch</h2>
+      <p class="contact-mail"><a href="mailto:outreach@aristacp.com">outreach@aristacp.com</a></p>
     </div>
+
+    <form class="contact-card" id="contactForm" action="https://formspree.io/f/mkoenogq" method="POST">
+      <p class="req" data-en="*Required" data-es="*Obligatorio">*Required</p>
+      <label class="sr-only" for="fname" data-en="First name" data-es="Nombre">First name</label>
+      <input id="fname" name="first_name" type="text" autocomplete="given-name" required placeholder="First name *" data-ph-en="First name *" data-ph-es="Nombre *">
+      <label class="sr-only" for="lname" data-en="Last name" data-es="Apellido">Last name</label>
+      <input id="lname" name="last_name" type="text" autocomplete="family-name" required placeholder="Last name *" data-ph-en="Last name *" data-ph-es="Apellido *">
+      <label class="sr-only" for="email" data-en="Email" data-es="Correo electrónico">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required placeholder="Email *" data-ph-en="Email *" data-ph-es="Correo electrónico *">
+      <label class="sr-only" for="who" data-en="I am" data-es="Soy">I am</label>
+      <select id="who" name="type" required>
+        <option value="" disabled selected data-en="I am a… *" data-es="Soy… *">I am a… *</option>
+        <option value="Business owner" data-en="Business owner" data-es="Dueño de empresa">Business owner</option>
+        <option value="Advisor or intermediary" data-en="Advisor or intermediary" data-es="Asesor o intermediario">Advisor or intermediary</option>
+        <option value="Investor" data-en="Investor" data-es="Inversionista">Investor</option>
+        <option value="Other" data-en="Other" data-es="Otro">Other</option>
+      </select>
+      <label class="sr-only" for="msg" data-en="Message" data-es="Mensaje">Message</label>
+      <textarea id="msg" name="message" required maxlength="2000" placeholder="Message *" data-ph-en="Message *" data-ph-es="Mensaje *"></textarea>
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="pill-submit"><span data-en="Submit" data-es="Enviar">Submit</span><svg width="10" height="14" viewBox="0 0 10 14" aria-hidden="true"><path d="M2 1.5 7.5 7 2 12.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
@@ -721,6 +756,9 @@
       var val = el.getAttribute('data-' + lang);
       if (val) el.textContent = val;
     });
+    document.querySelectorAll('[data-ph-en]').forEach(function (el) {
+      el.placeholder = el.getAttribute('data-ph-' + lang);
+    });
     var btn = document.getElementById('langToggle');
     btn.textContent = STR[lang].toggle;
     btn.setAttribute('aria-label', STR[lang].toggleLabel);
@@ -753,7 +791,7 @@
       .then(function (res) {
         if (!res.ok) throw new Error();
         form.reset();
-        statusEl.style.color = '#25392C';
+        statusEl.style.color = '#013F50';
         statusEl.textContent = STR[currentLang].ok;
       })
       .catch(function () {
