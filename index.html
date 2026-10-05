@@ -489,6 +489,38 @@
     #criteria .pillar-col h3 { min-height: 0; }
   }
 
+  /* Hero: drifting teal glow, interactive lines, staged entrance */
+  .hero { isolation: isolate; }
+  .hero::before {
+    content: ""; position: absolute; inset: -25%; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(38% 46% at 28% 62%, rgba(3,93,79,0.55), rgba(3,93,79,0) 70%),
+      radial-gradient(34% 42% at 74% 34%, rgba(1,63,80,0.75), rgba(1,63,80,0) 70%),
+      radial-gradient(26% 30% at 58% 82%, rgba(3,93,79,0.30), rgba(3,93,79,0) 70%);
+    filter: blur(30px);
+    animation: glowDrift 38s ease-in-out infinite alternate;
+  }
+  @keyframes glowDrift {
+    0%   { transform: translate3d(-5%, 3%, 0) scale(1); }
+    50%  { transform: translate3d(4%, -4%, 0) scale(1.08); }
+    100% { transform: translate3d(6%, 5%, 0) scale(1.03); }
+  }
+  #hero-canvas { z-index: 1; }
+  .hero-text { z-index: 2; }
+  .hero h1 .mask { display: block; overflow: hidden; padding-bottom: 0.06em; }
+  .hero h1 .ln { display: block; transform: translateY(105%); animation: lineUp 0.95s cubic-bezier(.2,.75,.15,1) forwards; }
+  .hero h1 .mask:nth-child(1) .ln { animation-delay: 0.15s; }
+  .hero h1 .mask:nth-child(2) .ln { animation-delay: 0.32s; }
+  .hero .hero-sub, .hero .hero-links { opacity: 0; transform: translateY(14px); animation: fadeUp 0.8s ease-out forwards; }
+  .hero .hero-sub { animation-delay: 0.75s; }
+  .hero .hero-links { animation-delay: 0.95s; }
+  @keyframes lineUp { to { transform: translateY(0); } }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero::before { animation: none; }
+    .hero h1 .ln, .hero .hero-sub, .hero .hero-links { animation: none; transform: none; opacity: 1; }
+  }
+
   /* MOBILE */
   @media (max-width: 960px) {
     .wrap { padding: 0 24px; }
@@ -562,7 +594,7 @@
 <header class="hero" id="top">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="wrap hero-text">
-    <h1 data-en="Acquiring and leading Colombian businesses" data-es="Adquirir y dirigir empresas colombianas">Acquiring and leading Colombian businesses</h1>
+    <h1 aria-label="Acquiring and leading Colombian businesses"><span class="mask"><span class="ln" data-en="Acquiring and leading" data-es="Adquirir y dirigir">Acquiring and leading</span></span><span class="mask"><span class="ln" data-en="Colombian businesses" data-es="empresas colombianas">Colombian businesses</span></span></h1>
     <p class="hero-sub" data-en="Institutional rigor, local roots. A search fund built for Colombia." data-es="Rigor institucional, raíces locales. Un search fund hecho para Colombia.">Institutional rigor, local roots. A search fund built for Colombia.</p>
     <div class="hero-links">
       <a href="#contact" class="btn" data-en="Contact us" data-es="Contáctenos">Contact us</a>
@@ -831,6 +863,8 @@
       var val = el.getAttribute('data-' + lang);
       if (val) el.textContent = val;
     });
+    var h1 = document.querySelector('.hero h1');
+    if (h1) h1.setAttribute('aria-label', lang === 'es' ? 'Adquirir y dirigir empresas colombianas' : 'Acquiring and leading Colombian businesses');
     document.querySelectorAll('[data-ph-en]').forEach(function (el) {
       el.placeholder = el.getAttribute('data-ph-' + lang);
     });
@@ -876,12 +910,14 @@
       .then(function () { btn.disabled = false; });
   });
 
-  // Hero canvas: slow contour lines behind the headline (from the previous site)
+  // Hero canvas: contour lines that bend away from the cursor and flatten on scroll
   (function () {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var canvas = document.getElementById('hero-canvas');
+    var hero = canvas.parentElement;
     var ctx = canvas.getContext('2d');
-    var W = 0, H = 0, NUM = 18, STEPS = 120;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = 0, H = 0, NUM = 20, STEPS = 140;
     var ph = [], sp = [], ph2 = [], sp2 = [], fa = [], fb = [], aa = [], ab = [];
     for (var i = 0; i < NUM; i++) {
       ph.push(Math.random() * Math.PI * 2); sp.push(0.0009 + Math.random() * 0.0006);
@@ -889,37 +925,77 @@
       fa.push(1.2 + Math.random() * 0.8); fb.push(2.8 + Math.random() * 1.6);
       aa.push(0.55 + Math.random() * 0.25); ab.push(0.3 + Math.random() * 0.2);
     }
-    var base = null, lastH = 0;
+    var base = null;
+    // pointer state: target (raw) and eased position; strength fades in and out
+    var mx = -9999, my = -9999, tx = -9999, ty = -9999, str = 0, strTarget = 0, lastMove = 0;
+    var visible = true;
+
     function spacing(n, h) {
       var m = h * 0.04, step = (h - m * 2) / (n - 1), p = [];
       for (var k = 0; k < n; k++) p.push(m + k * step + (Math.random() - 0.5) * step * 0.28);
       return p.sort(function (a, b) { return a - b; });
     }
     function resize() {
-      var r = canvas.parentElement;
-      if (r.clientWidth !== W || r.clientHeight !== H) { W = canvas.width = r.clientWidth; H = canvas.height = r.clientHeight; }
+      var w = hero.clientWidth, h = hero.clientHeight;
+      if (w !== W || h !== H) {
+        W = w; H = h;
+        canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        base = spacing(NUM, H);
+      }
     }
     function noise(i, x, t) {
       return aa[i] * Math.sin(x * fa[i] * Math.PI * 2 + t * sp[i] + ph[i]) + ab[i] * Math.sin(x * fb[i] * Math.PI * 2 - t * sp2[i] + ph2[i]);
     }
+
+    hero.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      var r = canvas.getBoundingClientRect();
+      tx = e.clientX - r.left; ty = e.clientY - r.top;
+      if (mx < -9000) { mx = tx; my = ty; }
+      strTarget = 1; lastMove = performance.now();
+    });
+    hero.addEventListener('pointerleave', function () { strTarget = 0; });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) requestAnimationFrame(draw); }, { threshold: 0 }).observe(hero);
+    }
+
     function draw(t) {
-      if (!W || !H) { resize(); requestAnimationFrame(draw); return; }
-      if (H !== lastH) { base = spacing(NUM, H); lastH = H; }
-      var gap = H / (NUM + 1) * 0.55, amp = gap * 1.1;
+      if (!visible) return;
+      if (!W || !H) resize();
+      // ease pointer and strength; let the bend relax when the cursor rests
+      mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
+      if (performance.now() - lastMove > 1400) strTarget = Math.min(strTarget, 0.35);
+      str += (strTarget - str) * 0.05;
+
+      // scroll: lines flatten and fade as the hero leaves the screen
+      var prog = Math.min(1, Math.max(0, window.scrollY / (H * 0.85)));
+      var calm = 1 - prog;
+
+      var gap = H / (NUM + 1) * 0.55, amp = gap * 1.1 * (0.25 + 0.75 * calm);
+      var radius = Math.max(140, Math.min(W, H) * 0.22), push = gap * 2.6 * str;
       ctx.clearRect(0, 0, W, H);
       for (var li = 0; li < NUM; li++) {
-        var tt = li / (NUM - 1), alpha = 0.06 + 0.10 * Math.pow(Math.sin(tt * Math.PI), 1.4);
+        var tt = li / (NUM - 1);
+        var alpha = (0.07 + 0.11 * Math.pow(Math.sin(tt * Math.PI), 1.4)) * (0.35 + 0.65 * calm);
         ctx.beginPath();
         for (var s = 0; s <= STEPS; s++) {
-          var x = (s / STEPS) * W, y = base[li] + noise(li, s / STEPS, t) * amp;
+          var x = (s / STEPS) * W;
+          var y = base[li] + noise(li, s / STEPS, t) * amp;
+          if (push > 0.1) {
+            var dx = x - mx, dy = y - my, d2 = dx * dx + dy * dy;
+            var f = Math.exp(-d2 / (2 * radius * radius));
+            var u = dy / (radius * 0.45);
+            y += push * f * (Math.exp(u) - Math.exp(-u)) / (Math.exp(u) + Math.exp(-u));
+          }
           if (s === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = 'rgba(163,184,168,' + (alpha * 0.8).toFixed(3) + ')';
-        ctx.lineWidth = 0.9; ctx.stroke();
+        ctx.strokeStyle = 'rgba(163,184,168,' + alpha.toFixed(3) + ')';
+        ctx.lineWidth = 1; ctx.stroke();
       }
       requestAnimationFrame(draw);
     }
-    window.addEventListener('resize', function () { resize(); base = null; lastH = 0; });
+    window.addEventListener('resize', function () { W = 0; H = 0; resize(); });
     resize(); requestAnimationFrame(draw);
   })();
 </script>
