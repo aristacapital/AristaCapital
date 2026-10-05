@@ -464,6 +464,31 @@
     nav .nav-links a { border-top-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.86); }
   }
 
+  /* Acquisition criteria as Thoma Bravo-style tiles */
+  #criteria > .wrap > .kicker, #criteria > .wrap > h2 { text-align: center; }
+  #criteria .criteria-intro { text-align: center; margin-left: auto; margin-right: auto; max-width: 820px; }
+  #criteria .pillars { gap: 20px; }
+  #criteria .pillar-col {
+    background: var(--paper); color: var(--ink); border-top: none;
+    padding: 40px 36px 44px;
+  }
+  #criteria .pillar-col:nth-child(1) { border-radius: 10px 60px 60px 60px; }
+  #criteria .pillar-col:nth-child(2) { border-radius: 60px 10px 60px 60px; }
+  #criteria .pillar-col:nth-child(3) { border-radius: 60px 60px 10px 60px; }
+  #criteria .pillar-col .pillar-n { font-weight: 200; font-size: 64px; line-height: 1; letter-spacing: -0.02em; color: var(--deep-teal); margin-bottom: 48px; }
+  #criteria .pillar-col h3 { min-height: 2.3em; font-weight: 400; font-size: 26px; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.15; color: var(--deep-teal); margin-bottom: 10px; }
+  #criteria .pillar-col .pillar-lead { color: var(--muted); margin-bottom: 24px; }
+  #criteria .pillar-col .facts div, #criteria .pillar-col .points li { border-top-color: rgba(17,30,43,0.14); }
+  #criteria .pillar-col .facts dt { color: var(--muted); }
+  #criteria .pillar-col .facts dd { color: var(--ink); }
+  #criteria .pillar-col .points li { color: var(--ink-2); }
+  #criteria .pillar-col .points li::before { color: var(--teal); }
+  @media (max-width: 960px) {
+    #criteria .pillar-col { padding: 32px 26px 36px; }
+    #criteria .pillar-col .pillar-n { font-size: 48px; margin-bottom: 28px; }
+    #criteria .pillar-col h3 { min-height: 0; }
+  }
+
   /* MOBILE */
   @media (max-width: 960px) {
     .wrap { padding: 0 24px; }
@@ -607,7 +632,7 @@
 
     <div class="pillars">
       <div class="pillar-col">
-        <p class="pillar-n">1</p>
+        <p class="pillar-n">01</p>
         <h3 data-en="Solid fundamentals" data-es="Fundamentos sólidos">Solid fundamentals</h3>
         <p class="pillar-lead" data-en="Profitable, established and resilient." data-es="Rentable, consolidada y resiliente.">Profitable, established and resilient.</p>
         <dl class="facts">
@@ -619,7 +644,7 @@
         </dl>
       </div>
       <div class="pillar-col">
-        <p class="pillar-n">2</p>
+        <p class="pillar-n">02</p>
         <h3 data-en="In an attractive sector" data-es="En un sector atractivo">In an attractive sector</h3>
         <p class="pillar-lead" data-en="Steady demand and room to grow." data-es="Demanda estable y espacio para crecer.">Steady demand and room to grow.</p>
         <ul class="points">
@@ -629,7 +654,7 @@
         </ul>
       </div>
       <div class="pillar-col">
-        <p class="pillar-n">3</p>
+        <p class="pillar-n">03</p>
         <h3 data-en="In a moment of transition" data-es="En un momento de transición">In a moment of transition</h3>
         <p class="pillar-lead" data-en="A founder ready for the next chapter." data-es="Un fundador listo para el siguiente capítulo.">A founder ready for the next chapter.</p>
         <ul class="points">
