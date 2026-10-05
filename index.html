@@ -229,6 +229,32 @@
   .dark .points li::before { color: var(--green-pale); }
   .dark .sector-note { color: rgba(255,255,255,0.55); }
 
+  /* Taller sections */
+  .hero { min-height: min(92vh, 940px); display: flex; align-items: center; padding: 140px 0 120px; }
+  .hero-text { width: 100%; padding-bottom: 0; }
+  .hero p { margin-bottom: 44px; }
+  #owners { padding: 140px 0; }
+  #owners .steps { margin-top: 80px; }
+  #owners .step { padding-top: 28px; }
+  #criteria { padding: 152px 0; }
+  #criteria h2 { margin-bottom: 28px; }
+  #criteria .criteria-intro { margin-bottom: 64px; }
+  .pillars { gap: 56px; }
+  .facts div, .points li { padding-top: 16px; padding-bottom: 16px; }
+  #sectors { padding: 152px 0; }
+  #sectors .sector-list { margin-top: 64px; gap: 0 64px; }
+  #sectors .sector-list li { padding: 32px 0 36px; border-top: 2px solid var(--navy); }
+  #sectors .sector-list li:nth-child(n+3) { border-top-width: 1px; border-top-color: var(--rule); }
+  #sectors .sector-list strong { font-size: 26px; margin-bottom: 10px; }
+  #sectors .sector-list span { font-size: 16.5px; display: block; max-width: 460px; }
+  #sectors .sector-data { margin-top: 14px; font-size: 14px; }
+  #sectors .sector-note { margin-top: 28px; }
+  @media (max-width: 960px) {
+    .hero { min-height: auto; padding: 128px 0 96px; }
+    #owners, #criteria, #sectors { padding: 96px 0; }
+    #sectors .sector-list li:nth-child(n+2) { border-top-width: 1px; border-top-color: var(--rule); }
+  }
+
   /* MOBILE */
   @media (max-width: 960px) {
     .wrap { padding: 0 24px; }
@@ -294,6 +320,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#owners" data-en="For owners" data-es="Para empresarios">For owners</a></li>
         <li><a href="#criteria" data-en="What we look for" data-es="Qué buscamos">What we look for</a></li>
+        <li><a href="#sectors" data-en="Sectors" data-es="Sectores">Sectors</a></li>
         <li><a href="#team" data-en="Team" data-es="Equipo">Team</a></li>
         <li><a href="#contact" class="nav-contact" data-en="Contact" data-es="Contacto">Contact</a></li>
       </ul>
@@ -331,6 +358,7 @@
       <div class="prose">
         <p class="lede" data-en="For founders planning succession, the usual options are a strategic buyer, a private equity fund or a family handover. A search fund offers a fourth: two operators, backed by experienced investors, who acquire a single company and lead it full time." data-es="Para los fundadores que planean su sucesión, las opciones habituales son un comprador estratégico, un fondo de private equity o un relevo familiar. Un search fund ofrece una cuarta: dos operadores, respaldados por inversionistas con experiencia, que adquieren una sola empresa y la dirigen de tiempo completo.">For founders planning succession, the usual options are a strategic buyer, a private equity fund or a family handover. A search fund offers a fourth: two operators, backed by experienced investors, who acquire a single company and lead it full time.</p>
         <p data-en="We preserve the company's name, team and customer relationships. Owners choose their involvement after closing, from a short handover to a board seat or a retained stake." data-es="Preservamos el nombre, el equipo y las relaciones con clientes de la empresa. Cada dueño decide su participación después del cierre, desde una transición corta hasta un puesto en la junta o una participación retenida.">We preserve the company's name, team and customer relationships. Owners choose their involvement after closing, from a short handover to a board seat or a retained stake.</p>
+        <p data-en="Many owners also keep part of the financing in the business, through a seller note or rolled equity, and share in the company&#39;s next stage of growth." data-es="Muchos dueños también mantienen parte del financiamiento en la empresa, mediante una nota del vendedor o una participación reinvertida, y comparten la siguiente etapa de crecimiento.">Many owners also keep part of the financing in the business, through a seller note or rolled equity, and share in the company&#39;s next stage of growth.</p>
       </div>
     </div>
 
@@ -398,16 +426,29 @@
       </div>
     </div>
 
-    <div class="sectors">
-      <p class="kicker" data-en="Priority sectors" data-es="Sectores prioritarios">Priority sectors</p>
-      <ul class="sector-list">
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <p class="kicker" data-en="Sectors of interest" data-es="Sectores de interés">Sectors of interest</p>
+        <h2 data-en="Where we are looking first" data-es="Dónde buscamos primero">Where we are looking first</h2>
+      </div>
+      <div class="prose">
+        <p class="lede" data-en="Four sectors stood out in our screen of Supersociedades data for recurring demand, fragmentation and the number of companies in our size range." data-es="Cuatro sectores se destacaron en nuestro análisis de los datos de Supersociedades por su demanda recurrente, su fragmentación y el número de empresas en nuestro rango de tamaño.">Four sectors stood out in our screen of Supersociedades data for recurring demand, fragmentation and the number of companies in our size range.</p>
+        <p data-en="Sector is a lens, not a filter. We review any company that fits our criteria, whatever its industry." data-es="El sector es una guía, no un filtro. Evaluamos cualquier empresa que cumpla nuestros criterios, sin importar su industria.">Sector is a lens, not a filter. We review any company that fits our criteria, whatever its industry.</p>
+      </div>
+    </div>
+    <ul class="sector-list">
         <li><strong data-en="Energy and engineering services" data-es="Servicios de energía e ingeniería">Energy and engineering services</strong><span data-en="Engineering, oilfield, power and gas services, needed whatever the energy mix" data-es="Ingeniería y servicios petroleros, eléctricos y de gas, necesarios sea cual sea la matriz energética">Engineering, oilfield, power and gas services, needed whatever the energy mix</span><em class="sector-data" data-en="172 companies · 62 in our size range" data-es="172 empresas · 62 en nuestro rango de tamaño">172 companies · 62 in our size range</em></li>
         <li><strong data-en="Clinical laboratories" data-es="Laboratorios clínicos">Clinical laboratories</strong><span data-en="Recurring contracts with EPS and insurers, backed by about 97% health coverage" data-es="Contratos recurrentes con EPS y aseguradoras, respaldados por una cobertura de salud cercana al 97%">Recurring contracts with EPS and insurers, backed by about 97% health coverage</span><em class="sector-data" data-en="42 companies · 11 in our size range" data-es="42 empresas · 11 en nuestro rango de tamaño">42 companies · 11 in our size range</em></li>
         <li><strong data-en="Heavy equipment rental" data-es="Alquiler de maquinaria pesada">Heavy equipment rental</strong><span data-en="Owned fleets for construction, industry and oil and gas; a weaker peso favors renting over buying" data-es="Flotas propias para construcción, industria y petróleo y gas; un peso más débil favorece el alquiler frente a la compra">Owned fleets for construction, industry and oil and gas; a weaker peso favors renting over buying</span><em class="sector-data" data-en="41 companies · 23 in our size range" data-es="41 empresas · 23 en nuestro rango de tamaño">41 companies · 23 in our size range</em></li>
         <li><strong data-en="Specialty medical practices" data-es="Medicina especializada">Specialty medical practices</strong><span data-en="Cardiology, oncology, fertility and plastic surgery, with growth from an aging population" data-es="Cardiología, oncología, fertilidad y cirugía plástica, con crecimiento por el envejecimiento de la población">Cardiology, oncology, fertility and plastic surgery, with growth from an aging population</span><em class="sector-data" data-en="141 companies · 48 in our size range" data-es="141 empresas · 48 en nuestro rango de tamaño">141 companies · 48 in our size range</em></li>
       </ul>
-      <p class="sector-note" data-en="Company counts: Supersociedades 2024 filings. Sector is a lens, not a filter; we review any company that fits the criteria." data-es="Cifras: estados financieros 2024 de Supersociedades. El sector es una guía, no un filtro; evaluamos cualquier empresa que cumpla los criterios.">Company counts: Supersociedades 2024 filings. Sector is a lens, not a filter; we review any company that fits the criteria.</p>
-    </div>
+    <p class="sector-note" data-en="Company counts from 2024 Supersociedades filings." data-es="Cifras de los estados financieros 2024 reportados a Supersociedades.">Company counts from 2024 Supersociedades filings.</p>
   </div>
 </section>
 
