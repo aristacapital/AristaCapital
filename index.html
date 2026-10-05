@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111E2B'/%3E%3Cg transform='translate(8 14) scale(0.4)'%3E%3Cpolygon points='32,80 74.5,12 117,80' fill='%237E9796'/%3E%3Cpolygon points='21.5,80 56.5,24 91.5,80' fill='%233D7A6B'/%3E%3Cpolyline points='56.5,24 91.5,80' fill='none' stroke='%23111E2B' stroke-width='6'/%3E%3Cpolygon points='3,80 30.5,36 58,80' fill='%23F4F6F8'/%3E%3Cpolyline points='30.5,36 58,80' fill='none' stroke='%23111E2B' stroke-width='6'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -285,6 +285,68 @@
     .hero h1 { margin-bottom: 36px; }
   }
 
+  /* Round 7: design cues borrowed from thomabravo.com */
+  /* Uppercase, tracked UI type */
+  .nav-links a { font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+  .lang-toggle { border-radius: 999px; font-size: 12px; letter-spacing: 0.1em; }
+  .kicker { font-size: 12.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* Hero: large, light, uppercase headline */
+  .hero h1 { font-family: 'DM Sans', system-ui, sans-serif; font-weight: 300; text-transform: uppercase; letter-spacing: -0.005em; line-height: 1.04; font-size: clamp(40px, 5.4vw, 80px); }
+  .hero { padding-bottom: 200px; }
+
+  /* Pill outline buttons */
+  .btn { background: transparent; color: var(--deep-teal); box-shadow: inset 0 0 0 1px currentColor; border-radius: 999px; min-height: 48px; padding: 0 30px; font-size: 14px; font-weight: 600; letter-spacing: 0.02em; transition: background 0.2s, color 0.2s; }
+  .btn:hover { background: var(--deep-teal); color: var(--white); }
+  .hero .btn { color: var(--white); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.85); }
+  .hero .btn:hover { background: var(--white); color: var(--navy); }
+
+  /* Sections slide up over the one before, with asymmetric rounded corners */
+  main > section { position: relative; margin-top: -80px; border-radius: 16px 80px 0 0; }
+  main > section:nth-of-type(even) { border-radius: 80px 16px 0 0; }
+  main > section:nth-of-type(1) { z-index: 1; } main > section:nth-of-type(2) { z-index: 2; }
+  main > section:nth-of-type(3) { z-index: 3; } main > section:nth-of-type(4) { z-index: 4; }
+  main > section:nth-of-type(5) { z-index: 5; } main > section:nth-of-type(6) { z-index: 6; }
+  #owners { padding-bottom: 280px; }
+  .glance { padding: 136px 0 216px; }
+  #criteria { padding-bottom: 232px; }
+  #sectors { padding-bottom: 232px; }
+  #team { padding: 136px 0 216px; }
+  #contact { padding: 136px 0 120px; }
+
+  /* At a glance band: big, thin numbers */
+  .glance { background: linear-gradient(230deg, #D9E4E1 0%, #EEF2F3 60%, #F4F6F8 100%); }
+  .glance .kicker { margin-bottom: 56px; }
+  .glance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .glance-grid > div { padding: 8px 32px 8px 0; }
+  .glance-grid > div + div { padding-left: 32px; border-left: 1px solid rgba(1,63,80,0.22); }
+  .g-num { white-space: nowrap; font-weight: 200; font-size: clamp(40px, 4.3vw, 66px); line-height: 1; color: var(--deep-teal); letter-spacing: -0.02em; }
+  .g-label { margin-top: 16px; font-size: 15px; color: var(--ink-2); max-width: 240px; }
+
+  /* Sector cards: solid color blocks with asymmetric corners */
+  #sectors .sector-list { gap: 20px !important; }
+  #sectors .sector-list li { border: none !important; padding: 48px 44px 52px !important; min-height: 280px; color: var(--white); display: flex; flex-direction: column; justify-content: flex-end; }
+  #sectors .sector-list li:nth-child(1) { background: var(--deep-teal); border-radius: 10px 60px 60px 60px; }
+  #sectors .sector-list li:nth-child(2) { background: var(--teal); border-radius: 60px 10px 60px 60px; }
+  #sectors .sector-list li:nth-child(3) { background: var(--teal); border-radius: 60px 60px 60px 10px; }
+  #sectors .sector-list li:nth-child(4) { background: var(--deep-teal); border-radius: 60px 60px 10px 60px; }
+  #sectors .sector-list strong { color: var(--white) !important; font-family: 'DM Sans', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; font-size: 26px; }
+  #sectors .sector-list span { color: rgba(255,255,255,0.82) !important; }
+
+  @media (max-width: 960px) {
+    main > section, main > section:nth-of-type(even) { margin-top: -36px; border-radius: 10px 36px 0 0; }
+    #owners, #criteria, #sectors, .glance, #team { padding-bottom: 136px; }
+    .glance, #team, #contact { padding-top: 96px; }
+    .hero { padding-bottom: 136px; }
+    .glance-grid { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+    .glance-grid > div:nth-child(3) { padding-left: 0; border-left: none; }
+    #sectors .sector-list li { min-height: 0; padding: 36px 28px 40px !important; }
+  }
+  @media (max-width: 560px) {
+    .glance-grid { grid-template-columns: 1fr; }
+    .glance-grid > div + div { padding-left: 0; border-left: none; border-top: 1px solid rgba(1,63,80,0.22); padding-top: 28px; }
+  }
+
   /* MOBILE */
   @media (max-width: 960px) {
     .wrap { padding: 0 24px; }
@@ -409,6 +471,19 @@
         <h3 data-en="Transition" data-es="Transición">Transition</h3>
         <p data-en="Planned with the owner, at the owner's pace." data-es="Planeada con el dueño, a su ritmo.">Planned with the owner, at the owner's pace.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- AT A GLANCE -->
+<section class="glance" id="glance">
+  <div class="wrap">
+    <p class="kicker" data-en="At a glance" data-es="En resumen">At a glance</p>
+    <div class="glance-grid">
+      <div><p class="g-num" data-en="10,000" data-es="10.000">10,000</p><p class="g-label" data-en="Colombian companies screened through Supersociedades" data-es="Empresas colombianas analizadas a través de Supersociedades">Colombian companies screened through Supersociedades</p></div>
+      <div><p class="g-num">$4–8M</p><p class="g-label" data-en="Target EBITDA (US$) for the platform acquisition" data-es="EBITDA objetivo (US$) para la adquisición principal">Target EBITDA (US$) for the platform acquisition</p></div>
+      <div><p class="g-num">24</p><p class="g-label" data-en="Month search, based in Bogotá" data-es="Meses de búsqueda, desde Bogotá">Month search, based in Bogotá</p></div>
+      <div><p class="g-num">60+</p><p class="g-label" data-en="Private equity due diligences completed by our principals" data-es="Due diligences de private equity completados por nuestros socios">Private equity due diligences completed by our principals</p></div>
     </div>
   </div>
 </section>
