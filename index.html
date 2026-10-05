@@ -26,7 +26,9 @@
     --muted:      #5A6B7C;
     --rule:       rgba(17, 30, 43, 0.14);
     --rule-light: rgba(255, 255, 255, 0.14);
-    --wrap:       1160px;
+    --wrap:       1280px;
+    --teal:       #035D4F;
+    --deep-teal:  #013F50;
   }
 
   html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -255,6 +257,34 @@
     #sectors .sector-list li:nth-child(n+2) { border-top-width: 1px; border-top-color: var(--rule); }
   }
 
+  /* Round 6: taller hero and owners, wider text, teal accents */
+  .hero { min-height: 100vh; padding: 150px 0 130px; }
+  .hero-text > * { max-width: none; }
+  .hero h1 { max-width: 1120px; font-size: clamp(42px, 5.6vw, 78px); margin-bottom: 52px; }
+  .hero p { max-width: 860px; font-size: 21px; margin-bottom: 52px; }
+  #owners { padding: 208px 0 200px; }
+  #owners .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 88px; }
+  .criteria-intro { max-width: 900px; font-size: 18px; }
+  #owners h2 { font-size: clamp(32px, 3.6vw, 48px); }
+  #owners .lede { font-size: 21px; }
+  #owners .prose p { font-size: 18px; }
+  #owners .steps { margin-top: 104px; }
+  #owners .step p { font-size: 16px; }
+
+  a { color: var(--teal); }
+  .kicker, .role, .step h3 { color: var(--teal); }
+  h2 { color: var(--deep-teal); }
+  .dark h2 { color: var(--white); }
+  #sectors .sector-list strong { color: var(--deep-teal); }
+  .avoid h3, .ledger caption { color: var(--deep-teal); }
+  @media (max-width: 960px) {
+    .hero { min-height: 88vh; padding: 128px 0 96px; }
+    #owners { padding: 104px 0; }
+    #owners .split { grid-template-columns: 1fr; gap: 32px; }
+    .hero p { font-size: 18px; }
+    .hero h1 { margin-bottom: 36px; }
+  }
+
   /* MOBILE */
   @media (max-width: 960px) {
     .wrap { padding: 0 24px; }
@@ -338,7 +368,7 @@
 <header class="hero" id="top">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="wrap hero-text">
-    <h1 data-en="Acquiring and leading one founder-owned business in Colombia." data-es="Adquirir y dirigir una empresa de fundador en Colombia.">Acquiring and leading one founder-owned business in Colombia.</h1>
+    <h1 data-en="Acquiring and leading one founder‑owned business in Colombia." data-es="Adquirir y dirigir una empresa de fundador en Colombia.">Acquiring and leading one founder‑owned business in Colombia.</h1>
     <p data-en="Arista Capital Partners is a search fund backed by experienced investors. We acquire one profitable Colombian company and lead it full time as its next generation of management." data-es="Arista Capital Partners es un search fund respaldado por inversionistas con experiencia. Adquirimos una empresa colombiana rentable y la dirigimos de tiempo completo como su nueva generación directiva.">Arista Capital Partners is a search fund backed by experienced investors. We acquire one profitable Colombian company and lead it full time as its next generation of management.</p>
     <div class="hero-links">
       <a href="#owners" class="btn" data-en="For business owners" data-es="Para empresarios">For business owners</a>
@@ -443,13 +473,12 @@
       </div>
     </div>
     <ul class="sector-list">
-        <li><strong data-en="Energy and engineering services" data-es="Servicios de energía e ingeniería">Energy and engineering services</strong><span data-en="Engineering, oilfield, power and gas services, needed whatever the energy mix" data-es="Ingeniería y servicios petroleros, eléctricos y de gas, necesarios sea cual sea la matriz energética">Engineering, oilfield, power and gas services, needed whatever the energy mix</span><em class="sector-data" data-en="172 companies · 62 in our size range" data-es="172 empresas · 62 en nuestro rango de tamaño">172 companies · 62 in our size range</em></li>
-        <li><strong data-en="Clinical laboratories" data-es="Laboratorios clínicos">Clinical laboratories</strong><span data-en="Recurring contracts with EPS and insurers, backed by about 97% health coverage" data-es="Contratos recurrentes con EPS y aseguradoras, respaldados por una cobertura de salud cercana al 97%">Recurring contracts with EPS and insurers, backed by about 97% health coverage</span><em class="sector-data" data-en="42 companies · 11 in our size range" data-es="42 empresas · 11 en nuestro rango de tamaño">42 companies · 11 in our size range</em></li>
-        <li><strong data-en="Heavy equipment rental" data-es="Alquiler de maquinaria pesada">Heavy equipment rental</strong><span data-en="Owned fleets for construction, industry and oil and gas; a weaker peso favors renting over buying" data-es="Flotas propias para construcción, industria y petróleo y gas; un peso más débil favorece el alquiler frente a la compra">Owned fleets for construction, industry and oil and gas; a weaker peso favors renting over buying</span><em class="sector-data" data-en="41 companies · 23 in our size range" data-es="41 empresas · 23 en nuestro rango de tamaño">41 companies · 23 in our size range</em></li>
-        <li><strong data-en="Specialty medical practices" data-es="Medicina especializada">Specialty medical practices</strong><span data-en="Cardiology, oncology, fertility and plastic surgery, with growth from an aging population" data-es="Cardiología, oncología, fertilidad y cirugía plástica, con crecimiento por el envejecimiento de la población">Cardiology, oncology, fertility and plastic surgery, with growth from an aging population</span><em class="sector-data" data-en="141 companies · 48 in our size range" data-es="141 empresas · 48 en nuestro rango de tamaño">141 companies · 48 in our size range</em></li>
+        <li><strong data-en="Energy and engineering services" data-es="Servicios de energía e ingeniería">Energy and engineering services</strong><span data-en="Engineering, oilfield, power and gas services, needed whatever the energy mix" data-es="Ingeniería y servicios petroleros, eléctricos y de gas, necesarios sea cual sea la matriz energética">Engineering, oilfield, power and gas services, needed whatever the energy mix</span></li>
+        <li><strong data-en="Clinical laboratories" data-es="Laboratorios clínicos">Clinical laboratories</strong><span data-en="Recurring contracts with EPS and insurers, backed by about 97% health coverage" data-es="Contratos recurrentes con EPS y aseguradoras, respaldados por una cobertura de salud cercana al 97%">Recurring contracts with EPS and insurers, backed by about 97% health coverage</span></li>
+        <li><strong data-en="Heavy equipment rental" data-es="Alquiler de maquinaria pesada">Heavy equipment rental</strong><span data-en="Owned fleets for construction, industry and oil and gas; a weaker peso favors renting over buying" data-es="Flotas propias para construcción, industria y petróleo y gas; un peso más débil favorece el alquiler frente a la compra">Owned fleets for construction, industry and oil and gas; a weaker peso favors renting over buying</span></li>
+        <li><strong data-en="Specialty medical practices" data-es="Medicina especializada">Specialty medical practices</strong><span data-en="Cardiology, oncology, fertility and plastic surgery, with growth from an aging population" data-es="Cardiología, oncología, fertilidad y cirugía plástica, con crecimiento por el envejecimiento de la población">Cardiology, oncology, fertility and plastic surgery, with growth from an aging population</span></li>
       </ul>
-    <p class="sector-note" data-en="Company counts from 2024 Supersociedades filings." data-es="Cifras de los estados financieros 2024 reportados a Supersociedades.">Company counts from 2024 Supersociedades filings.</p>
-  </div>
+      </div>
 </section>
 
 <!-- TEAM -->
@@ -485,7 +514,7 @@
         <div class="advisor">
           <h3>Tom Reinhart</h3>
           <p class="role" data-en="Former COO, TPG" data-es="Ex COO de TPG">Former COO, TPG</p>
-          <p data-en="Former Chief Operating Officer of TPG, one of the world&#39;s largest alternative asset managers. Advises Arista on governance and on building the operating and reporting systems of the company we acquire." data-es="Ex director de operaciones (COO) de TPG, una de las mayores gestoras de activos alternativos del mundo. Asesora a Arista en gobierno corporativo y en la construcción de los sistemas operativos y de reporte de la empresa que adquiramos.">Former Chief Operating Officer of TPG, one of the world&#39;s largest alternative asset managers. Advises Arista on governance and on building the operating and reporting systems of the company we acquire.</p>
+          <p data-en="Former Chief Operating Officer of TPG, one of the world&#39;s largest alternative asset managers." data-es="Ex director de operaciones (COO) de TPG, una de las mayores gestoras de activos alternativos del mundo.">Former Chief Operating Officer of TPG, one of the world&#39;s largest alternative asset managers.</p>
         </div>
         <div class="advisor">
           <h3>Steve Pirri</h3>
