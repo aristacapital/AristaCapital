@@ -496,10 +496,7 @@
   .hero { isolation: isolate; }
   .hero::before {
     content: ""; position: absolute; inset: -25%; z-index: 0; pointer-events: none;
-    background:
-      radial-gradient(38% 46% at 28% 62%, rgba(3,93,79,0.55), rgba(3,93,79,0) 70%),
-      radial-gradient(34% 42% at 74% 34%, rgba(1,63,80,0.75), rgba(1,63,80,0) 70%),
-      radial-gradient(26% 30% at 58% 82%, rgba(3,93,79,0.30), rgba(3,93,79,0) 70%);
+    background: radial-gradient(70% 58% at 62% 36%, rgba(1,63,80,0.5), rgba(1,63,80,0) 72%);
     filter: blur(30px);
     animation: glowDrift 38s ease-in-out infinite alternate;
   }
@@ -1042,89 +1039,231 @@
       .then(function () { btn.disabled = false; });
   });
 
-  // Hero canvas: contour lines that bend away from the cursor and flatten on scroll
+  // Hero canvas: an engraved cordillera that draws itself in, then drifts slowly; it sinks and fades on scroll
   (function () {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var canvas = document.getElementById('hero-canvas');
     var hero = canvas.parentElement;
     var ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var W = 0, H = 0, NUM = 20, STEPS = 140;
-    var ph = [], sp = [], ph2 = [], sp2 = [], fa = [], fb = [], aa = [], ab = [];
-    for (var i = 0; i < NUM; i++) {
-      ph.push(Math.random() * Math.PI * 2); sp.push(0.0009 + Math.random() * 0.0006);
-      ph2.push(Math.random() * Math.PI * 2); sp2.push(0.00055 + Math.random() * 0.0004);
-      fa.push(1.2 + Math.random() * 0.8); fb.push(2.8 + Math.random() * 1.6);
-      aa.push(0.55 + Math.random() * 0.25); ab.push(0.3 + Math.random() * 0.2);
-    }
-    var base = null;
-    // pointer state: target (raw) and eased position; strength fades in and out
-    var mx = -9999, my = -9999, tx = -9999, ty = -9999, str = 0, strTarget = 0, lastMove = 0;
-    var visible = true;
+    var W = 0, H = 0, t0 = performance.now(), visible = true;
 
-    function spacing(n, h) {
-      var m = h * 0.04, step = (h - m * 2) / (n - 1), p = [];
-      for (var k = 0; k < n; k++) p.push(m + k * step + (Math.random() - 0.5) * step * 0.28);
-      return p.sort(function (a, b) { return a - b; });
+    // seeded random
+    function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+
+    // periodic 1D value noise
+    function makeNoise(seed, n) {
+      var r = rng(seed), a = [];
+      for (var i = 0; i < n; i++) a.push(r());
+      return function (x) {
+        var i0 = Math.floor(x), f = x - i0, s = f * f * (3 - 2 * f);
+        var a0 = a[((i0 % n) + n) % n], a1 = a[(((i0 + 1) % n) + n) % n];
+        return a0 + (a1 - a0) * s;
+      };
     }
+    // ridged profile: sharp peaks, jagged rock detail
+    function makeRidge(seed) {
+      var ns = [makeNoise(seed, 64), makeNoise(seed + 7, 128), makeNoise(seed + 13, 256), makeNoise(seed + 29, 512), makeNoise(seed + 41, 1024)];
+      var fr = [1, 2.3, 5.1, 11, 26], wt = [0.62, 0.24, 0.09, 0.035, 0.015];
+      return function (u) {
+        var h = 0, gain = 1;
+        for (var o = 0; o < 5; o++) {
+          var r = 1 - Math.abs(2 * ns[o](u * fr[o]) - 1);
+          r = r * r * r; h += r * wt[o] * gain; gain = Math.min(1, 0.4 + r * 1.2);
+        }
+        return h * 1.35;
+      };
+    }
+    var LAYERS = 7, ridges = [], offs = [];
+    for (var i = 0; i < LAYERS; i++) { ridges.push(makeRidge(11 + i * 97)); offs.push(i * 7.3); }
+
     function resize() {
       var w = hero.clientWidth, h = hero.clientHeight;
       if (w !== W || h !== H) {
         W = w; H = h;
         canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        base = spacing(NUM, H);
       }
     }
-    function noise(i, x, t) {
-      return aa[i] * Math.sin(x * fa[i] * Math.PI * 2 + t * sp[i] + ph[i]) + ab[i] * Math.sin(x * fb[i] * Math.PI * 2 - t * sp2[i] + ph2[i]);
-    }
-
-    hero.addEventListener('pointermove', function (e) {
-      if (e.pointerType && e.pointerType !== 'mouse') return;
-      var r = canvas.getBoundingClientRect();
-      tx = e.clientX - r.left; ty = e.clientY - r.top;
-      if (mx < -9000) { mx = tx; my = ty; }
-      strTarget = 1; lastMove = performance.now();
-    });
-    hero.addEventListener('pointerleave', function () { strTarget = 0; });
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) requestAnimationFrame(draw); }, { threshold: 0 }).observe(hero);
     }
+    function ease(p) { p = Math.min(1, Math.max(0, p)); return 1 - Math.pow(1 - p, 3); }
 
-    function draw(t) {
+    // Engraved cordillera that drifts. Each range is a seamless loop built once per size; the shading is part of
+    // the terrain, so it travels with the mountains instead of being redrawn against the screen.
+    var scene = null;
+    function buildScene() {
+      var r = rng(4242);
+      function rr(a, b) { return a + (b - a) * r(); }
+      function jagLine(pts, amp, step) {
+        var out = [pts[0]];
+        for (var q = 0; q < pts.length - 1; q++) {
+          var x1 = pts[q][0], y1 = pts[q][1], x2 = pts[q + 1][0], y2 = pts[q + 1][1];
+          var d = Math.hypot(x2 - x1, y2 - y1) || 1, n = Math.max(1, Math.floor(d / step));
+          var nx = -(y2 - y1) / d, ny = (x2 - x1) / d;
+          for (var s = 1; s <= n; s++) {
+            var tt = s / n, x = x1 + (x2 - x1) * tt, y = y1 + (y2 - y1) * tt;
+            if (s < n) { var a = rr(-amp, amp); x += nx * a; y += ny * a; }
+            out.push([x, y]);
+          }
+        }
+        return out;
+      }
+      // parallel lines at 48 degrees, clipped to the face, broken into dashes; dashes thin out toward the base
+      function hatchFace(poly, top, bot, sp, u, out) {
+        var minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9;
+        poly.forEach(function (q) { minx = Math.min(minx, q[0]); maxx = Math.max(maxx, q[0]); miny = Math.min(miny, q[1]); maxy = Math.max(maxy, q[1]); });
+        var ang = 48 * Math.PI / 180, dx = Math.cos(ang), dy = Math.sin(ang), nx = -dy, ny = dx;
+        var cx = (minx + maxx) / 2, cy = (miny + maxy) / 2, R = Math.hypot(maxx - minx, maxy - miny) / 2 + 4;
+        for (var off = -R; off < R; off += sp * rr(0.85, 1.2)) {
+          var ox = cx + nx * off, oy = cy + ny * off, hits = [];
+          for (var e = 0; e < poly.length; e++) {
+            var A = poly[e], Bp = poly[(e + 1) % poly.length];
+            var ex = Bp[0] - A[0], ey = Bp[1] - A[1], den = dx * ey - dy * ex;
+            if (Math.abs(den) < 1e-9) continue;
+            var wx = A[0] - ox, wy = A[1] - oy;
+            var tl = (wx * ey - wy * ex) / den, se = (wx * dy - wy * dx) / den;
+            if (se >= 0 && se < 1) hits.push(tl);
+          }
+          hits.sort(function (a, b) { return a - b; });
+          for (var h = 0; h + 1 < hits.length; h += 2) {
+            for (var t1 = hits[h] + rr(0, 4); t1 < hits[h + 1]; ) {
+              var seg = rr(10, 34) * Math.max(0.6, u), t2 = Math.min(hits[h + 1], t1 + seg);
+              var mx2 = ox + dx * (t1 + t2) / 2, my2 = oy + dy * (t1 + t2) / 2;
+              var f = Math.min(1, Math.max(0, (my2 - top) / (bot - top)));
+              if (f < 0.5 || r() > (f - 0.5) / 0.5) out.push(ox + dx * t1, oy + dy * t1, ox + dx * t2, oy + dy * t2);
+              t1 = t2 + rr(0.9, 2.2) * Math.max(0.8, u);
+            }
+          }
+        }
+      }
+
+      var P = Math.round(Math.max(W * 1.7, 1900));          // loop length in px
+      var ref = Math.min(H, Math.max(W * 0.95, 420));
+      var layers = [];
+      for (var i = 0; i < LAYERS; i++) {
+        var depth = i / (LAYERS - 1);
+        var baseY = H * (0.46 + depth * 0.48);
+        var amp = ref * (0.25 + depth * 0.21);
+        var scale = 2.4 - depth * 1.0, span = Math.max(W, 1200);
+        var f0 = function (x) { return ridges[i](x / span * scale + offs[i]); };
+        var blend = P * 0.18;
+        var Y = function (x) {                                // seamless over P
+          x = ((x % P) + P) % P;
+          var y = f0(x);
+          if (x > P - blend) { var w = (x - (P - blend)) / blend; w = w * w * (3 - 2 * w); y = y * (1 - w) + f0(x - P) * w; }
+          return baseY - y * amp;
+        };
+        var STEP = 3, M = Math.round(W * 0.12 / STEP) * STEP, pts = [];
+        for (var x = -M; x <= P + M; x += STEP) pts.push([x, Y(x)]);
+        var i0 = M / STEP, i1 = i0 + Math.round(P / STEP);   // indices of one period [0, P)
+
+        var win = Math.max(8, Math.round(Math.min(W, 1200) * 0.04 / STEP)), peaks = [];
+        for (var k = Math.max(win, i0 - win); k < Math.min(pts.length - win, i1 + win); k++) {
+          var isPk = true;
+          for (var j = k - win; j <= k + win; j++) if (pts[j][1] < pts[k][1]) { isPk = false; break; }
+          if (isPk && (!peaks.length || k - peaks[peaks.length - 1] > win)) peaks.push(k);
+        }
+        var hatch = [], strokes = [];
+        if (depth > 0.25) {
+          for (var p = 0; p < peaks.length; p++) {
+            var s0 = peaks[p]; if (s0 < i0 || s0 >= i1) continue;      // each summit once per loop
+            var end = p + 1 < peaks.length ? peaks[p + 1] : Math.min(pts.length - 1, s0 + win * 4), v = s0;
+            for (k = s0; k <= end; k++) if (pts[k][1] > pts[v][1]) v = k;
+            var S = pts[s0], V = pts[v], hgt = V[1] - S[1];
+            if (hgt < amp * 0.16 || v - s0 < 3) continue;
+            var u = hgt / 100;
+            var B = [S[0] + (V[0] - S[0]) * 0.32, V[1] + hgt * 0.45];
+            var spur = jagLine([S, [S[0] + (B[0] - S[0]) * 0.5, S[1] + (B[1] - S[1]) * 0.5], B], 1.3 * u, Math.max(3, 3 * u));
+            var poly = pts.slice(s0, v + 1).concat([[V[0], B[1]]]).concat(spur.slice().reverse());
+            hatchFace(poly, S[1], B[1], Math.min(4.6, Math.max(2.6, 1.9 * u)), u, hatch);
+            // spur fades out below the valley, like the face
+            var cut = Math.max(2, Math.round(spur.length * 0.72));
+            strokes.push(spur.slice(0, cut));
+            var prev = p > 0 ? peaks[p - 1] : Math.max(0, s0 - win * 2), nl = 2 + Math.floor(r() * 3);
+            for (var l = 0; l < nl; l++) {
+              var at = Math.round(s0 - (s0 - prev) * rr(0.08, 0.6)); if (at < 0 || at >= pts.length) continue;
+              var P0 = pts[at], len = hgt * rr(0.12, 0.26);
+              strokes.push(jagLine([[P0[0] + 1, P0[1] + 3], [P0[0] - len * 0.18, P0[1] + 3 + len * 0.55], [P0[0] - len * 0.3, P0[1] + 3 + len]], 0.9 * u, Math.max(2.4, 2.6 * u)));
+            }
+          }
+        }
+        layers.push({ depth: depth, pts: pts, i0: i0, i1: i1, hatch: new Float32Array(hatch), strokes: strokes,
+                      speed: 3 + depth * 20 });
+      }
+      scene = { W: W, H: H, P: P, layers: layers };
+    }
+
+    function drawRanges(t, calm, prog, engraved) {
+      if (!scene || scene.W !== W || scene.H !== H) buildScene();
+      var P = scene.P;
+      for (var i = 0; i < LAYERS; i++) {
+        var L = scene.layers[i], depth = L.depth, pts = L.pts;
+        var p = ease((t - 200 - i * 230) / 1900);
+        if (p <= 0) continue;
+        var xEnd = W * p, sink = prog * H * 0.25 * depth;
+        var lineA = (0.12 + depth * 0.42) * (0.35 + 0.65 * calm);
+        var o = -(((t / 1000) * L.speed) % P);
+        var copies = [o, o + P];
+        ctx.save();
+        ctx.translate(0, sink);
+        ctx.beginPath(); ctx.rect(-10, -H, xEnd + 10, H * 3); ctx.clip();
+
+        // one continuous ridge across both copies of the loop
+        var line = [];
+        copies.forEach(function (X0) {
+          for (var k = L.i0; k < L.i1; k++) { var sx = X0 + pts[k][0]; if (sx > -12 && sx < W + 12) line.push(sx, pts[k][1]); }
+        });
+        if (line.length < 4) { ctx.restore(); continue; }
+
+        ctx.beginPath(); ctx.moveTo(line[0], H + 4);
+        for (var q = 0; q < line.length; q += 2) ctx.lineTo(line[q], line[q + 1]);
+        ctx.lineTo(line[line.length - 2], H + 4); ctx.closePath();
+        ctx.fillStyle = 'rgba(17,30,43,' + (0.5 + depth * 0.3).toFixed(3) + ')';
+        ctx.fill();
+
+        if (engraved && L.hatch.length) {
+          var hp = ease((t - 1500 - i * 230) / 1600);
+          if (hp > 0) {
+            var col = depth > 0.8 ? '220,230,226' : '163,184,168', hb = L.hatch;
+            ctx.beginPath();
+            copies.forEach(function (X0) {
+              for (var z = 0; z < hb.length; z += 4) {
+                var ax = X0 + hb[z]; if (ax < -60 || ax > W + 60) continue;
+                ctx.moveTo(ax, hb[z + 1]); ctx.lineTo(X0 + hb[z + 2], hb[z + 3]);
+              }
+            });
+            ctx.strokeStyle = 'rgba(' + col + ',' + (lineA * 0.7 * hp).toFixed(3) + ')';
+            ctx.lineWidth = 0.75; ctx.stroke();
+            ctx.beginPath();
+            copies.forEach(function (X0) {
+              L.strokes.forEach(function (ln) {
+                if (X0 + ln[0][0] < -200 || X0 + ln[0][0] > W + 200) return;
+                ctx.moveTo(X0 + ln[0][0], ln[0][1]);
+                for (var z = 1; z < ln.length; z++) ctx.lineTo(X0 + ln[z][0], ln[z][1]);
+              });
+            });
+            ctx.strokeStyle = 'rgba(' + col + ',' + (lineA * 0.8 * hp).toFixed(3) + ')';
+            ctx.lineWidth = 0.6 + depth * 0.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+          }
+        }
+
+        ctx.beginPath(); ctx.moveTo(line[0], line[1]);
+        for (q = 2; q < line.length; q += 2) ctx.lineTo(line[q], line[q + 1]);
+        ctx.strokeStyle = 'rgba(' + (depth > 0.8 ? '220,230,226' : '163,184,168') + ',' + lineA.toFixed(3) + ')';
+        ctx.lineWidth = 0.8 + depth * 0.7; ctx.lineJoin = 'round'; ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    function draw(now) {
       if (!visible) return;
       if (!W || !H) resize();
-      // ease pointer and strength; let the bend relax when the cursor rests
-      mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;
-      if (performance.now() - lastMove > 1400) strTarget = Math.min(strTarget, 0.35);
-      str += (strTarget - str) * 0.05;
-
-      // scroll: lines flatten and fade as the hero leaves the screen
-      var prog = Math.min(1, Math.max(0, window.scrollY / (H * 0.85)));
-      var calm = 1 - prog;
-
-      var gap = H / (NUM + 1) * 0.55, amp = gap * 1.1 * (0.25 + 0.75 * calm);
-      var radius = Math.max(140, Math.min(W, H) * 0.22), push = gap * 2.6 * str;
+      var t = now - t0;
+      var prog = Math.min(1, Math.max(0, window.scrollY / (H * 0.85))), calm = 1 - prog;
       ctx.clearRect(0, 0, W, H);
-      for (var li = 0; li < NUM; li++) {
-        var tt = li / (NUM - 1);
-        var alpha = (0.07 + 0.11 * Math.pow(Math.sin(tt * Math.PI), 1.4)) * (0.35 + 0.65 * calm);
-        ctx.beginPath();
-        for (var s = 0; s <= STEPS; s++) {
-          var x = (s / STEPS) * W;
-          var y = base[li] + noise(li, s / STEPS, t) * amp;
-          if (push > 0.1) {
-            var dx = x - mx, dy = y - my, d2 = dx * dx + dy * dy;
-            var f = Math.exp(-d2 / (2 * radius * radius));
-            var u = dy / (radius * 0.45);
-            y += push * f * (Math.exp(u) - Math.exp(-u)) / (Math.exp(u) + Math.exp(-u));
-          }
-          if (s === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        }
-        ctx.strokeStyle = 'rgba(163,184,168,' + alpha.toFixed(3) + ')';
-        ctx.lineWidth = 1; ctx.stroke();
-      }
+      drawRanges(t, calm, prog, true);
       requestAnimationFrame(draw);
     }
     window.addEventListener('resize', function () { W = 0; H = 0; resize(); });
