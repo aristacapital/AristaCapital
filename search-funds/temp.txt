@@ -1,1 +1,29 @@
-x
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+<title>Search funds in Colombia | Arista Capital Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root { --page-bg: #E4EAEE; --bar-bg: rgba(228,234,238,0.92); --bar-fg: #111E2B; --seg-bg: #FFFFFF; --seg-fg: #3E4C5A; --seg-on-bg: #111E2B; --seg-on-fg: #FFFFFF; --seg-border: #C9D3DA; color-scheme: light;
+  box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --page-bg: #0B1219; --bar-bg: rgba(11,18,25,0.92); --bar-fg: #E8EEF2; --seg-bg: #16212C; --seg-fg: #C9D3DA; --seg-on-bg: #7FD1BE; --seg-on-fg: #0B1219; --seg-border: #2A3846; color-scheme: dark; } }
+:root[data-theme="dark"] { --page-bg: #0B1219; --bar-bg: rgba(11,18,25,0.92); --bar-fg: #E8EEF2; --seg-bg: #16212C; --seg-fg: #C9D3DA; --seg-on-bg: #7FD1BE; --seg-on-fg: #0B1219; --seg-border: #2A3846; color-scheme: dark; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body { margin: 0; background: var(--page-bg); font-family: 'DM Sans', system-ui, sans-serif; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bar-bg); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 10px 16px; background: var(--bar-bg); backdrop-filter: blur(8px); color: var(--bar-fg); font-size: 13px; }
+.seg { display: inline-flex; border: 1px solid var(--seg-border); border-radius: 999px; overflow: hidden; background: var(--seg-bg); }
+.seg button { appearance: none; border: 0; background: none; font: inherit; font-weight: 500; font-size: 13px; padding: 6px 14px; color: var(--seg-fg); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--seg-on-bg); color: var(--seg-on-fg); }
+.stage { width: 100%; max-width: 1200px; margin: 0 auto 24px; overflow: hidden; position: relative; }
+.poster { width: 1200px; transform-origin: top left; }
+.poster[hidden] { display: none; }
+.ac-logo { width: 76px; background: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCAC/AOQDASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAYHAwQFCAIB/8QAPRAAAgEEAgECBQIFAgQDCQAAAQIDAAQFEQYSIQcTFCIxQVEIYRUjMlJxQpEWFySBM0OhJTc4YnJzdrG0/8QAGQEBAAMBAQAAAAAAAAAAAAAAAAECAwQF/8QAKREAAgIBBAECBgMBAAAAAAAAAAECEQMSITFBBFHwEyJhcYHBMkLR8f/aAAwDAQACEQMRAD8A9/UpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKVEvUP1EwPprxaPO5/4h4ZLmK2WG2T3JW7MOzBfqQidnbX+lT+1Sk26RWUlFW+CW0rDaXVtfWMN7ZXEVxbTIJIpoXDpIpGwysPBBHkEVmqCwpSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKp7L2ltzjMct5BbM0NothFx/D5SQ+TercSe41v4OkMxt4y+vmaH7qoJlHq3yJ+PemN78JftaZG962doYj/ADiXI7tGP7kj9yTf0UIWPgV9PY2NrYcIwFhZmxxyyoy2IOiiQ27SRq
