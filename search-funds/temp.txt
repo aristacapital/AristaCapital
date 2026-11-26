@@ -26,4 +26,468 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .stage { width: 100%; max-width: 1200px; margin: 0 auto 24px; overflow: hidden; position: relative; }
 .poster { width: 1200px; transform-origin: top left; }
 .poster[hidden] { display: none; }
-.ac-logo { width: 76px; background: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCAC/AOQDASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAYHAwQFCAIB/8QAPRAAAgEEAgECBQIFAgQDCQAAAQIDAAQFEQYSIQcTFCIxQVEIYRUjMlJxQpEWFySBM0OhJTc4YnJzdrG0/8QAGQEBAAMBAQAAAAAAAAAAAAAAAAECAwQF/8QAKREAAgIBBAECBgMBAAAAAAAAAAECEQMSITFBBFHwEyJhcYHBMkLR8f/aAAwDAQACEQMRAD8A9/UpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKVEvUP1EwPprxaPO5/4h4ZLmK2WG2T3JW7MOzBfqQidnbX+lT+1Sk26RWUlFW+CW0rDaXVtfWMN7ZXEVxbTIJIpoXDpIpGwysPBBHkEVmqCwpSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKp7L2ltzjMct5BbM0NothFx/D5SQ+TercSe41v4OkMxt4y+vmaH7qoJlHq3yJ+PemN78JftaZG962doYj/ADiXI7tGP7kj9yTf0UIWPgV9PY2NrYcIwFhZmxxyyoy2IOiiQ27SRq
+.ac-logo { width: 76px; background: url(data:image/jpeg;base64,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) center / contain no-repeat; }
+a { color: #035D4F; }
+.home { margin-right: auto; color: var(--bar-fg); font-weight: 500; text-decoration: none; }
+.home::before { content: "\2190\00a0"; }
+.home:hover { text-decoration: underline; text-underline-offset: 4px; }
+</style>
+</head>
+<body>
+<div class="bar"><a class="home" href="/" id="home-link">Arista Capital Partners</a><span class="bar-lab" id="lang-label">Language</span><div class="seg" role="group" aria-labelledby="lang-label"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button></div></div>
+<div class="stage" id="stage">
+<div class="poster" id="poster-en" lang="en">
+
+<div style="width: 1200px; min-height: 4200px; box-sizing: border-box; background: #F2F5F7; font-family: 'DM Sans', system-ui, sans-serif; color: #111E2B; display: flex; flex-direction: column">
+
+  <!-- HEADER -->
+  <div style="background: #111E2B; color: #FFFFFF; padding: 72px 80px 64px; display: flex; flex-direction: column; gap: 28px">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px">
+      <div style="font-size: 15px; letter-spacing: 4px; text-transform: uppercase; color: #7FD1BE; font-weight: 500">Search funds · Colombia</div>
+      <div style="background: #FFFFFF; border-radius: 12px; padding: 10px 16px; display: flex; align-items: center">
+        <div class="ac-logo" role="img" aria-label="Arista Capital Partners" style="height: 64px; width: 76px; display: block"></div>
+      </div>
+    </div>
+    <h1 style="margin: 0; font-size: 76px; line-height: 1.02; font-weight: 300; letter-spacing: -1.5px; max-width: 980px">The search fund: <span style="font-weight: 700">Colombia’s next engine</span> for private capital</h1>
+    <p style="margin: 0; font-size: 24px; line-height: 1.45; color: #C9D3DA; max-width: 900px; font-weight: 300">A proven model that has outperformed PE and VC, a market built for it, and a role for public capital to multiply private investment into Colombian SMEs.</p>
+  </div>
+
+  <!-- SECTION 1: THE MODEL -->
+  <div style="padding: 72px 80px 40px; display: flex; flex-direction: column; gap: 36px">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <div style="font-size: 56px; font-weight: 700; color: #035D4F; line-height: 1">01</div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0; font-size: 40px; font-weight: 500; letter-spacing: -0.5px">How the search fund model works</h2>
+        <p style="margin: 0; font-size: 19px; color: #3E4C5A">One or two entrepreneurs, backed by experienced investors, buy and run a single profitable small business.</p>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10M9.5 9.5c0-1.2 1.1-2 2.5-2s2.5.8 2.5 2-1.1 1.8-2.5 2.2-2.5 1-2.5 2.3 1.1 2 2.5 2 2.5-.8 2.5-2"></path></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #3E4C5A; font-weight: 500">1. Raise</div>
+        <div style="font-size: 34px; font-weight: 700; color: #035D4F; line-height: 1">$10–30M</div>
+        <div style="font-size: 17px; line-height: 1.45; color: #111E2B">Equity raised from 10–15 investors to buy the company</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21"></path></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #3E4C5A; font-weight: 500">2. Search</div>
+        <div style="font-size: 34px; font-weight: 700; color: #035D4F; line-height: 1">12–24 mo</div>
+        <div style="font-size: 17px; line-height: 1.45; color: #111E2B">Searchers evaluate deals for ~1-2 years before acquiring</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"></path></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #3E4C5A; font-weight: 500">3. Acquire</div>
+        <div style="font-size: 34px; font-weight: 700; color: #035D4F; line-height: 1">$10–65M</div>
+        <div style="font-size: 17px; line-height: 1.45; color: #111E2B">Range of company sizes that search funds have acquired historically</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #3E4C5A; font-weight: 500">4. Grow &amp; exit</div>
+        <div style="font-size: 34px; font-weight: 700; color: #035D4F; line-height: 1">5–7 yrs</div>
+        <div style="font-size: 17px; line-height: 1.45; color: #111E2B">Searchers become CEOs, professionalize and grow the business</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: RETURNS -->
+  <div style="padding: 40px 80px 40px; display: flex; flex-direction: column; gap: 32px">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <div style="font-size: 56px; font-weight: 700; color: #035D4F; line-height: 1">02</div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0; font-size: 40px; font-weight: 500; letter-spacing: -0.5px">Returns have beaten private equity and venture</h2>
+        <p style="margin: 0; font-size: 19px; color: #3E4C5A">Investor IRR by asset class</p>
+      </div>
+    </div>
+    <div style="background: #FFFFFF; border-radius: 20px; padding: 40px 44px; display: flex; flex-direction: column; gap: 22px">
+      <div style="display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 20px; align-items: center">
+        <div style="font-size: 19px; font-weight: 500">Latin America search funds</div>
+        <div style="display: flex; align-items: center; gap: 14px"><div style="height: 56px; width: 82%; background: #035D4F; border-radius: 8px"></div><div style="font-size: 40px; font-weight: 700; color: #035D4F">28.1%</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 20px; align-items: center">
+        <div style="font-size: 19px; font-weight: 500; color: #3E4C5A">Venture capital</div>
+        <div style="display: flex; align-items: center; gap: 14px"><div style="height: 44px; width: 52.5%; background: #A9B7C1; border-radius: 8px"></div><div style="font-size: 30px; font-weight: 700; color: #3E4C5A" data-om-label="~15%">~18%</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 20px; align-items: center">
+        <div style="font-size: 19px; font-weight: 500; color: #3E4C5A">Private equity buyouts</div>
+        <div style="display: flex; align-items: center; gap: 14px"><div style="height: 44px; width: 45.5%; background: #A9B7C1; border-radius: 8px"></div><div style="font-size: 30px; font-weight: 700; color: #3E4C5A">~15%</div></div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #111E2B; color: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 48px; font-weight: 700; color: #7FD1BE; line-height: 1">3.1×</div>
+        <div style="font-size: 17px; line-height: 1.4; color: #D7DEE3">return on invested capital, Latin America search funds</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: WHY COLOMBIA -->
+  <div style="padding: 40px 80px 40px; display: flex; flex-direction: column; gap: 32px">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <div style="font-size: 56px; font-weight: 700; color: #035D4F; line-height: 1">03</div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0; font-size: 40px; font-weight: 500; letter-spacing: -0.5px">Why Colombia is built for search funds</h2>
+        <p style="margin: 0; font-size: 19px; color: #3E4C5A">A large, stable economy with under-valued and under-capitalized SMEs</p>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 44px; font-weight: 700; color: #035D4F; line-height: 1">&lt;0.3%</div>
+        <div style="font-size: 16px; line-height: 1.4; color: #3E4C5A">Private equity penetration as a share of GDP in Colombia (<span style="font-weight: 700; color: #111E2B">versus ~3% in the US</span>)</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 44px; font-weight: 700; color: #035D4F; line-height: 1">3.6%</div>
+        <div style="font-size: 16px; line-height: 1.4; color: #3E4C5A">Colombia’s GDP growth 2001–2025 (<span style="font-weight: 700; color: #111E2B">versus 1.5% in Mexico and 2.3% in Brazil</span>)</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 44px; font-weight: 700; color: #035D4F; line-height: 1">~40%</div>
+        <div style="font-size: 16px; line-height: 1.4; color: #3E4C5A">of GDP comes from <span style="font-weight: 700; color: #111E2B">micro, small and medium enterprises</span>, 99% of all businesses</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 44px; font-weight: 700; color: #035D4F; line-height: 1">15–30%</div>
+        <div style="font-size: 16px; line-height: 1.4; color: #3E4C5A">annual revenue growth at <span style="font-weight: 700; color: #111E2B">Colombian search fund acquisitions</span> since purchase</div>
+      </div>
+    </div>
+    <div style="background: #FFFFFF; border-radius: 20px; padding: 36px 40px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px; align-items: center">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+        <svg role="img" aria-label="Search funds raised to date: Mexico 59, Brazil 53, Colombia 10" width="560" height="300" viewBox="0 0 600 320">
+          <path d="M40 290 A260 260 0 0 1 560 290" fill="none" stroke="#E6ECEF" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M90 290 A210 210 0 0 1 510 290" fill="none" stroke="#E6ECEF" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M140 290 A160 160 0 0 1 460 290" fill="none" stroke="#E6ECEF" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M40 290 A260 260 0 0 1 560 289.5" fill="none" stroke="#8A9AA6" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M90 290 A210 210 0 0 1 499.4 224.1" fill="none" stroke="#B5C2CB" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M140 290 A160 160 0 0 1 162.1 208.8" fill="none" stroke="#035D4F" stroke-width="36" stroke-linecap="round"></path>
+          <text x="300" y="238" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="64" font-weight="700" fill="#035D4F">17%</text>
+          <text x="300" y="272" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="17" fill="#3E4C5A">of Mexico’s search funds</text>
+        </svg>
+        <div style="font-size: 14px; color: #3E4C5A">Full arc = Mexico’s 59 search funds</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="font-size: 26px; font-weight: 700">A market with room to run</div>
+          <div style="font-size: 16px; color: #3E4C5A">Search funds raised to date</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; align-items: center; gap: 14px"><div style="width: 18px; height: 18px; border-radius: 50%; background: #8A9AA6"></div><div style="font-size: 19px; flex: 1 1 auto">Mexico</div><div style="font-size: 30px; font-weight: 700; color: #3E4C5A">59</div></div>
+          <div style="display: flex; align-items: center; gap: 14px"><div style="width: 18px; height: 18px; border-radius: 50%; background: #B5C2CB"></div><div style="font-size: 19px; flex: 1 1 auto">Brazil</div><div style="font-size: 30px; font-weight: 700; color: #3E4C5A">53</div></div>
+          <div style="display: flex; align-items: center; gap: 14px"><div style="width: 18px; height: 18px; border-radius: 50%; background: #035D4F"></div><div style="font-size: 19px; font-weight: 700; flex: 1 1 auto">Colombia</div><div style="font-size: 30px; font-weight: 700; color: #035D4F">10</div></div>
+        </div>
+        <div style="background: #E3ECEA; border-radius: 12px; padding: 16px 18px; font-size: 16px; line-height: 1.5; color: #111E2B">Colombia has <span style="font-weight: 700">2.2 search funds per $100B of GDP</span>, versus 3.2 in Mexico. Matching Mexico would mean about 15 funds, versus 10 to date.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: PUBLIC CAPITAL -->
+  <div style="padding: 40px 80px 48px; display: flex; flex-direction: column; gap: 32px; background-color: #c9d3da">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <div style="font-size: 56px; font-weight: 700; color: #035D4F; line-height: 1">04</div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0; font-size: 40px; font-weight: 500; letter-spacing: -0.5px">A $1.5B opportunity for foreign investment</h2>
+        <p style="margin: 0; font-size: 19px; color: #3E4C5A">What search funds could bring into Colombian SMEs, and how public capital can help unlock it</p>
+      </div>
+    </div>
+    <div style="background: #035D4F; color: #FFFFFF; border-radius: 24px; padding: 44px; display: flex; flex-direction: column; gap: 28px">
+      <div style="font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #BFE3D9; font-weight: 500">The opportunity · illustrative</div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr) 48px minmax(0, 1.15fr); gap: 12px; align-items: center">
+        <div style="background: rgba(255,255,255,0.10); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 52px; font-weight: 700; line-height: 1">100</div>
+          <div style="font-size: 17px; line-height: 1.4; color: #DDF0EA">search funds in Colombia, up from 10 today</div>
+        </div>
+        <div style="font-size: 44px; font-weight: 300; text-align: center; color: #FFFFFF">×</div>
+        <div style="background: rgba(255,255,255,0.10); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 52px; font-weight: 700; line-height: 1">$15M</div>
+          <div style="font-size: 17px; line-height: 1.4; color: #DDF0EA">investor equity per acquisition</div>
+        </div>
+        <div style="font-size: 44px; font-weight: 300; text-align: center; color: #FFFFFF">=</div>
+        <div style="background: #FFFFFF; color: #035D4F; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 60px; font-weight: 700; line-height: 1">$1.5B</div>
+          <div style="font-size: 17px; line-height: 1.4; color: #111E2B">of foreign equity into Colombian SMEs</div>
+        </div>
+      </div>
+      <div style="font-size: 16px; line-height: 1.5; color: #DDF0EA">For scale, search funds raised to date: Spain 98 · Mexico 59 · Brazil 53 · Colombia 10 (IESE 2026). Each deal also draws in seller financing and local debt on top of the equity.</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"></path></svg>
+        <div style="font-size: 21px; font-weight: 700">Attract foreign investors</div>
+        <div style="font-size: 17px; line-height: 1.5; color: #3E4C5A">A public co-investor <span style="font-weight: 700; color: #111E2B">de-risks first-time funds</span> and signals commitment to the US and European investors who back most searchers</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11M12 11c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6zM12 14c0-3-2.2-5-5-5 0 3 2.2 5 5 5zM7 21h10"></path></svg>
+        <div style="font-size: 21px; font-weight: 700">Provides liquidity for successful entrepreneurs</div>
+        <div style="font-size: 17px; line-height: 1.5; color: #3E4C5A">Every deal <span style="font-weight: 700; color: #111E2B">solves a founder’s succession</span>, keeps jobs local and brings professional management to a Colombian SME. A clear exit route also <span style="font-weight: 700; color: #111E2B">encourages more people to start businesses</span></div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-13.7 5.7M4 12a8 8 0 0 1 13.7-5.7M18 3v4h-4M6 21v-4h4"></path></svg>
+        <div style="font-size: 21px; font-weight: 700">Success attracts more capital</div>
+        <div style="font-size: 17px; line-height: 1.5; color: #3E4C5A">Every successful exit <span style="font-weight: 700; color: #111E2B">proves the model in Colombia</span>. Investors who earn strong returns back the next wave of searchers and bring new capital with them, creating a <span style="font-weight: 700; color: #111E2B">self-reinforcing loop</span></div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"></circle><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"></path><path d="M18.5 3.5l.6 1.3 1.4.2-1 1 .2 1.4-1.2-.7-1.2.7.2-1.4-1-1 1.4-.2z"></path></svg>
+        <div style="font-size: 21px; font-weight: 700">Bring talent to Colombia</div>
+        <div style="font-size: 17px; line-height: 1.5; color: #3E4C5A">Search funds draw <span style="font-weight: 700; color: #111E2B">ambitious young entrepreneurs</span> who move to Colombia to buy and lead a local business for the long term</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div style="background: #035D4F; color: #FFFFFF; padding: 64px 80px; display: flex; flex-direction: column; justify-content: center; gap: 16px; flex: 1 0 auto">
+    <h2 style="margin: 0; font-size: 48px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.1">Search funds are the future of LATAM private equity</h2>
+    <p style="margin: 0; font-size: 21px; line-height: 1.5; color: #DDF0EA; max-width: 980px">They solve the SME and micro-business gap in LATAM, where too few companies are big enough for foreign or domestic private equity.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top: auto; background: #111E2B; color: #C9D3DA; padding: 36px 80px 40px; display: flex; flex-direction: column; gap: 12px">
+    <div style="font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #FFFFFF; font-weight: 500">Sources</div>
+    <div style="font-size: 14px; line-height: 1.6">Stanford GSB 2026 Search Fund Study (US &amp; Canada IRR, ROI) · IESE International Search Funds 2026 (international IRR, exited-fund returns) · Spectra Search Fund Conference / Cerralvo (Latin America IRR) · Spectra 2025 &amp; Stanford 2024 (PE ~15%, VC ~18% average IRR) · IMF World Economic Outlook (GDP) · MinCIT / DANE (MSME share of GDP and businesses) · LAVCA (private equity penetration as a share of GDP) · World Bank (domestic credit) · GF Data 2025 (US PE multiples) · Supersociedades filings (Colombian precedent revenue growth). The public-capital example is illustrative, based on Arista Capital Partners’ PPM deal structure. Past returns do not guarantee future results.</div>
+  </div>
+</div>
+</div>
+<div class="poster" id="poster-es" lang="es" hidden>
+
+<div style="width: 1200px; min-height: 4200px; box-sizing: border-box; background: #F2F5F7; font-family: 'DM Sans', system-ui, sans-serif; color: #111E2B; display: flex; flex-direction: column">
+
+  <!-- HEADER -->
+  <div style="background: #111E2B; color: #FFFFFF; padding: 72px 80px 64px; display: flex; flex-direction: column; gap: 28px">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px">
+      <div style="font-size: 15px; letter-spacing: 4px; text-transform: uppercase; color: #7FD1BE; font-weight: 500">Search funds · Colombia</div>
+      <div style="background: #FFFFFF; border-radius: 12px; padding: 10px 16px; display: flex; align-items: center">
+        <div class="ac-logo" role="img" aria-label="Arista Capital Partners" style="height: 64px; width: 76px; display: block"></div>
+      </div>
+    </div>
+    <h1 style="margin: 0; font-size: 76px; line-height: 1.02; font-weight: 300; letter-spacing: -1.5px; max-width: 980px">El search fund: <span style="font-weight: 700">el próximo motor de Colombia</span> para el capital privado</h1>
+    <p style="margin: 0; font-size: 24px; line-height: 1.45; color: #C9D3DA; max-width: 900px; font-weight: 300">Un modelo probado que ha superado al private equity y al venture capital, un mercado hecho a su medida y un papel para el capital público que multiplique la inversión privada en las pymes colombianas.</p>
+  </div>
+
+  <!-- SECTION 1: THE MODEL -->
+  <div style="padding: 72px 80px 40px; display: flex; flex-direction: column; gap: 36px">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <div style="font-size: 56px; font-weight: 700; color: #035D4F; line-height: 1">01</div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0; font-size: 40px; font-weight: 500; letter-spacing: -0.5px">Cómo funciona el modelo de search fund</h2>
+        <p style="margin: 0; font-size: 19px; color: #3E4C5A">Uno o dos emprendedores, respaldados por inversionistas experimentados, compran y dirigen una sola empresa pequeña y rentable.</p>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10M9.5 9.5c0-1.2 1.1-2 2.5-2s2.5.8 2.5 2-1.1 1.8-2.5 2.2-2.5 1-2.5 2.3 1.1 2 2.5 2 2.5-.8 2.5-2"></path></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #3E4C5A; font-weight: 500">1. Levantar capital</div>
+        <div style="font-size: 34px; font-weight: 700; color: #035D4F; line-height: 1">US$10–30M</div>
+        <div style="font-size: 17px; line-height: 1.45; color: #111E2B">Capital de 10–15 inversionistas para comprar la empresa</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21"></path></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #3E4C5A; font-weight: 500">2. Buscar</div>
+        <div style="font-size: 34px; font-weight: 700; color: #035D4F; line-height: 1">12–24 meses</div>
+        <div style="font-size: 17px; line-height: 1.45; color: #111E2B">Los buscadores evalúan oportunidades durante ~1–2 años antes de adquirir</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"></path></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #3E4C5A; font-weight: 500">3. Adquirir</div>
+        <div style="font-size: 34px; font-weight: 700; color: #035D4F; line-height: 1">US$10–65M</div>
+        <div style="font-size: 17px; line-height: 1.45; color: #111E2B">Rango de tamaño de las empresas que los search funds han adquirido históricamente</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>
+        <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #3E4C5A; font-weight: 500">4. Crecer y vender</div>
+        <div style="font-size: 34px; font-weight: 700; color: #035D4F; line-height: 1">5–7 años</div>
+        <div style="font-size: 17px; line-height: 1.45; color: #111E2B">Los buscadores se convierten en CEO, profesionalizan y hacen crecer el negocio</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: RETURNS -->
+  <div style="padding: 40px 80px 40px; display: flex; flex-direction: column; gap: 32px">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <div style="font-size: 56px; font-weight: 700; color: #035D4F; line-height: 1">02</div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0; font-size: 40px; font-weight: 500; letter-spacing: -0.5px">Los retornos han superado al private equity y al venture capital</h2>
+        <p style="margin: 0; font-size: 19px; color: #3E4C5A">TIR del inversionista por clase de activo</p>
+      </div>
+    </div>
+    <div style="background: #FFFFFF; border-radius: 20px; padding: 40px 44px; display: flex; flex-direction: column; gap: 22px">
+      <div style="display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 20px; align-items: center">
+        <div style="font-size: 19px; font-weight: 500">Search funds en Latinoamérica</div>
+        <div style="display: flex; align-items: center; gap: 14px"><div style="height: 56px; width: 82%; background: #035D4F; border-radius: 8px"></div><div style="font-size: 40px; font-weight: 700; color: #035D4F">28,1%</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 20px; align-items: center">
+        <div style="font-size: 19px; font-weight: 500; color: #3E4C5A">Venture capital</div>
+        <div style="display: flex; align-items: center; gap: 14px"><div style="height: 44px; width: 52.5%; background: #A9B7C1; border-radius: 8px"></div><div style="font-size: 30px; font-weight: 700; color: #3E4C5A" data-om-label="~15%">~18%</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 20px; align-items: center">
+        <div style="font-size: 19px; font-weight: 500; color: #3E4C5A">Compras de private equity</div>
+        <div style="display: flex; align-items: center; gap: 14px"><div style="height: 44px; width: 45.5%; background: #A9B7C1; border-radius: 8px"></div><div style="font-size: 30px; font-weight: 700; color: #3E4C5A">~15%</div></div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #111E2B; color: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 48px; font-weight: 700; color: #7FD1BE; line-height: 1">3,1×</div>
+        <div style="font-size: 17px; line-height: 1.4; color: #D7DEE3">retorno sobre el capital invertido, search funds en Latinoamérica</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: WHY COLOMBIA -->
+  <div style="padding: 40px 80px 40px; display: flex; flex-direction: column; gap: 32px">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <div style="font-size: 56px; font-weight: 700; color: #035D4F; line-height: 1">03</div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0; font-size: 40px; font-weight: 500; letter-spacing: -0.5px">Por qué Colombia está hecha para los search funds</h2>
+        <p style="margin: 0; font-size: 19px; color: #3E4C5A">Una economía grande y estable con pymes subvaloradas y subcapitalizadas</p>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 44px; font-weight: 700; color: #035D4F; line-height: 1">&lt;0,3%</div>
+        <div style="font-size: 16px; line-height: 1.4; color: #3E4C5A">Penetración del private equity como porcentaje del PIB en Colombia (<span style="font-weight: 700; color: #111E2B">frente a ~3% en EE. UU.</span>)</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 44px; font-weight: 700; color: #035D4F; line-height: 1">3,6%</div>
+        <div style="font-size: 16px; line-height: 1.4; color: #3E4C5A">Crecimiento del PIB de Colombia 2001–2025 (<span style="font-weight: 700; color: #111E2B">frente a 1,5% en México y 2,3% en Brasil</span>)</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 44px; font-weight: 700; color: #035D4F; line-height: 1">~40%</div>
+        <div style="font-size: 16px; line-height: 1.4; color: #3E4C5A">del PIB proviene de <span style="font-weight: 700; color: #111E2B">micro, pequeñas y medianas empresas</span>, el 99% de todas las empresas</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+        <div style="font-size: 44px; font-weight: 700; color: #035D4F; line-height: 1">15–30%</div>
+        <div style="font-size: 16px; line-height: 1.4; color: #3E4C5A">crecimiento anual de ingresos en <span style="font-weight: 700; color: #111E2B">adquisiciones de search funds en Colombia</span> desde la compra</div>
+      </div>
+    </div>
+    <div style="background: #FFFFFF; border-radius: 20px; padding: 36px 40px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px; align-items: center">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+        <svg role="img" aria-label="Search funds levantados a la fecha: México 59, Brasil 53, Colombia 10" width="560" height="300" viewBox="0 0 600 320">
+          <path d="M40 290 A260 260 0 0 1 560 290" fill="none" stroke="#E6ECEF" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M90 290 A210 210 0 0 1 510 290" fill="none" stroke="#E6ECEF" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M140 290 A160 160 0 0 1 460 290" fill="none" stroke="#E6ECEF" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M40 290 A260 260 0 0 1 560 289.5" fill="none" stroke="#8A9AA6" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M90 290 A210 210 0 0 1 499.4 224.1" fill="none" stroke="#B5C2CB" stroke-width="36" stroke-linecap="round"></path>
+          <path d="M140 290 A160 160 0 0 1 162.1 208.8" fill="none" stroke="#035D4F" stroke-width="36" stroke-linecap="round"></path>
+          <text x="300" y="238" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="64" font-weight="700" fill="#035D4F">17%</text>
+          <text x="300" y="272" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="17" fill="#3E4C5A">de los search funds de México</text>
+        </svg>
+        <div style="font-size: 14px; color: #3E4C5A">Arco completo = 59 search funds de México</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="font-size: 26px; font-weight: 700">Un mercado con mucho espacio para crecer</div>
+          <div style="font-size: 16px; color: #3E4C5A">Search funds levantados a la fecha</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; align-items: center; gap: 14px"><div style="width: 18px; height: 18px; border-radius: 50%; background: #8A9AA6"></div><div style="font-size: 19px; flex: 1 1 auto">México</div><div style="font-size: 30px; font-weight: 700; color: #3E4C5A">59</div></div>
+          <div style="display: flex; align-items: center; gap: 14px"><div style="width: 18px; height: 18px; border-radius: 50%; background: #B5C2CB"></div><div style="font-size: 19px; flex: 1 1 auto">Brasil</div><div style="font-size: 30px; font-weight: 700; color: #3E4C5A">53</div></div>
+          <div style="display: flex; align-items: center; gap: 14px"><div style="width: 18px; height: 18px; border-radius: 50%; background: #035D4F"></div><div style="font-size: 19px; font-weight: 700; flex: 1 1 auto">Colombia</div><div style="font-size: 30px; font-weight: 700; color: #035D4F">10</div></div>
+        </div>
+        <div style="background: #E3ECEA; border-radius: 12px; padding: 16px 18px; font-size: 16px; line-height: 1.5; color: #111E2B">Colombia tiene <span style="font-weight: 700">2,2 search funds por cada US$100.000 millones de PIB</span>, frente a 3,2 en México. Igualar a México implicaría unos 15 fondos, frente a 10 a la fecha.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: PUBLIC CAPITAL -->
+  <div style="padding: 40px 80px 48px; display: flex; flex-direction: column; gap: 32px; background-color: #c9d3da">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <div style="font-size: 56px; font-weight: 700; color: #035D4F; line-height: 1">04</div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0; font-size: 40px; font-weight: 500; letter-spacing: -0.5px">Una oportunidad de US$1.500 millones para la inversión extranjera</h2>
+        <p style="margin: 0; font-size: 19px; color: #3E4C5A">Lo que los search funds podrían traer a las pymes colombianas y cómo el capital público puede ayudar a desbloquearlo</p>
+      </div>
+    </div>
+    <div style="background: #035D4F; color: #FFFFFF; border-radius: 24px; padding: 44px; display: flex; flex-direction: column; gap: 28px">
+      <div style="font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #BFE3D9; font-weight: 500">La oportunidad · ilustrativo</div>
+      <div style="display: grid; grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr) 48px minmax(0, 1.15fr); gap: 12px; align-items: center">
+        <div style="background: rgba(255,255,255,0.10); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 52px; font-weight: 700; line-height: 1">100</div>
+          <div style="font-size: 17px; line-height: 1.4; color: #DDF0EA">search funds en Colombia, frente a 10 hoy</div>
+        </div>
+        <div style="font-size: 44px; font-weight: 300; text-align: center; color: #FFFFFF">×</div>
+        <div style="background: rgba(255,255,255,0.10); border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 52px; font-weight: 700; line-height: 1">US$15M</div>
+          <div style="font-size: 17px; line-height: 1.4; color: #DDF0EA">de capital de inversionistas por adquisición</div>
+        </div>
+        <div style="font-size: 44px; font-weight: 300; text-align: center; color: #FFFFFF">=</div>
+        <div style="background: #FFFFFF; color: #035D4F; border-radius: 16px; padding: 28px 24px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 44px; font-weight: 700; line-height: 1">US$1.500M</div>
+          <div style="font-size: 17px; line-height: 1.4; color: #111E2B">de capital extranjero para las pymes colombianas</div>
+        </div>
+      </div>
+      <div style="font-size: 16px; line-height: 1.5; color: #DDF0EA">Como referencia, search funds levantados a la fecha: España 98 · México 59 · Brasil 53 · Colombia 10 (IESE 2026). Cada operación además atrae financiación del vendedor y deuda local, adicionales al capital.</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"></path></svg>
+        <div style="font-size: 21px; font-weight: 700">Atraer inversionistas extranjeros</div>
+        <div style="font-size: 17px; line-height: 1.5; color: #3E4C5A">Un coinversionista público <span style="font-weight: 700; color: #111E2B">reduce el riesgo de los fondos nuevos</span> y muestra compromiso ante los inversionistas de EE. UU. y Europa que respaldan a la mayoría de los buscadores</div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11M12 11c0-3.5 2.5-6 6-6 0 3.5-2.5 6-6 6zM12 14c0-3-2.2-5-5-5 0 3 2.2 5 5 5zM7 21h10"></path></svg>
+        <div style="font-size: 21px; font-weight: 700">Da liquidez a los emprendedores exitosos</div>
+        <div style="font-size: 17px; line-height: 1.5; color: #3E4C5A">Cada operación <span style="font-weight: 700; color: #111E2B">resuelve la sucesión de un fundador</span>, mantiene empleos locales y lleva gestión profesional a una pyme colombiana. Una ruta de salida clara también <span style="font-weight: 700; color: #111E2B">motiva a más personas a emprender</span></div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-13.7 5.7M4 12a8 8 0 0 1 13.7-5.7M18 3v4h-4M6 21v-4h4"></path></svg>
+        <div style="font-size: 21px; font-weight: 700">El éxito atrae más capital</div>
+        <div style="font-size: 17px; line-height: 1.5; color: #3E4C5A">Cada salida exitosa <span style="font-weight: 700; color: #111E2B">demuestra el modelo en Colombia</span>. Los inversionistas que obtienen buenos retornos respaldan a la siguiente generación de buscadores y traen capital nuevo, creando un <span style="font-weight: 700; color: #111E2B">círculo virtuoso</span></div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+        <svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#035D4F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"></circle><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"></path><path d="M18.5 3.5l.6 1.3 1.4.2-1 1 .2 1.4-1.2-.7-1.2.7.2-1.4-1-1 1.4-.2z"></path></svg>
+        <div style="font-size: 21px; font-weight: 700">Traer talento a Colombia</div>
+        <div style="font-size: 17px; line-height: 1.5; color: #3E4C5A">Los search funds atraen a <span style="font-weight: 700; color: #111E2B">jóvenes emprendedores ambiciosos</span> que se mudan a Colombia para comprar y dirigir una empresa local a largo plazo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div style="background: #035D4F; color: #FFFFFF; padding: 64px 80px; display: flex; flex-direction: column; justify-content: center; gap: 16px; flex: 1 0 auto">
+    <h2 style="margin: 0; font-size: 48px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.1">Los search funds son el futuro del private equity en Latinoamérica</h2>
+    <p style="margin: 0; font-size: 21px; line-height: 1.5; color: #DDF0EA; max-width: 980px">Resuelven la brecha de las pymes y microempresas en Latinoamérica, donde muy pocas empresas son lo bastante grandes para el private equity extranjero o local.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top: auto; background: #111E2B; color: #C9D3DA; padding: 36px 80px 40px; display: flex; flex-direction: column; gap: 12px">
+    <div style="font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #FFFFFF; font-weight: 500">Fuentes</div>
+    <div style="font-size: 14px; line-height: 1.6">Stanford GSB 2026 Search Fund Study (TIR y ROI de EE. UU. y Canadá) · IESE International Search Funds 2026 (TIR internacional, retornos de fondos con salida) · Spectra Search Fund Conference / Cerralvo (TIR de Latinoamérica) · Spectra 2025 y Stanford 2024 (TIR promedio de PE y VC) · FMI, World Economic Outlook (PIB) · MinCIT / DANE (participación de las mipymes en el PIB y en las empresas) · LAVCA (penetración del private equity como porcentaje del PIB) · Banco Mundial (crédito interno) · GF Data 2025 (múltiplos de PE en EE. UU.) · Registros de Supersociedades (crecimiento de ingresos de adquisiciones colombianas). El ejemplo de capital público es ilustrativo y se basa en la estructura de operación del PPM de Arista Capital Partners. Los retornos pasados no garantizan resultados futuros.</div>
+  </div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var posters = { en: document.getElementById('poster-en'), es: document.getElementById('poster-es') };
+  var label = document.getElementById('lang-label');
+  var current = 'en';
+  function fit() {
+    var p = posters[current];
+    var s = Math.min(1, stage.clientWidth / 1200);
+    p.style.transform = 'scale(' + s + ')';
+    stage.style.height = Math.ceil(p.offsetHeight * s) + 'px';
+  }
+  function setLang(lang) {
+    current = lang === 'es' ? 'es' : 'en';
+    posters.en.hidden = current !== 'en';
+    posters.es.hidden = current !== 'es';
+    document.documentElement.lang = current;
+    document.title = current === 'es' ? 'Search funds en Colombia | Arista Capital Partners' : 'Search funds in Colombia | Arista Capital Partners';
+    label.textContent = current === 'es' ? 'Idioma' : 'Language'; document.getElementById('home-link').textContent = current === 'es' ? 'Volver al inicio' : 'Back to home';
+    document.querySelectorAll('.seg button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === current)); });
+    fit();
+  }
+  function fromHash() { var h = location.hash.slice(1); return h === 'es' || h === 'en' ? h : null; }
+  function stored() { try { return localStorage.getItem('acp-lang') || localStorage.getItem('lang'); } catch (e) { return null; } }
+  function fromBrowser() {
+    var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+    return String(langs[0] || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+  }
+  document.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      try { localStorage.setItem('acp-lang', b.dataset.lang); } catch (e) {}
+      if (location.hash !== '#' + b.dataset.lang) location.hash = b.dataset.lang; else setLang(b.dataset.lang);
+    });
+  });
+  window.addEventListener('hashchange', function () { var h = fromHash(); if (h) setLang(h); });
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  setLang(fromHash() || stored() || fromBrowser());
+})();
+</script>
+</body>
+</html>
